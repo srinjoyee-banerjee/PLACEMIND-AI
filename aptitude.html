@@ -246,7 +246,6 @@ button:disabled{
 }
 
 @media(max-width:700px){
-
     .assessment{
         grid-template-columns:1fr;
     }
@@ -282,9 +281,11 @@ button:disabled{
 
 </div>
 
+
 <div class="progress">
     <div class="fill"></div>
 </div>
+
 
 <section class="hero">
 
@@ -305,6 +306,7 @@ button:disabled{
     </p>
 
 </section>
+
 
 <div class="assessment">
 
@@ -361,27 +363,11 @@ button:disabled{
         </h2>
 
         <select id="interview">
-
-            <option value="">
-                Select confidence
-            </option>
-
-            <option value="30">
-                Low
-            </option>
-
-            <option value="50">
-                Moderate
-            </option>
-
-            <option value="70">
-                High
-            </option>
-
-            <option value="90">
-                Very High
-            </option>
-
+            <option value="">Select confidence</option>
+            <option value="30">Low</option>
+            <option value="50">Moderate</option>
+            <option value="70">High</option>
+            <option value="90">Very High</option>
         </select>
 
     </div>
@@ -398,27 +384,11 @@ button:disabled{
         </h2>
 
         <select id="preparation">
-
-            <option value="">
-                Select your level
-            </option>
-
-            <option value="30">
-                Just Started
-            </option>
-
-            <option value="50">
-                Developing
-            </option>
-
-            <option value="70">
-                Well Prepared
-            </option>
-
-            <option value="90">
-                Highly Prepared
-            </option>
-
+            <option value="">Select your level</option>
+            <option value="30">Just Started</option>
+            <option value="50">Developing</option>
+            <option value="70">Well Prepared</option>
+            <option value="90">Highly Prepared</option>
         </select>
 
     </div>
@@ -426,17 +396,11 @@ button:disabled{
 
     <div class="bottom">
 
-        <div
-            class="status"
-            id="status"
-        >
+        <div class="status" id="status">
             0 / 4 COMPLETED
         </div>
 
-        <button
-            id="analysisButton"
-            onclick="finish()"
-        >
+        <button id="analysisButton" onclick="finish()">
             GENERATE AI ANALYSIS ↗
         </button>
 
@@ -479,301 +443,8 @@ function update(){
 
     document.getElementById("status").innerText =
         count + " / 4 COMPLETED";
-
 }
 
-
-async function finish(){
-
-    const values = ids.map(id => {
-
-        return document
-            .getElementById(id)
-            .value;
-
-    });
-
-
-    if(values.includes("")){
-
-        document
-            .querySelector(".assessment")
-            .animate(
-                [
-                    {transform:"translateX(0)"},
-                    {transform:"translateX(-7px)"},
-                    {transform:"translateX(7px)"},
-                    {transform:"translateX(-4px)"},
-                    {transform:"translateX(0)"}
-                ],
-                {
-                    duration:400
-                }
-            );
-
-        return;
-    }
-
-
-    const aptitudeScore =
-        Number(values[0]);
-
-    const communicationScore =
-        Number(values[1]);
-
-    const interviewScore =
-        Number(values[2]);
-
-
-    /*
-       IMPORTANT:
-       These are the SAME localStorage names
-       used by the previous assessment pages.
-    */
-
-    const academic =
-        JSON.parse(
-            localStorage.getItem(
-                "studentAcademic"
-            ) || "{}"
-        );
-
-
-    const coding =
-        JSON.parse(
-            localStorage.getItem(
-                "studentCoding"
-            ) || "{}"
-        );
-
-
-    const technical =
-        JSON.parse(
-            localStorage.getItem(
-                "studentTechnical"
-            ) || "{}"
-        );
-
-
-    /*
-       Build the final AI input.
-    */
-
-    const data = {
-
-        academic: {
-
-            sem1:
-                Number(
-                    academic.sem1 || 0
-                ),
-
-            sem2:
-                Number(
-                    academic.sem2 || 0
-                ),
-
-            sem3:
-                Number(
-                    academic.sem3 || 0
-                ),
-
-            sem4:
-                Number(
-                    academic.sem4 || 0
-                )
-
-        },
-
-
-        coding: {
-
-            codingScore:
-                Number(
-                    coding.codingScore || 0
-                )
-
-        },
-
-
-        technical: {
-
-            technicalScore:
-                Number(
-                    technical.technicalScore || 0
-                )
-
-        },
-
-
-        aptitude: {
-
-            aptitudeScore:
-                aptitudeScore,
-
-            communicationScore:
-                communicationScore,
-
-            interviewScore:
-                interviewScore
-
-        }
-
-    };
-
-
-    console.log(
-        "PLACEMIND AI FINAL INPUT:",
-        data
-    );
-
-
-    const button =
-        document.getElementById(
-            "analysisButton"
-        );
-
-
-    button.innerText =
-        "ANALYZING PROFILE...";
-
-    button.classList.add("loading");
-
-    button.disabled = true;
-
-
-    try{
-
-        const response =
-            await fetch(
-                "/predict",
-                {
-
-                    method:"POST",
-
-                    headers:{
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify(data)
-
-                }
-            );
-
-
-        const result =
-            await response.json();
-
-
-        console.log(
-            "PLACEMIND AI RESULT:",
-            result
-        );
-
-
-        if(!response.ok){
-
-            throw new Error(
-                result.details ||
-                result.error ||
-                "Prediction failed"
-            );
-
-        }
-
-
-        /*
-           Save the complete AI result.
-        */
-
-        localStorage.setItem(
-            "placementResult",
-            JSON.stringify(result)
-        );
-
-
-        /*
-           Small transition before result page.
-        */
-
-        document.body.animate(
-            [
-                {opacity:1},
-                {opacity:0}
-            ],
-            {
-                duration:550,
-                easing:"ease-in-out"
-            }
-        );
-
-
-        setTimeout(() => {
-
-            window.location.href =
-                "result.html";
-
-        },550);
-
-
-    }
-    catch(error){
-
-        console.error(
-            "PLACEMIND ERROR:",
-            error
-        );
-
-
-        button.innerText =
-            "TRY AGAIN";
-
-        button.classList.remove(
-            "loading"
-        );
-
-        button.disabled = false;
-
-
-        alert(
-            "AI analysis could not be completed.\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-<script>
-
-const ids = [
-    "aptitude",
-    "communication",
-    "interview",
-    "preparation"
-];
-
-ids.forEach(id => {
-    document.getElementById(id).addEventListener("change", update);
-});
-
-
-function update(){
-
-    const count = ids.filter(id =>
-        document.getElementById(id).value !== ""
-    ).length;
-
-    document.getElementById("status").innerText =
-        count + " / 4 COMPLETED";
-}
-
-
-/* ============================================================
-   FIND SAVED DATA FROM PREVIOUS PAGES
-   ============================================================ */
 
 function findStorageData(names){
 
@@ -782,30 +453,37 @@ function findStorageData(names){
         const value =
             localStorage.getItem(name);
 
-        if(value){
+        if(!value){
+            continue;
+        }
 
-            try{
+        try{
 
-                const parsed =
-                    JSON.parse(value);
+            const parsed =
+                JSON.parse(value);
 
-                if(
-                    parsed &&
-                    typeof parsed === "object" &&
-                    Object.keys(parsed).length > 0
-                ){
+            if(
+                parsed &&
+                typeof parsed === "object" &&
+                Object.keys(parsed).length > 0
+            ){
 
-                    console.log(
-                        "PLACEMIND FOUND:",
-                        name,
-                        parsed
-                    );
+                console.log(
+                    "PLACEMIND FOUND:",
+                    name,
+                    parsed
+                );
 
-                    return parsed;
+                return parsed;
 
-                }
+            }
 
-            }catch(e){}
+        }catch(error){
+
+            console.log(
+                "Storage parse error:",
+                name
+            );
 
         }
 
@@ -815,11 +493,7 @@ function findStorageData(names){
 }
 
 
-/* ============================================================
-   GET A VALUE FROM MULTIPLE POSSIBLE FIELD NAMES
-   ============================================================ */
-
-function getValue(obj, names){
+function getValue(obj,names){
 
     for(const name of names){
 
@@ -829,7 +503,11 @@ function getValue(obj, names){
             obj[name] !== ""
         ){
 
-            return Number(obj[name]);
+            const value = Number(obj[name]);
+
+            if(!Number.isNaN(value)){
+                return value;
+            }
 
         }
 
@@ -838,10 +516,6 @@ function getValue(obj, names){
     return 0;
 }
 
-
-/* ============================================================
-   FINAL ANALYSIS
-   ============================================================ */
 
 async function finish(){
 
@@ -867,13 +541,11 @@ async function finish(){
                 }
             );
 
+        alert("Please complete all four sections before generating the analysis.");
+
         return;
     }
 
-
-    /* ========================================================
-       READ ALL POSSIBLE ACADEMIC STORAGE NAMES
-       ======================================================== */
 
     const academic = findStorageData([
         "studentAcademic",
@@ -884,10 +556,6 @@ async function finish(){
     ]);
 
 
-    /* ========================================================
-       READ ALL POSSIBLE CODING STORAGE NAMES
-       ======================================================== */
-
     const coding = findStorageData([
         "studentCoding",
         "codingData",
@@ -897,10 +565,6 @@ async function finish(){
     ]);
 
 
-    /* ========================================================
-       READ ALL POSSIBLE TECHNICAL STORAGE NAMES
-       ======================================================== */
-
     const technical = findStorageData([
         "studentTechnical",
         "technicalData",
@@ -909,30 +573,6 @@ async function finish(){
         "studentTechnicalData"
     ]);
 
-
-    console.log(
-        "========== PLACEMIND DEBUG =========="
-    );
-
-    console.log(
-        "ACADEMIC:",
-        academic
-    );
-
-    console.log(
-        "CODING:",
-        coding
-    );
-
-    console.log(
-        "TECHNICAL:",
-        technical
-    );
-
-
-    /* ========================================================
-       EXTRACT ACADEMIC VALUES
-       ======================================================== */
 
     const sem1 = getValue(
         academic,
@@ -982,10 +622,6 @@ async function finish(){
     );
 
 
-    /* ========================================================
-       EXTRACT CODING
-       ======================================================== */
-
     const codingScore = getValue(
         coding,
         [
@@ -998,10 +634,6 @@ async function finish(){
     );
 
 
-    /* ========================================================
-       EXTRACT TECHNICAL
-       ======================================================== */
-
     const technicalScore = getValue(
         technical,
         [
@@ -1012,10 +644,6 @@ async function finish(){
         ]
     );
 
-
-    /* ========================================================
-       APTITUDE
-       ======================================================== */
 
     const aptitudeScore =
         Number(values[0]);
@@ -1029,90 +657,46 @@ async function finish(){
         Number(values[2]);
 
 
-    /* ========================================================
-       SHOW WHAT IS ACTUALLY BEING SENT
-       ======================================================== */
-
-    console.log(
-        "SEMESTERS:",
-        sem1,
-        sem2,
-        sem3,
-        sem4
-    );
-
-    console.log(
-        "CODING:",
-        codingScore
-    );
-
-    console.log(
-        "TECHNICAL:",
-        technicalScore
-    );
-
-
-    /* ========================================================
-       BUILD API REQUEST
-       ======================================================== */
-
     const data = {
 
         academic: {
-
             sem1: sem1,
             sem2: sem2,
             sem3: sem3,
             sem4: sem4
-
         },
 
         coding: {
-
-            codingScore:
-                codingScore
-
+            codingScore: codingScore
         },
 
         technical: {
-
-            technicalScore:
-                technicalScore
-
+            technicalScore: technicalScore
         },
 
         aptitude: {
-
-            aptitudeScore:
-                aptitudeScore,
-
-            communicationScore:
-                communicationScore,
-
-            interviewScore:
-                interviewScore
-
+            aptitudeScore: aptitudeScore,
+            communicationScore: communicationScore,
+            interviewScore: interviewScore
         }
 
     };
 
 
     console.log(
-        "========== FINAL API INPUT =========="
+        "PLACEMIND AI FINAL INPUT:",
+        data
     );
-
-    console.log(data);
 
 
     const button =
-        document.getElementById(
-            "analysisButton"
-        );
+        document.getElementById("analysisButton");
 
 
     button.innerText =
         "ANALYZING PROFILE...";
 
+    button.classList.add("loading");
     button.disabled = true;
 
 
@@ -1140,10 +724,9 @@ async function finish(){
 
 
         console.log(
-            "========== AI RESULT =========="
+            "PLACEMIND AI RESULT:",
+            result
         );
-
-        console.log(result);
 
 
         if(!response.ok){
@@ -1169,7 +752,8 @@ async function finish(){
                 {opacity:0}
             ],
             {
-                duration:550
+                duration:550,
+                easing:"ease-in-out"
             }
         );
 
@@ -1185,15 +769,21 @@ async function finish(){
     }
     catch(error){
 
-        console.error(error);
+        console.error(
+            "PLACEMIND AI ERROR:",
+            error
+        );
+
 
         button.innerText =
             "TRY AGAIN";
 
+        button.classList.remove("loading");
         button.disabled = false;
 
+
         alert(
-            "AI analysis failed:\n\n" +
+            "AI analysis failed.\n\n" +
             error.message
         );
 
@@ -1202,7 +792,6 @@ async function finish(){
 }
 
 </script>
-
 
 </body>
 </html>

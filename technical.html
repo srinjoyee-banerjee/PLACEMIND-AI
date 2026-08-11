@@ -1,181 +1,207 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PLACEMIND AI — Technical Profile</title>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>PLACEMIND AI — Technical Profile</title>
-
-    <link rel="stylesheet"
-          href="../css/style.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,Helvetica,sans-serif;color:#f5f7ff;min-height:100vh;
+background:
+radial-gradient(circle at 20% 20%,rgba(14,165,233,.15),transparent 30%),
+radial-gradient(circle at 80% 75%,rgba(108,99,255,.18),transparent 30%),
+#070b14
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;
+background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:55px 55px
+}
+.page{width:min(1180px,92%);margin:auto;padding:32px 0 60px}
+.top{display:flex;justify-content:space-between;margin-bottom:65px}
+.logo{font-weight:800;letter-spacing:3px}.logo span{color:#6c63ff}
+.step{font-size:11px;letter-spacing:3px;color:#8991a5}
+.progress{height:2px;background:#171c29;margin-top:-42px;margin-bottom:65px}
+.fill{height:100%;width:75%;background:linear-gradient(90deg,#6c63ff,#22d3ee)}
+.hero{animation:up .8s ease}
+.eyebrow{color:#22b8ee;font-size:11px;letter-spacing:4px;margin-bottom:20px;font-weight:bold}
+h1{font-size:clamp(48px,7vw,82px);line-height:.9;letter-spacing:-5px}
+h1 span{color:#22b8ee}
+.desc{color:#969eb1;max-width:650px;line-height:1.7;margin-top:25px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:55px;animation:up .9s .2s both}
+.skill{
+padding:28px;border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.035);border-radius:16px;
+transition:.3s
+}
+.skill:hover{transform:translateY(-5px);border-color:rgba(34,184,238,.5)}
+.number{font-size:10px;letter-spacing:3px;color:#22b8ee;margin-bottom:18px}
+.skill h2{font-size:20px;margin-bottom:18px}
+select{
+width:100%;padding:14px;border-radius:10px;background:#111725;
+border:1px solid rgba(255,255,255,.1);color:white;outline:none;cursor:pointer
+}
+select:focus{border-color:#22b8ee;box-shadow:0 0 15px rgba(34,184,238,.1)}
+.bottom{
+display:flex;justify-content:space-between;align-items:center;
+margin-top:25px;padding-top:25px;border-top:1px solid rgba(255,255,255,.08);
+grid-column:1/-1
+}
+.status{font-size:11px;letter-spacing:2px;color:#737c90}
+button{
+background:#f5f7ff;border:0;border-radius:9px;padding:16px 28px;
+font-weight:800;cursor:pointer;transition:.3s
+}
+button:hover{transform:translateY(-3px)}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.bottom{flex-direction:column;gap:18px;align-items:stretch}}
+</style>
 
 </head>
 
 <body>
+<div class="page">
 
-    <main class="hero">
+<div class="top">
+<div class="logo">PLACEMIND<span>AI</span></div>
+<div class="step">STEP 04 / 04</div>
+</div>
 
-        <div class="hero-content">
+<div class="progress"><div class="fill"></div></div>
 
-            <div class="brand">
-                PLACEMIND<span>AI</span>
-            </div>
+<section class="hero">
+<div class="eyebrow">TECHNICAL INTELLIGENCE</div>
+<h1>YOUR<br>TECHNICAL<br><span>EDGE.</span></h1>
+<p class="desc">
+Evaluate the technical knowledge you bring into an interview.
+Choose the level that best represents your current understanding.
+</p>
+</section>
 
-            <p class="step-text">
-                STEP 04 / PROJECTS & TECHNICAL SKILLS
-            </p>
+<div class="grid">
 
-            <div class="tagline">
-                WHAT<br>
-                CAN YOU<br>
-                BUILD?
-            </div>
+<div class="skill">
+<div class="number">01 / CORE</div>
+<h2>Computer Science</h2>
+<select id="cs">
+<option value="">Select level</option>
+<option value="30">Basic</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
-            <p class="description">
-                Projects and technical depth help us understand
-                how prepared you are to apply your knowledge
-                beyond academic coursework.
-            </p>
+<div class="skill">
+<div class="number">02 / DEVELOPMENT</div>
+<h2>Programming</h2>
+<select id="programming">
+<option value="">Select level</option>
+<option value="30">Basic</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
+<div class="skill">
+<div class="number">03 / DATA</div>
+<h2>Databases & SQL</h2>
+<select id="database">
+<option value="">Select level</option>
+<option value="30">Basic</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
-            <div style="margin-top: 40px; max-width: 500px;">
+<div class="skill">
+<div class="number">04 / AI</div>
+<h2>AI / Machine Learning</h2>
+<select id="ai">
+<option value="">Select level</option>
+<option value="30">Basic</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
-                <input
-                    type="number"
-                    id="projects"
-                    placeholder="Number of completed projects"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="skill">
+<div class="number">05 / ENGINEERING</div>
+<h2>Projects & Tools</h2>
+<select id="projects">
+<option value="">Select level</option>
+<option value="30">Basic</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
-                <input
-                    type="number"
-                    id="majorProjects"
-                    placeholder="Major / advanced projects"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="skill">
+<div class="number">06 / PRACTICAL</div>
+<h2>Technical Interview</h2>
+<select id="interview">
+<option value="">Select confidence</option>
+<option value="30">Low</option>
+<option value="50">Moderate</option>
+<option value="70">High</option>
+<option value="90">Very High</option>
+</select>
+</div>
 
-                <input
-                    type="number"
-                    id="internships"
-                    placeholder="Internships completed"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="bottom">
+<div class="status" id="status">0 / 6 COMPLETED</div>
+<button onclick="next()">CONTINUE →</button>
+</div>
 
-                <input
-                    type="number"
-                    id="technicalScore"
-                    placeholder="Technical assessment score (%)"
-                    min="0"
-                    max="100"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="languages"
-                    placeholder="Programming languages known"
-                    min="0"
-                    style="width:100%; padding:18px;"
-                >
+<script>
+const ids=["cs","programming","database","ai","projects","interview"];
 
-            </div>
+ids.forEach(id=>{
+document.getElementById(id).addEventListener("change",update);
+});
 
+function update(){
+let count=ids.filter(id=>document.getElementById(id).value).length;
+document.getElementById("status").innerText=count+" / 6 COMPLETED";
+}
 
-            <button
-                class="start-btn"
-                onclick="goToAptitude()">
+function next(){
 
-                CONTINUE →
+let vals=ids.map(id=>document.getElementById(id).value);
 
-            </button>
+if(vals.includes("")){
+document.querySelector(".grid").animate(
+[{transform:"translateX(0)"},{transform:"translateX(-6px)"},
+{transform:"translateX(6px)"},{transform:"translateX(0)"}],
+{duration:350});
+return;
+}
 
+let score=Math.round(
+vals.reduce((a,b)=>a+Number(b),0)/vals.length
+);
 
-            <div class="progress">
+localStorage.setItem("technicalData",
+JSON.stringify({technicalScore:score}));
 
-                <span></span>
-                <span></span>
-                <span class="active"></span>
-                <span></span>
-                <span></span>
+document.body.style.opacity="0";
 
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <script>
-
-        function goToAptitude() {
-
-            const projects =
-                document.getElementById("projects").value;
-
-            const majorProjects =
-                document.getElementById("majorProjects").value;
-
-            const internships =
-                document.getElementById("internships").value;
-
-            const technicalScore =
-                document.getElementById("technicalScore").value;
-
-            const languages =
-                document.getElementById("languages").value;
-
-
-            if (
-                !projects ||
-                !majorProjects ||
-                !internships ||
-                !technicalScore ||
-                !languages
-            ) {
-
-                alert("Please complete your technical profile.");
-
-                return;
-
-            }
-
-
-            const technical = {
-
-                projects: Number(projects),
-
-                majorProjects: Number(majorProjects),
-
-                internships: Number(internships),
-
-                technicalScore: Number(technicalScore),
-
-                languages: Number(languages)
-
-            };
-
-
-            localStorage.setItem(
-                "studentTechnical",
-                JSON.stringify(technical)
-            );
-
-
-            window.location.href =
-                "aptitude.html";
-
-        }
-
-    </script>
+setTimeout(()=>{
+location.href="aptitude.html";
+},350);
+}
+</script>
 
 </body>
-
 </html>

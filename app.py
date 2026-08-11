@@ -5,12 +5,12 @@ import joblib
 import pandas as pd
 import os
 
-app = Flask(__name__, static_folder="../frontend")
+app = Flask(__name__)
 CORS(app)
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = BASE_DIR
-FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
+FRONTEND_DIR = BASE_DIR
 
 # ============================================================
 # LOAD REAL ML MODELS
@@ -31,7 +31,6 @@ placement_model = joblib.load(
 print("✅ Academic Forecast model loaded")
 print("✅ Academic Decline model loaded")
 print("✅ Placement model loaded")
-
 
 # ============================================================
 # FRONTEND

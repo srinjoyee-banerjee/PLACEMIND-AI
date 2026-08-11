@@ -1,187 +1,267 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PLACEMIND AI — Aptitude Assessment</title>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>PLACEMIND AI — Interview Profile</title>
-
-    <link rel="stylesheet"
-          href="../css/style.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,Helvetica,sans-serif;color:#f5f7ff;min-height:100vh;
+background:
+radial-gradient(circle at 80% 20%,rgba(168,85,247,.18),transparent 30%),
+radial-gradient(circle at 10% 80%,rgba(236,72,153,.10),transparent 30%),
+#070b14
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;
+background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:55px 55px
+}
+.page{width:min(1180px,92%);margin:auto;padding:32px 0 60px;min-height:100vh}
+.top{display:flex;justify-content:space-between;margin-bottom:65px}
+.logo{font-weight:800;letter-spacing:3px}.logo span{color:#a855f7}
+.step{font-size:11px;letter-spacing:3px;color:#8991a5}
+.progress{height:2px;background:#171c29;margin-top:-42px;margin-bottom:65px}
+.fill{height:100%;width:100%;background:linear-gradient(90deg,#6c63ff,#d946ef);box-shadow:0 0 18px #a855f7}
+.hero{animation:up .8s ease}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#c084fc;font-weight:bold;margin-bottom:20px}
+h1{font-size:clamp(48px,7vw,82px);line-height:.9;letter-spacing:-5px}
+h1 span{color:#c084fc}
+.desc{color:#969eb1;max-width:680px;line-height:1.7;margin-top:25px}
+.assessment{
+display:grid;grid-template-columns:1fr 1fr;gap:15px;
+margin-top:55px;animation:up .9s .2s both
+}
+.block{
+padding:28px;border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.035);border-radius:16px;
+transition:.3s
+}
+.block:hover{transform:translateY(-5px);border-color:rgba(192,132,252,.5)}
+.num{font-size:10px;letter-spacing:3px;color:#c084fc;margin-bottom:15px}
+h2{font-size:19px;margin-bottom:20px}
+select{
+width:100%;padding:14px;border-radius:10px;background:#111725;
+border:1px solid rgba(255,255,255,.1);color:white;outline:none;cursor:pointer
+}
+select:focus{border-color:#c084fc;box-shadow:0 0 15px rgba(192,132,252,.12)}
+.bottom{
+grid-column:1/-1;display:flex;justify-content:space-between;
+align-items:center;border-top:1px solid rgba(255,255,255,.08);
+padding-top:25px;margin-top:15px
+}
+.status{font-size:11px;letter-spacing:2px;color:#737c90}
+button{
+background:#f5f7ff;color:#080b13;border:0;border-radius:9px;
+padding:16px 28px;font-weight:800;cursor:pointer;transition:.3s
+}
+button:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,255,255,.12)}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+.assessment{grid-template-columns:1fr}
+.bottom{flex-direction:column;gap:18px;align-items:stretch}
+}
+</style>
 
 </head>
 
 <body>
+<div class="page">
 
-    <main class="hero">
+<div class="top">
+<div class="logo">PLACEMIND<span>AI</span></div>
+<div class="step">FINAL ASSESSMENT</div>
+</div>
 
-        <div class="hero-content">
+<div class="progress"><div class="fill"></div></div>
 
-            <div class="brand">
-                PLACEMIND<span>AI</span>
-            </div>
+<section class="hero">
+<div class="eyebrow">APTITUDE & INTERVIEW INTELLIGENCE</div>
+<h1>ARE YOU<br><span>INTERVIEW</span><br>READY?</h1>
+<p class="desc">
+Placement readiness is more than technical knowledge.
+Evaluate your aptitude, communication and interview confidence
+before PLACEMIND AI generates your final readiness profile.
+</p>
+</section>
 
-            <p class="step-text">
-                STEP 05 / APTITUDE & INTERVIEW
-            </p>
+<div class="assessment">
 
-            <div class="tagline">
-                ARE YOU<br>
-                INTERVIEW<br>
-                READY?
-            </div>
+<div class="block">
+<div class="num">01 / APTITUDE</div>
+<h2>Quantitative & Logical Reasoning</h2>
+<select id="aptitude">
+<option value="">Select your level</option>
+<option value="30">Beginner</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Advanced</option>
+</select>
+</div>
 
-            <p class="description">
-                Technical knowledge is only one part of placement
-                preparation. Aptitude, communication and interview
-                performance also matter.
-            </p>
+<div class="block">
+<div class="num">02 / COMMUNICATION</div>
+<h2>Communication Skills</h2>
+<select id="communication">
+<option value="">Select your level</option>
+<option value="30">Needs Work</option>
+<option value="50">Developing</option>
+<option value="70">Strong</option>
+<option value="90">Excellent</option>
+</select>
+</div>
 
+<div class="block">
+<div class="num">03 / INTERVIEW</div>
+<h2>Interview Confidence</h2>
+<select id="interview">
+<option value="">Select confidence</option>
+<option value="30">Low</option>
+<option value="50">Moderate</option>
+<option value="70">High</option>
+<option value="90">Very High</option>
+</select>
+</div>
 
-            <div style="margin-top: 40px; max-width: 500px;">
+<div class="block">
+<div class="num">04 / PREPARATION</div>
+<h2>Placement Preparation</h2>
+<select id="preparation">
+<option value="">Select your level</option>
+<option value="30">Just Started</option>
+<option value="50">Developing</option>
+<option value="70">Well Prepared</option>
+<option value="90">Highly Prepared</option>
+</select>
+</div>
 
-                <input
-                    type="number"
-                    id="aptitudeScore"
-                    placeholder="Aptitude test score (%)"
-                    min="0"
-                    max="100"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="bottom">
+<div class="status" id="status">0 / 4 COMPLETED</div>
+<button onclick="finish()">GENERATE AI ANALYSIS ↗</button>
+</div>
 
-                <input
-                    type="number"
-                    id="communicationScore"
-                    placeholder="Communication score (%)"
-                    min="0"
-                    max="100"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="mockInterviews"
-                    placeholder="Mock interviews completed"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<script>
+const ids=["aptitude","communication","interview","preparation"];
 
-                <input
-                    type="number"
-                    id="interviewScore"
-                    placeholder="Average mock interview score (%)"
-                    min="0"
-                    max="100"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+ids.forEach(id=>{
+document.getElementById(id).addEventListener("change",update);
+});
 
-                <input
-                    type="number"
-                    id="preparationHours"
-                    placeholder="Placement preparation hours/week"
-                    min="0"
-                    style="width:100%; padding:18px;"
-                >
+function update(){
 
-            </div>
+let count=ids.filter(id=>
+document.getElementById(id).value
+).length;
 
+document.getElementById("status").innerText=
+count+" / 4 COMPLETED";
+}
 
-            <button
-                class="start-btn"
-                onclick="generateAssessment()">
+async function finish(){
 
-                ANALYZE MY READINESS →
+let vals=ids.map(id=>
+document.getElementById(id).value
+);
 
-            </button>
+if(vals.includes("")){
 
+document.querySelector(".assessment").animate(
+[
+{transform:"translateX(0)"},
+{transform:"translateX(-6px)"},
+{transform:"translateX(6px)"},
+{transform:"translateX(0)"}
+],
+{duration:350}
+);
 
-            <div class="progress">
+return;
+}
 
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span class="active"></span>
+const aptitudeScore=Number(vals[0]);
+const communicationScore=Number(vals[1]);
+const interviewScore=Number(vals[2]);
 
-            </div>
+const academic=JSON.parse(
+localStorage.getItem("academicData")||"{}"
+);
 
-        </div>
+const coding=JSON.parse(
+localStorage.getItem("codingData")||"{}"
+);
 
-    </main>
+const technical=JSON.parse(
+localStorage.getItem("technicalData")||"{}"
+);
 
+const data={
+academic:{
+sem1:Number(academic.sem1),
+sem2:Number(academic.sem2),
+sem3:Number(academic.sem3),
+sem4:Number(academic.sem4)
+},
+coding:{
+codingScore:Number(coding.codingScore)
+},
+technical:{
+technicalScore:Number(technical.technicalScore)
+},
+aptitude:{
+aptitudeScore:aptitudeScore,
+communicationScore:communicationScore,
+interviewScore:interviewScore
+}
+};
 
-    <script>
+document.querySelector("button").innerText=
+"ANALYZING...";
 
-        function generateAssessment() {
+try{
 
-            const aptitudeScore =
-                document.getElementById("aptitudeScore").value;
+const response=await fetch("/predict",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(data)
+});
 
-            const communicationScore =
-                document.getElementById("communicationScore").value;
+const result=await response.json();
 
-            const mockInterviews =
-                document.getElementById("mockInterviews").value;
+localStorage.setItem(
+"placementResult",
+JSON.stringify(result)
+);
 
-            const interviewScore =
-                document.getElementById("interviewScore").value;
+if(!response.ok){
+throw new Error(result.details||"Prediction failed");
+}
 
-            const preparationHours =
-                document.getElementById("preparationHours").value;
+document.body.style.opacity="0";
 
+setTimeout(()=>{
+location.href="result.html";
+},500);
 
-            if (
-                !aptitudeScore ||
-                !communicationScore ||
-                !mockInterviews ||
-                !interviewScore ||
-                !preparationHours
-            ) {
+}catch(error){
 
-                alert("Please complete your interview profile.");
+console.error(error);
 
-                return;
+document.querySelector("button").innerText=
+"TRY AGAIN";
 
-            }
-
-
-            const aptitude = {
-
-                aptitudeScore: Number(aptitudeScore),
-
-                communicationScore:
-                    Number(communicationScore),
-
-                mockInterviews:
-                    Number(mockInterviews),
-
-                interviewScore:
-                    Number(interviewScore),
-
-                preparationHours:
-                    Number(preparationHours)
-
-            };
-
-
-            localStorage.setItem(
-                "studentAptitude",
-                JSON.stringify(aptitude)
-            );
-
-
-            window.location.href =
-                "forecast.html";
-
-        }
-
-    </script>
+alert("AI analysis could not be completed. Please try again.");
+}
+}
+</script>
 
 </body>
-
 </html>

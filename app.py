@@ -4,351 +4,374 @@ import joblib
 import pandas as pd
 import os
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# ============================================================
+
+# PATHS
+
+# ============================================================
+
+BASE_DIR = os.path.dirname(os.path.abspath(**file**))
 MODEL_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR
 
-app = Flask(__name__)
+app = Flask(**name**)
 CORS(app)
 
-
 # ============================================================
+
 # FRONTEND
+
 # ============================================================
 
 @app.route("/")
 def home():
-    return send_from_directory(FRONTEND_DIR, "index.html")
+return send_from_directory(FRONTEND_DIR, "index.html")
 
-
-@app.route("/<path:filename>")
+@app.route("/[path:filename](path:filename)")
 def frontend_files(filename):
-    return send_from_directory(FRONTEND_DIR, filename)
-
+return send_from_directory(FRONTEND_DIR, filename)
 
 # ============================================================
+
 # LOAD REAL ML MODELS
+
 # ============================================================
 
 academic_model = joblib.load(
-    os.path.join(MODEL_DIR, "academic_forecast_model.pkl")
+os.path.join(MODEL_DIR, "academic_forecast_model.pkl")
 )
 
 decline_model = joblib.load(
-    os.path.join(MODEL_DIR, "academic_decline_model.pkl")
+os.path.join(MODEL_DIR, "academic_decline_model.pkl")
 )
 
 placement_model = joblib.load(
-    os.path.join(MODEL_DIR, "placement_model.pkl")
+os.path.join(MODEL_DIR, "placement_model.pkl")
 )
 
 print("✅ Academic Forecast model loaded")
 print("✅ Academic Decline model loaded")
 print("✅ Placement model loaded")
 
-
 # ============================================================
+
 # HEALTH
+
 # ============================================================
 
 @app.route("/health")
 def health():
-    return jsonify({
-        "status": "online",
-        "application": "PLACEMIND AI",
-        "models": {
-            "academic_forecast": "loaded",
-            "academic_decline": "loaded",
-            "placement": "loaded"
-        }
-    })
-
+return jsonify({
+"status": "online",
+"application": "PLACEMIND AI",
+"models": {
+"academic_forecast": "loaded",
+"academic_decline": "loaded",
+"placement": "loaded"
+}
+})
 
 # ============================================================
+
 # COMPLETE AI ANALYSIS
+
 # ============================================================
 
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    try:
+```
+try:
 
-        data = request.get_json() or {}
+    data = request.get_json() or {}
 
-        academic = data.get("academic", {})
-        coding = data.get("coding", {})
-        technical = data.get("technical", {})
-        aptitude = data.get("aptitude", {})
+    academic = data.get("academic", {})
+    coding = data.get("coding", {})
+    technical = data.get("technical", {})
+    aptitude = data.get("aptitude", {})
 
-        # ====================================================
-        # ACADEMIC INPUT
-        # ====================================================
+    # ====================================================
+    # ACADEMIC INPUT
+    # ====================================================
 
-        academic_input = pd.DataFrame([{
-            "SEM 1": float(academic["sem1"]),
-            "SEM 2": float(academic["sem2"]),
-            "SEM 3": float(academic["sem3"]),
-            "SEM 4": float(academic["sem4"])
-        }])
+    academic_input = pd.DataFrame([{
+        "SEM 1": float(academic["sem1"]),
+        "SEM 2": float(academic["sem2"]),
+        "SEM 3": float(academic["sem3"]),
+        "SEM 4": float(academic["sem4"])
+    }])
 
-        sem1 = float(academic["sem1"])
-        sem2 = float(academic["sem2"])
-        sem3 = float(academic["sem3"])
-        sem4 = float(academic["sem4"])
+    sem1 = float(academic["sem1"])
+    sem2 = float(academic["sem2"])
+    sem3 = float(academic["sem3"])
+    sem4 = float(academic["sem4"])
 
-        # ====================================================
-        # REAL ACADEMIC FORECAST
-        # ====================================================
+    # ====================================================
+    # ACADEMIC FORECAST
+    # ====================================================
 
-        academic_forecast = float(
-            academic_model.predict(academic_input)[0]
+    academic_forecast = float(
+        academic_model.predict(academic_input)[0]
+    )
+
+    # ====================================================
+    # ACADEMIC DECLINE MODEL
+    # ====================================================
+
+    decline_prediction = int(
+        decline_model.predict(academic_input)[0]
+    )
+
+    decline_probability = None
+
+    if hasattr(decline_model, "predict_proba"):
+
+        probabilities = decline_model.predict_proba(
+            academic_input
+        )[0]
+
+        classes = list(decline_model.classes_)
+
+        if 1 in classes:
+            decline_probability = float(
+                probabilities[classes.index(1)]
+            )
+
+    if decline_probability is not None:
+
+        if decline_probability >= 0.70:
+            academic_status = "High Risk of Academic Decline"
+
+        elif decline_probability >= 0.40:
+            academic_status = "Moderate Risk of Academic Decline"
+
+        else:
+            academic_status = "Low Risk of Academic Decline"
+
+    else:
+        academic_status = "Academic trajectory analyzed"
+
+    # ====================================================
+    # ACADEMIC READINESS
+    # ====================================================
+
+    academic_average = (
+        sem1 * 0.15 +
+        sem2 * 0.20 +
+        sem3 * 0.25 +
+        sem4 * 0.40
+    )
+
+    academic_score = min(
+        100,
+        max(0, academic_average * 10)
+    )
+
+    # ====================================================
+    # CODING
+    # ====================================================
+
+    coding_score = min(
+        100,
+        max(
+            0,
+            float(coding.get("codingScore", 0))
         )
+    )
 
-        # ====================================================
-        # REAL ACADEMIC DECLINE MODEL
-        # ====================================================
+    # ====================================================
+    # TECHNICAL
+    # ====================================================
 
-        decline_prediction = int(
-            decline_model.predict(academic_input)[0]
+    technical_score = min(
+        100,
+        max(
+            0,
+            float(technical.get("technicalScore", 0))
         )
+    )
 
-        decline_probability = None
+    # ====================================================
+    # APTITUDE
+    # ====================================================
 
-        if hasattr(decline_model, "predict_proba"):
-
-            probabilities = decline_model.predict_proba(
-                academic_input
-            )[0]
-
-            classes = list(decline_model.classes_)
-
-            if 1 in classes:
-                decline_probability = float(
-                    probabilities[classes.index(1)]
+    aptitude_score = min(
+        100,
+        max(
+            0,
+            (
+                float(
+                    aptitude.get(
+                        "aptitudeScore",
+                        0
+                    )
                 )
-
-        if decline_probability is not None:
-
-            if decline_probability >= 0.70:
-                academic_status = "High Risk of Academic Decline"
-
-            elif decline_probability >= 0.40:
-                academic_status = "Moderate Risk of Academic Decline"
-
-            else:
-                academic_status = "Low Risk of Academic Decline"
-
-        else:
-            academic_status = "Academic trajectory analyzed"
-
-        # ====================================================
-        # ACADEMIC READINESS
-        # ====================================================
-
-        academic_average = (
-            sem1 * 0.15 +
-            sem2 * 0.20 +
-            sem3 * 0.25 +
-            sem4 * 0.40
-        )
-
-        academic_score = min(
-            100,
-            max(0, academic_average * 10)
-        )
-
-        # ====================================================
-        # CODING
-        # ====================================================
-
-        coding_score = min(
-            100,
-            max(
-                0,
-                float(coding.get("codingScore", 0))
-            )
-        )
-
-        # ====================================================
-        # TECHNICAL
-        # ====================================================
-
-        technical_score = min(
-            100,
-            max(
-                0,
-                float(technical.get("technicalScore", 0))
-            )
-        )
-
-        # ====================================================
-        # APTITUDE
-        # ====================================================
-
-        aptitude_score = min(
-            100,
-            max(
-                0,
-                (
-                    float(
-                        aptitude.get(
-                            "aptitudeScore",
-                            0
-                        )
+                +
+                float(
+                    aptitude.get(
+                        "communicationScore",
+                        0
                     )
-                    +
-                    float(
-                        aptitude.get(
-                            "communicationScore",
-                            0
-                        )
+                )
+                +
+                float(
+                    aptitude.get(
+                        "interviewScore",
+                        0
                     )
-                    +
-                    float(
-                        aptitude.get(
-                            "interviewScore",
-                            0
-                        )
-                    )
-                ) / 3
-            )
+                )
+            ) / 3
         )
+    )
 
-        interview_score = float(
-            aptitude.get("interviewScore", 0)
-        )
+    interview_score = float(
+        aptitude.get("interviewScore", 0)
+    )
 
-        # ====================================================
-        # FINAL READINESS
-        # ====================================================
+    # ====================================================
+    # FINAL READINESS
+    # ====================================================
 
-        readiness = round(
-            academic_score * 0.25 +
-            coding_score * 0.25 +
-            technical_score * 0.20 +
-            aptitude_score * 0.30,
+    readiness = round(
+
+        academic_score * 0.25 +
+        coding_score * 0.25 +
+        technical_score * 0.20 +
+        aptitude_score * 0.30,
+
+        1
+    )
+
+    if readiness >= 80:
+
+        readiness_label = "HIGH PLACEMENT READINESS"
+
+    elif readiness >= 60:
+
+        readiness_label = "MODERATE PLACEMENT READINESS"
+
+    else:
+
+        readiness_label = "NEEDS IMPROVEMENT"
+
+    # ====================================================
+    # WEAKEST AREA
+    # ====================================================
+
+    scores = {
+        "Academic": academic_score,
+        "Coding": coding_score,
+        "Technical": technical_score,
+        "Aptitude": aptitude_score
+    }
+
+    weakest_area = min(
+        scores,
+        key=scores.get
+    )
+
+    recommendation = (
+        f"Your weakest area is {weakest_area}. "
+        f"Focus your preparation there to improve "
+        f"overall placement readiness."
+    )
+
+    # ====================================================
+    # FORECAST TEXT
+    # ====================================================
+
+    forecast_text = (
+        f"Predicted next-semester GPA: "
+        f"{academic_forecast:.2f}. "
+        f"{academic_status}."
+    )
+
+    # ====================================================
+    # RESPONSE
+    # ====================================================
+
+    return jsonify({
+
+        "readinessScore": readiness,
+
+        "readinessLabel": readiness_label,
+
+        "academicResult": round(
+            academic_score,
             1
-        )
+        ),
 
-        if readiness >= 80:
-            readiness_label = "HIGH PLACEMENT READINESS"
+        "codingResult": round(
+            coding_score,
+            1
+        ),
 
-        elif readiness >= 60:
-            readiness_label = "MODERATE PLACEMENT READINESS"
+        "technicalResult": round(
+            technical_score,
+            1
+        ),
 
-        else:
-            readiness_label = "NEEDS IMPROVEMENT"
+        "aptitudeResult": round(
+            aptitude_score,
+            1
+        ),
 
-        # ====================================================
-        # WEAKEST AREA
-        # ====================================================
+        "interviewResult": round(
+            interview_score,
+            1
+        ),
 
-        scores = {
-            "Academic": academic_score,
-            "Coding": coding_score,
-            "Technical": technical_score,
-            "Aptitude": aptitude_score
-        }
+        "academicForecast": academic_forecast,
 
-        weakest_area = min(
-            scores,
-            key=scores.get
-        )
+        "academicDeclineProbability":
+            decline_probability,
 
-        recommendation = (
-            f"Your weakest area is {weakest_area}. "
-            f"Focus your preparation there to improve "
-            f"overall placement readiness."
-        )
+        "academicStatus":
+            academic_status,
 
-        # ====================================================
-        # FORECAST TEXT
-        # ====================================================
+        "forecast":
+            forecast_text,
 
-        forecast_text = (
-            f"Predicted next-semester GPA: "
-            f"{academic_forecast:.2f}. "
-            f"{academic_status}."
-        )
+        "recommendation":
+            recommendation
 
-        # ====================================================
-        # RESPONSE
-        # ====================================================
+    })
 
-        return jsonify({
+except Exception as e:
 
-            "readinessScore": readiness,
+    print(
+        "Prediction error:",
+        str(e)
+    )
 
-            "readinessLabel": readiness_label,
+    return jsonify({
 
-            "academicResult": round(
-                academic_score,
-                1
-            ),
+        "error": "Prediction failed",
 
-            "codingResult": round(
-                coding_score,
-                1
-            ),
+        "details": str(e)
 
-            "technicalResult": round(
-                technical_score,
-                1
-            ),
-
-            "aptitudeResult": round(
-                aptitude_score,
-                1
-            ),
-
-            "interviewResult": round(
-                interview_score,
-                1
-            ),
-
-            "academicForecast": academic_forecast,
-
-            "academicDeclineProbability":
-                decline_probability,
-
-            "academicStatus":
-                academic_status,
-
-            "forecast":
-                forecast_text,
-
-            "recommendation":
-                recommendation
-        })
-
-    except Exception as e:
-
-        print(
-            "Prediction error:",
-            str(e)
-        )
-
-        return jsonify({
-            "error": "Prediction failed",
-            "details": str(e)
-        }), 500
-
+    }), 500
+```
 
 # ============================================================
+
 # RUN
+
 # ============================================================
 
-if __name__ == "__main__":
+if **name** == "**main**":
 
-    port = int(
-        os.environ.get(
-            "PORT",
-            7860
-        )
+```
+port = int(
+    os.environ.get(
+        "PORT",
+        7860
     )
+)
 
-    app.run(
-        host="0.0.0.0",
-        port=port,
-        debug=False
-    )
+app.run(
+    host="0.0.0.0",
+    port=port,
+    debug=False
+)
+```

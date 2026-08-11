@@ -1,194 +1,228 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PLACEMIND AI — Coding Assessment</title>
 
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>PLACEMIND AI — Coding Profile</title>
-
-    <link rel="stylesheet"
-          href="../css/style.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:
+radial-gradient(circle at 75% 20%,rgba(99,102,241,.20),transparent 30%),
+radial-gradient(circle at 10% 80%,rgba(6,182,212,.12),transparent 30%),
+#070b14;
+color:#f5f7ff;
+min-height:100vh;
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;
+background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:55px 55px;
+}
+.page{width:min(1180px,92%);margin:auto;padding:32px 0 60px;min-height:100vh}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:65px}
+.logo{font-weight:800;letter-spacing:3px}.logo span{color:#6c63ff}
+.step{font-size:11px;letter-spacing:3px;color:#8991a5}
+.progress{height:2px;background:#171c29;margin-top:-42px;margin-bottom:65px}
+.fill{height:100%;width:50%;background:linear-gradient(90deg,#6c63ff,#22d3ee);box-shadow:0 0 15px #6c63ff}
+.hero{animation:up .8s ease}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#6c63ff;font-weight:bold;margin-bottom:20px}
+h1{font-size:clamp(48px,7vw,82px);line-height:.9;letter-spacing:-5px}
+h1 span{color:#6c63ff}
+.desc{color:#969eb1;max-width:650px;line-height:1.7;margin-top:25px}
+.layout{display:grid;grid-template-columns:280px 1fr;gap:45px;margin-top:55px}
+.side{animation:up .9s .1s both}
+.side-title{font-size:11px;letter-spacing:3px;color:#737c90;margin-bottom:18px}
+.card{
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.035);
+padding:25px;border-radius:16px
+}
+.big{font-size:38px;font-weight:800;margin-bottom:8px}
+.small{font-size:12px;color:#858da0;line-height:1.6}
+.assessment{animation:up .9s .2s both}
+.question{
+padding:26px;
+border:1px solid rgba(255,255,255,.08);
+background:rgba(255,255,255,.035);
+border-radius:16px;margin-bottom:14px;
+transition:.3s
+}
+.question:hover{border-color:rgba(108,99,255,.45);transform:translateY(-3px)}
+.qtop{display:flex;justify-content:space-between;margin-bottom:20px}
+.qnum{color:#6c63ff;font-size:10px;letter-spacing:3px}
+.qtitle{font-size:18px;font-weight:700}
+.options{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.option{
+padding:14px 10px;border:1px solid rgba(255,255,255,.09);
+border-radius:10px;text-align:center;color:#a7afc0;
+cursor:pointer;transition:.25s;font-size:13px
+}
+.option:hover{border-color:#6c63ff;color:white}
+.option.active{
+background:rgba(108,99,255,.15);
+border-color:#6c63ff;color:white;
+box-shadow:0 0 20px rgba(108,99,255,.12)
+}
+.bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding-top:25px;margin-top:20px}
+.status{font-size:11px;letter-spacing:2px;color:#737c90}
+button{
+background:#f5f7ff;border:0;border-radius:9px;padding:16px 28px;
+font-weight:800;cursor:pointer;transition:.3s
+}
+button:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,255,255,.12)}
+@keyframes up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(max-width:800px){
+.layout{grid-template-columns:1fr}.options{grid-template-columns:1fr 1fr}
+}
+</style>
 
 </head>
 
 <body>
+<div class="page">
 
-    <main class="hero">
+<div class="top">
+<div class="logo">PLACEMIND<span>AI</span></div>
+<div class="step">STEP 03 / 04</div>
+</div>
 
-        <div class="hero-content">
+<div class="progress"><div class="fill"></div></div>
 
-            <div class="brand">
-                PLACEMIND<span>AI</span>
-            </div>
+<section class="hero">
+<div class="eyebrow">CODING INTELLIGENCE</div>
+<h1>YOUR<br>CODING<br><span>PROFILE.</span></h1>
+<p class="desc">
+Measure your practical coding ability across problem solving,
+data structures and algorithms. Select the option that best
+represents your current level.
+</p>
+</section>
 
-            <p class="step-text">
-                STEP 03 / CODING & DSA
-            </p>
+<div class="layout">
 
-            <div class="tagline">
-                HOW<br>
-                STRONG IS<br>
-                YOUR CODE?
-            </div>
+<div class="side">
+<div class="side-title">ASSESSMENT SIGNAL</div>
+<div class="card">
+<div class="big" id="score">0%</div>
+<div class="small">
+Your coding readiness updates live as you complete the assessment.
+</div>
+</div>
+</div>
 
-            <p class="description">
-                Your coding preparation is one of the strongest
-                indicators of technical placement readiness.
-            </p>
+<div class="assessment">
 
+<div class="question">
+<div class="qtop">
+<div class="qnum">01 / DSA</div>
+<div class="qtitle">Problem Solving</div>
+</div>
+<div class="options" data-key="problem">
+<div class="option" data-value="25">Beginner</div>
+<div class="option" data-value="45">Developing</div>
+<div class="option" data-value="70">Strong</div>
+<div class="option" data-value="90">Advanced</div>
+</div>
+</div>
 
-            <div style="margin-top: 40px; max-width: 500px;">
+<div class="question">
+<div class="qtop">
+<div class="qnum">02 / PRACTICE</div>
+<div class="qtitle">Coding Practice</div>
+</div>
+<div class="options" data-key="practice">
+<div class="option" data-value="25">Rarely</div>
+<div class="option" data-value="45">Sometimes</div>
+<div class="option" data-value="70">Regularly</div>
+<div class="option" data-value="90">Daily</div>
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="dsaSolved"
-                    placeholder="DSA problems solved"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="question">
+<div class="qtop">
+<div class="qnum">03 / ALGORITHMS</div>
+<div class="qtitle">Algorithm Knowledge</div>
+</div>
+<div class="options" data-key="algorithm">
+<div class="option" data-value="30">Basic</div>
+<div class="option" data-value="50">Intermediate</div>
+<div class="option" data-value="75">Strong</div>
+<div class="option" data-value="95">Expert</div>
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="easyProblems"
-                    placeholder="Easy problems solved"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="question">
+<div class="qtop">
+<div class="qnum">04 / CONFIDENCE</div>
+<div class="qtitle">Interview Coding</div>
+</div>
+<div class="options" data-key="interview">
+<div class="option" data-value="30">Low</div>
+<div class="option" data-value="50">Moderate</div>
+<div class="option" data-value="75">High</div>
+<div class="option" data-value="95">Very High</div>
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="mediumProblems"
-                    placeholder="Medium problems solved"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<div class="bottom">
+<div class="status" id="status">0 / 4 COMPLETED</div>
+<button onclick="next()">CONTINUE →</button>
+</div>
 
-                <input
-                    type="number"
-                    id="hardProblems"
-                    placeholder="Hard problems solved"
-                    min="0"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+</div>
+</div>
+</div>
 
-                <input
-                    type="number"
-                    id="codingScore"
-                    placeholder="Average coding test score (%)"
-                    min="0"
-                    max="100"
-                    style="width:100%; padding:18px; margin-bottom:15px;"
-                >
+<script>
+const values={};
 
-                <input
-                    type="number"
-                    id="contestRating"
-                    placeholder="Coding contest rating"
-                    min="0"
-                    style="width:100%; padding:18px;"
-                >
+document.querySelectorAll(".options").forEach(group=>{
+group.querySelectorAll(".option").forEach(option=>{
+option.onclick=()=>{
+group.querySelectorAll(".option").forEach(x=>x.classList.remove("active"));
+option.classList.add("active");
+values[group.dataset.key]=Number(option.dataset.value);
 
-            </div>
+let total=Object.values(values).reduce((a,b)=>a+b,0);
+let count=Object.keys(values).length;
 
+document.getElementById("score").innerText=
+Math.round(total/count)+"%";
 
-            <button
-                class="start-btn"
-                onclick="goToTechnical()">
+document.getElementById("status").innerText=
+count+" / 4 COMPLETED";
+};
+});
+});
 
-                CONTINUE →
+function next(){
+if(Object.keys(values).length<4){
+document.querySelector(".assessment").animate(
+[{transform:"translateX(0)"},{transform:"translateX(-6px)"},
+{transform:"translateX(6px)"},{transform:"translateX(0)"}],
+{duration:350});
+return;
+}
 
-            </button>
+const score=Math.round(
+Object.values(values).reduce((a,b)=>a+b,0)/4
+);
 
+const academic=JSON.parse(localStorage.getItem("academicData")||"{}");
 
-            <div class="progress">
+localStorage.setItem("codingData",JSON.stringify({
+codingScore:score
+}));
 
-                <span></span>
-                <span></span>
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-        </div>
-
-    </main>
-
-
-    <script>
-
-        function goToTechnical() {
-
-            const dsaSolved =
-                document.getElementById("dsaSolved").value;
-
-            const easyProblems =
-                document.getElementById("easyProblems").value;
-
-            const mediumProblems =
-                document.getElementById("mediumProblems").value;
-
-            const hardProblems =
-                document.getElementById("hardProblems").value;
-
-            const codingScore =
-                document.getElementById("codingScore").value;
-
-            const contestRating =
-                document.getElementById("contestRating").value;
-
-
-            if (
-                !dsaSolved ||
-                !easyProblems ||
-                !mediumProblems ||
-                !hardProblems ||
-                !codingScore ||
-                !contestRating
-            ) {
-
-                alert("Please complete your coding profile.");
-
-                return;
-
-            }
-
-
-            const coding = {
-
-                dsaSolved: Number(dsaSolved),
-
-                easyProblems: Number(easyProblems),
-
-                mediumProblems: Number(mediumProblems),
-
-                hardProblems: Number(hardProblems),
-
-                codingScore: Number(codingScore),
-
-                contestRating: Number(contestRating)
-
-            };
-
-
-            localStorage.setItem(
-                "studentCoding",
-                JSON.stringify(coding)
-            );
-
-
-            window.location.href =
-                "technical.html";
-
-        }
-
-    </script>
+document.body.style.opacity="0";
+setTimeout(()=>location.href="technical.html",350);
+}
+</script>
 
 </body>
-
 </html>

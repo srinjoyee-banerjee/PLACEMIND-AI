@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>PLACEMIND AI — Aptitude Assessment</title>
 
 <style>
@@ -19,9 +19,9 @@ body{
     color:#f5f7ff;
     min-height:100vh;
     background:
-        radial-gradient(circle at 80% 20%,rgba(168,85,247,.18),transparent 30%),
-        radial-gradient(circle at 10% 80%,rgba(236,72,153,.10),transparent 30%),
-        #070b14;
+    radial-gradient(circle at 80% 20%,rgba(168,85,247,.18),transparent 30%),
+    radial-gradient(circle at 10% 80%,rgba(236,72,153,.10),transparent 30%),
+    #070b14;
     overflow-x:hidden;
 }
 
@@ -31,8 +31,8 @@ body:before{
     inset:0;
     pointer-events:none;
     background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
     background-size:55px 55px;
 }
 
@@ -46,7 +46,6 @@ body:before{
 .top{
     display:flex;
     justify-content:space-between;
-    align-items:center;
     margin-bottom:65px;
 }
 
@@ -70,7 +69,6 @@ body:before{
     background:#171c29;
     margin-top:-42px;
     margin-bottom:65px;
-    overflow:hidden;
 }
 
 .fill{
@@ -78,7 +76,6 @@ body:before{
     width:100%;
     background:linear-gradient(90deg,#6c63ff,#d946ef);
     box-shadow:0 0 18px #a855f7;
-    animation:progressGlow 2s infinite alternate;
 }
 
 .hero{
@@ -123,28 +120,14 @@ h1 span{
     border:1px solid rgba(255,255,255,.08);
     background:rgba(255,255,255,.035);
     border-radius:16px;
-    transition:.35s;
-    position:relative;
-    overflow:hidden;
+    transition:.3s;
+    animation:cardIn .7s both;
 }
 
-.block:before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(168,85,247,.07),
-        transparent
-    );
-    transform:translateX(-100%);
-    transition:.6s;
-}
-
-.block:hover:before{
-    transform:translateX(100%);
-}
+.block:nth-child(1){animation-delay:.1s}
+.block:nth-child(2){animation-delay:.2s}
+.block:nth-child(3){animation-delay:.3s}
+.block:nth-child(4){animation-delay:.4s}
 
 .block:hover{
     transform:translateY(-5px);
@@ -173,7 +156,7 @@ select{
     color:white;
     outline:none;
     cursor:pointer;
-    transition:.3s;
+    transition:.25s;
 }
 
 select:hover{
@@ -183,11 +166,6 @@ select:hover{
 select:focus{
     border-color:#c084fc;
     box-shadow:0 0 15px rgba(192,132,252,.12);
-}
-
-select option{
-    background:#111725;
-    color:white;
 }
 
 .bottom{
@@ -204,7 +182,6 @@ select option{
     font-size:11px;
     letter-spacing:2px;
     color:#737c90;
-    transition:.3s;
 }
 
 button{
@@ -223,14 +200,9 @@ button:hover{
     box-shadow:0 12px 35px rgba(255,255,255,.12);
 }
 
-button.loading{
-    opacity:.7;
-    pointer-events:none;
-}
-
-.completed{
-    border-color:rgba(168,85,247,.45);
-    box-shadow:0 0 25px rgba(168,85,247,.07);
+button:disabled{
+    opacity:.65;
+    cursor:wait;
 }
 
 @keyframes up{
@@ -244,12 +216,14 @@ button.loading{
     }
 }
 
-@keyframes progressGlow{
+@keyframes cardIn{
     from{
-        opacity:.65;
+        opacity:0;
+        transform:translateY(25px);
     }
     to{
         opacity:1;
+        transform:none;
     }
 }
 
@@ -279,6 +253,7 @@ button.loading{
 
 ```
 <div class="top">
+
     <div class="logo">
         PLACEMIND<span>AI</span>
     </div>
@@ -286,6 +261,7 @@ button.loading{
     <div class="step">
         FINAL ASSESSMENT
     </div>
+
 </div>
 
 <div class="progress">
@@ -306,18 +282,15 @@ button.loading{
 
     <p class="desc">
         Placement readiness is more than technical knowledge.
-        Evaluate your aptitude, communication, interview confidence
-        and preparation before PLACEMIND AI generates your final
-        readiness profile.
+        Evaluate your aptitude, communication and interview confidence
+        before PLACEMIND AI generates your final readiness profile.
     </p>
 
 </section>
 
 <div class="assessment">
 
-    <!-- APTITUDE -->
-
-    <div class="block" id="blockAptitude">
+    <div class="block">
 
         <div class="num">
             01 / APTITUDE
@@ -328,33 +301,17 @@ button.loading{
         </h2>
 
         <select id="aptitude">
-            <option value="">
-                Select your level
-            </option>
-
-            <option value="30">
-                Beginner
-            </option>
-
-            <option value="50">
-                Developing
-            </option>
-
-            <option value="70">
-                Strong
-            </option>
-
-            <option value="90">
-                Advanced
-            </option>
+            <option value="">Select your level</option>
+            <option value="30">Beginner</option>
+            <option value="50">Developing</option>
+            <option value="70">Strong</option>
+            <option value="90">Advanced</option>
         </select>
 
     </div>
 
 
-    <!-- COMMUNICATION -->
-
-    <div class="block" id="blockCommunication">
+    <div class="block">
 
         <div class="num">
             02 / COMMUNICATION
@@ -365,35 +322,17 @@ button.loading{
         </h2>
 
         <select id="communication">
-
-            <option value="">
-                Select your level
-            </option>
-
-            <option value="30">
-                Needs Work
-            </option>
-
-            <option value="50">
-                Developing
-            </option>
-
-            <option value="70">
-                Strong
-            </option>
-
-            <option value="90">
-                Excellent
-            </option>
-
+            <option value="">Select your level</option>
+            <option value="30">Needs Work</option>
+            <option value="50">Developing</option>
+            <option value="70">Strong</option>
+            <option value="90">Excellent</option>
         </select>
 
     </div>
 
 
-    <!-- INTERVIEW -->
-
-    <div class="block" id="blockInterview">
+    <div class="block">
 
         <div class="num">
             03 / INTERVIEW
@@ -430,9 +369,7 @@ button.loading{
     </div>
 
 
-    <!-- PREPARATION -->
-
-    <div class="block" id="blockPreparation">
+    <div class="block">
 
         <div class="num">
             04 / PREPARATION
@@ -507,63 +444,30 @@ ids.forEach(id => {
 
 function update(){
 
-    let count = ids.filter(id =>
-        document.getElementById(id).value !== ""
-    ).length;
+    const count = ids.filter(id => {
+
+        return document
+            .getElementById(id)
+            .value !== "";
+
+    }).length;
 
 
     document.getElementById("status").innerText =
         count + " / 4 COMPLETED";
 
-
-    ids.forEach(id => {
-
-        const select =
-            document.getElementById(id);
-
-        const block =
-            select.closest(".block");
-
-        if(select.value !== ""){
-            block.classList.add("completed");
-        }
-        else{
-            block.classList.remove("completed");
-        }
-
-    });
-
 }
 
 
-function getStoredData(primaryKey, fallbackKey){
+function getStoredData(key){
 
     try{
 
-        const primary =
-            JSON.parse(
-                localStorage.getItem(primaryKey) || "null"
-            );
-
-        if(primary && Object.keys(primary).length){
-            return primary;
-        }
-
-
-        const fallback =
-            JSON.parse(
-                localStorage.getItem(fallbackKey) || "{}"
-            );
-
-        return fallback;
-
-    }
-    catch(error){
-
-        console.error(
-            "Storage read error:",
-            error
+        return JSON.parse(
+            localStorage.getItem(key) || "{}"
         );
+
+    }catch{
 
         return {};
 
@@ -574,14 +478,14 @@ function getStoredData(primaryKey, fallbackKey){
 
 async function finish(){
 
-    const vals = ids.map(id =>
-        document.getElementById(id).value
-    );
+    const vals = ids.map(id => {
 
+        return document
+            .getElementById(id)
+            .value;
 
-    /* -----------------------------------------
-       VALIDATION
-    ----------------------------------------- */
+    });
+
 
     if(vals.includes("")){
 
@@ -595,6 +499,7 @@ async function finish(){
                 {transform:"translateX(-8px)"},
                 {transform:"translateX(8px)"},
                 {transform:"translateX(-5px)"},
+                {transform:"translateX(5px)"},
                 {transform:"translateX(0)"}
             ],
             {
@@ -602,21 +507,12 @@ async function finish(){
             }
         );
 
-
-        document.getElementById("status").innerText =
-            "COMPLETE ALL 4 SECTIONS";
-
-
         return;
 
     }
 
 
-    /* -----------------------------------------
-       READ SCORES
-    ----------------------------------------- */
-
-    const aptitudeBase =
+    const aptitudeScore =
         Number(vals[0]);
 
     const communicationScore =
@@ -625,97 +521,74 @@ async function finish(){
     const interviewScore =
         Number(vals[2]);
 
-    const preparationScore =
-        Number(vals[3]);
+
+    /*
+    IMPORTANT:
+    These are the SAME localStorage keys
+    used by the other assessment pages.
+    */
+
+    const academic =
+        getStoredData("studentAcademic");
+
+    const coding =
+        getStoredData("studentCoding");
+
+    const technical =
+        getStoredData("studentTechnical");
 
 
     /*
-       Aptitude score now uses BOTH:
-
-       Quantitative / Logical ability
-       +
-       Placement preparation
-
-       This means the preparation field is
-       no longer ignored.
+    Make sure numeric values are valid.
     */
 
-    const aptitudeScore =
-        Math.round(
-            (aptitudeBase + preparationScore) / 2
-        );
+    const sem1 =
+        Number(academic.sem1 || 0);
+
+    const sem2 =
+        Number(academic.sem2 || 0);
+
+    const sem3 =
+        Number(academic.sem3 || 0);
+
+    const sem4 =
+        Number(academic.sem4 || 0);
+
+    const codingScore =
+        Number(coding.codingScore || 0);
+
+    const technicalScore =
+        Number(technical.technicalScore || 0);
 
 
-    /* -----------------------------------------
-       READ PREVIOUS ASSESSMENT DATA
-
-       Supports both naming systems so the
-       existing pages continue working.
-    ----------------------------------------- */
-
-    const academic =
-        getStoredData(
-            "studentAcademic",
-            "academicData"
-        );
-
-
-    const coding =
-        getStoredData(
-            "studentCoding",
-            "codingData"
-        );
-
-
-    const technical =
-        getStoredData(
-            "studentTechnical",
-            "technicalData"
-        );
-
-
-    /* -----------------------------------------
-       BUILD FINAL AI INPUT
-    ----------------------------------------- */
+    /*
+    FINAL DATA SENT TO FLASK
+    */
 
     const data = {
 
         academic: {
 
-            sem1:
-                Number(academic.sem1 || 0),
-
-            sem2:
-                Number(academic.sem2 || 0),
-
-            sem3:
-                Number(academic.sem3 || 0),
-
-            sem4:
-                Number(academic.sem4 || 0)
+            sem1: sem1,
+            sem2: sem2,
+            sem3: sem3,
+            sem4: sem4
 
         },
-
 
         coding: {
 
             codingScore:
-                Number(
-                    coding.codingScore || 0
-                )
+                codingScore
 
         },
-
 
         technical: {
 
             technicalScore:
-                Number(
-                    technical.technicalScore || 0
-                )
+                technicalScore
 
         },
-
 
         aptitude: {
 
@@ -734,14 +607,10 @@ async function finish(){
 
 
     console.log(
-        "PLACEMIND AI FINAL INPUT:",
+        "PLACEMIND AI INPUT:",
         data
     );
 
-
-    /* -----------------------------------------
-       BUTTON STATE
-    ----------------------------------------- */
 
     const button =
         document.getElementById(
@@ -749,22 +618,11 @@ async function finish(){
         );
 
 
+    button.disabled = true;
+
     button.innerText =
-        "ANALYZING...";
+        "ANALYZING AI PROFILE...";
 
-
-    button.classList.add(
-        "loading"
-    );
-
-
-    document.getElementById("status").innerText =
-        "AI MODEL ANALYZING PROFILE";
-
-
-    /* -----------------------------------------
-       SEND TO FLASK
-    ----------------------------------------- */
 
     try{
 
@@ -772,6 +630,7 @@ async function finish(){
             await fetch(
                 "/predict",
                 {
+
                     method:"POST",
 
                     headers:{
@@ -781,6 +640,7 @@ async function finish(){
 
                     body:
                         JSON.stringify(data)
+
                 }
             );
 
@@ -806,9 +666,10 @@ async function finish(){
         }
 
 
-        /* -----------------------------------------
-           SAVE FINAL RESULT
-        ----------------------------------------- */
+        /*
+        Store the complete AI result
+        for result.html.
+        */
 
         localStorage.setItem(
             "placementResult",
@@ -816,22 +677,26 @@ async function finish(){
         );
 
 
-        /* -----------------------------------------
-           TRANSITION TO RESULT PAGE
-        ----------------------------------------- */
+        /*
+        Small transition before
+        opening the final analysis.
+        */
 
         document.body.animate(
             [
                 {
-                    opacity:1
+                    opacity:1,
+                    transform:"scale(1)"
                 },
                 {
-                    opacity:0
+                    opacity:0,
+                    transform:"scale(.98)"
                 }
             ],
             {
-                duration:550,
-                easing:"ease"
+                duration:500,
+                easing:"ease-in-out",
+                fill:"forwards"
             }
         );
 
@@ -841,11 +706,10 @@ async function finish(){
             window.location.href =
                 "result.html";
 
-        },550);
+        },500);
 
 
-    }
-    catch(error){
+    }catch(error){
 
         console.error(
             "PLACEMIND AI ERROR:",
@@ -853,16 +717,10 @@ async function finish(){
         );
 
 
+        button.disabled = false;
+
         button.innerText =
             "TRY AGAIN";
-
-        button.classList.remove(
-            "loading"
-        );
-
-
-        document.getElementById("status").innerText =
-            "ANALYSIS FAILED";
 
 
         alert(

@@ -5,12 +5,20 @@ import joblib
 import pandas as pd
 import os
 
-app = Flask(__name__)
-CORS(app)
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/")
+def home():
+    return send_from_directory(FRONTEND_DIR, "index.html")
+
+@app.route("/<path:filename>")
+def frontend_files(filename):
+    return send_from_directory(FRONTEND_DIR, filename)
 
 # ============================================================
 # LOAD REAL ML MODELS

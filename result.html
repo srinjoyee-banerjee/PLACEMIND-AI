@@ -3,359 +3,878 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PLACEMIND AI — Final Analysis</title>
 
-<link rel="stylesheet" href="../css/style.css">
-
 <style>
-    * {
-        box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+    color:#f5f7ff;
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(
+        circle at 85% 15%,
+        rgba(168,85,247,.22),
+        transparent 28%
+    ),
+    radial-gradient(
+        circle at 10% 85%,
+        rgba(59,130,246,.12),
+        transparent 30%
+    ),
+    #070b14;
+
+    overflow-x:hidden;
+}
+
+
+/* GRID */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    background-image:
+    linear-gradient(
+        rgba(255,255,255,.025) 1px,
+        transparent 1px
+    ),
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,.025) 1px,
+        transparent 1px
+    );
+
+    background-size:55px 55px;
+
+}
+
+
+/* FLOATING GLOW */
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:450px;
+    height:450px;
+
+    right:-180px;
+    bottom:-180px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(168,85,247,.18),
+        transparent 65%
+    );
+
+    animation:
+    floatGlow 7s ease-in-out infinite;
+
+    pointer-events:none;
+
+}
+
+
+/* PAGE */
+
+.page{
+
+    width:min(1180px,92%);
+
+    margin:auto;
+
+    padding:
+    30px 0 70px;
+
+}
+
+
+/* TOP */
+
+.top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+    animation:
+    fadeDown .7s ease;
+
+}
+
+.logo{
+
+    font-weight:800;
+
+    letter-spacing:4px;
+
+    font-size:15px;
+
+}
+
+.logo span{
+
+    color:#a855f7;
+
+}
+
+.status{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:#9ca3b5;
+
+}
+
+
+/* HERO */
+
+.hero{
+
+    position:relative;
+
+    min-height:370px;
+
+    display:grid;
+
+    grid-template-columns:
+    1.15fr .85fr;
+
+    gap:50px;
+
+    align-items:center;
+
+    animation:
+    fadeUp .9s ease;
+
+}
+
+
+/* HERO TEXT */
+
+.step{
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    color:#c084fc;
+
+    margin-bottom:25px;
+
+}
+
+h1{
+
+    font-size:
+    clamp(52px,7vw,88px);
+
+    line-height:.88;
+
+    letter-spacing:-6px;
+
+}
+
+h1 span{
+
+    color:#c084fc;
+
+}
+
+.description{
+
+    max-width:600px;
+
+    margin-top:28px;
+
+    color:#929aad;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+}
+
+
+/* VISUAL */
+
+.visual{
+
+    position:relative;
+
+    height:320px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* ORBIT */
+
+.orbit{
+
+    position:absolute;
+
+    width:270px;
+    height:270px;
+
+    border:1px solid
+    rgba(192,132,252,.25);
+
+    border-radius:50%;
+
+    animation:
+    rotate 18s linear infinite;
+
+}
+
+.orbit::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    background:#c084fc;
+
+    border-radius:50%;
+
+    top:15px;
+    left:50%;
+
+    box-shadow:
+    0 0 20px #c084fc,
+    0 0 45px #c084fc;
+
+}
+
+
+/* SECOND ORBIT */
+
+.orbit2{
+
+    position:absolute;
+
+    width:200px;
+    height:200px;
+
+    border:1px solid
+    rgba(96,165,250,.22);
+
+    border-radius:50%;
+
+    animation:
+    rotateReverse 12s linear infinite;
+
+}
+
+
+/* CORE */
+
+.core{
+
+    width:135px;
+    height:135px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle at 35% 30%,
+        #e9d5ff,
+        #a855f7 35%,
+        #4c1d95 70%,
+        #12051f
+    );
+
+    box-shadow:
+    0 0 35px rgba(168,85,247,.45),
+    0 0 90px rgba(168,85,247,.18);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    animation:
+    pulse 3s ease-in-out infinite;
+
+    z-index:2;
+
+}
+
+.core-text{
+
+    text-align:center;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+
+}
+
+
+/* SCORE */
+
+.score-card{
+
+    margin-top:30px;
+
+    padding:30px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    background:
+    rgba(255,255,255,.035);
+
+    border-radius:18px;
+
+    animation:
+    fadeUp .9s .2s both;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.score-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #6c63ff,
+        #d946ef,
+        transparent
+    );
+
+}
+
+.label{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:#8991a5;
+
+    margin-bottom:12px;
+
+}
+
+.score-line{
+
+    display:flex;
+
+    align-items:end;
+
+    gap:5px;
+
+}
+
+.score{
+
+    font-size:
+    clamp(60px,8vw,95px);
+
+    font-weight:800;
+
+    line-height:.9;
+
+    letter-spacing:-6px;
+
+}
+
+.percent{
+
+    font-size:25px;
+
+    color:#c084fc;
+
+    margin-bottom:8px;
+
+}
+
+.score-label{
+
+    margin-top:14px;
+
+    color:#c084fc;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+
+}
+
+
+/* RESULTS */
+
+.results{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:14px;
+
+    margin-top:25px;
+
+}
+
+.result{
+
+    padding:25px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    background:
+    rgba(255,255,255,.03);
+
+    border-radius:15px;
+
+    transition:.35s;
+
+    animation:
+    cardIn .7s both;
+
+}
+
+.result:nth-child(1){
+    animation-delay:.15s;
+}
+
+.result:nth-child(2){
+    animation-delay:.25s;
+}
+
+.result:nth-child(3){
+    animation-delay:.35s;
+}
+
+.result:hover{
+
+    transform:
+    translateY(-7px);
+
+    border-color:
+    rgba(192,132,252,.45);
+
+    box-shadow:
+    0 20px 50px
+    rgba(168,85,247,.08);
+
+}
+
+.result-number{
+
+    font-size:10px;
+
+    color:#c084fc;
+
+    letter-spacing:3px;
+
+    margin-bottom:18px;
+
+}
+
+.result-name{
+
+    color:#929aad;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+}
+
+.result-value{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    margin-top:8px;
+
+}
+
+
+/* PROGRESS BAR */
+
+.bar{
+
+    height:3px;
+
+    margin-top:18px;
+
+    background:#171c29;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+}
+
+.bar-fill{
+
+    height:100%;
+
+    width:0;
+
+    background:
+    linear-gradient(
+        90deg,
+        #6c63ff,
+        #d946ef
+    );
+
+    transition:
+    width 1.5s ease;
+
+}
+
+
+/* FORECAST + RECOMMENDATION */
+
+.bottom-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:15px;
+
+    margin-top:15px;
+
+}
+
+.box{
+
+    padding:30px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    background:
+    rgba(255,255,255,.035);
+
+    border-radius:17px;
+
+    animation:
+    fadeUp .8s .45s both;
+
+}
+
+.box-label{
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    color:#c084fc;
+
+    margin-bottom:18px;
+
+}
+
+.box h2{
+
+    font-size:27px;
+
+    letter-spacing:-1px;
+
+    margin-bottom:15px;
+
+}
+
+.box p{
+
+    color:#969eb1;
+
+    line-height:1.7;
+
+    font-size:13px;
+
+}
+
+
+/* RECOMMENDATION */
+
+.recommendation{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.recommendation::after{
+
+    content:"AI";
+
+    position:absolute;
+
+    right:25px;
+    bottom:-25px;
+
+    font-size:100px;
+
+    font-weight:900;
+
+    color:
+    rgba(168,85,247,.045);
+
+}
+
+
+/* BUTTON */
+
+.start-btn{
+
+    margin-top:30px;
+
+    padding:16px 28px;
+
+    background:#f5f7ff;
+
+    color:#080b13;
+
+    border:0;
+
+    border-radius:9px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    animation:
+    fadeUp .8s .6s both;
+
+}
+
+.start-btn:hover{
+
+    transform:
+    translateY(-4px);
+
+    box-shadow:
+    0 15px 40px
+    rgba(255,255,255,.12);
+
+}
+
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
     }
 
-    body {
-        margin: 0;
-        min-height: 100vh;
-        background:
-            radial-gradient(circle at 80% 15%, rgba(80, 110, 255, 0.16), transparent 32%),
-            radial-gradient(circle at 15% 85%, rgba(0, 220, 180, 0.08), transparent 30%),
-            #080a0f;
-        color: #f4f5f7;
-        font-family: Arial, Helvetica, sans-serif;
-        overflow-x: hidden;
+    to{
+        opacity:1;
+        transform:none;
     }
 
-    .page {
-        width: min(1180px, 92%);
-        margin: auto;
-        padding: 42px 0 70px;
+}
+
+@keyframes fadeDown{
+
+    from{
+        opacity:0;
+        transform:translateY(-20px);
     }
 
-    /* HEADER */
-
-    .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 55px;
-        animation: fadeDown 0.8s ease both;
+    to{
+        opacity:1;
+        transform:none;
     }
 
-    .brand {
-        font-size: 22px;
-        font-weight: 800;
-        letter-spacing: 0.12em;
+}
+
+@keyframes cardIn{
+
+    from{
+        opacity:0;
+        transform:
+        translateY(25px)
+        scale(.98);
     }
 
-    .brand span {
-        opacity: 0.45;
+    to{
+        opacity:1;
+        transform:none;
     }
 
-    .status {
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        opacity: 0.55;
+}
+
+@keyframes rotate{
+
+    from{
+        transform:rotate(0deg);
     }
 
-    .status-dot {
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #64ffc9;
-        margin-right: 8px;
-        box-shadow: 0 0 14px rgba(100,255,201,.8);
+    to{
+        transform:rotate(360deg);
     }
 
-    /* INTRO */
+}
 
-    .eyebrow {
-        font-size: 11px;
-        letter-spacing: 0.25em;
-        opacity: 0.45;
-        margin-bottom: 20px;
+@keyframes rotateReverse{
+
+    from{
+        transform:rotate(360deg);
     }
 
-    .title {
-        font-size: clamp(48px, 8vw, 104px);
-        line-height: 0.88;
-        letter-spacing: -0.055em;
-        margin: 0;
-        max-width: 850px;
-        animation: titleReveal 1s ease both;
+    to{
+        transform:rotate(0deg);
     }
 
-    .title span {
-        opacity: 0.42;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
     }
 
-    .subtitle {
-        max-width: 620px;
-        margin-top: 28px;
-        font-size: 15px;
-        line-height: 1.7;
-        color: rgba(255,255,255,.55);
-        animation: fadeUp 1s .25s ease both;
+    50%{
+        transform:scale(1.08);
     }
 
-    /* SCORE */
+}
 
-    .main-grid {
-        display: grid;
-        grid-template-columns: 1.1fr .9fr;
-        gap: 22px;
-        margin-top: 65px;
+@keyframes floatGlow{
+
+    0%,100%{
+        transform:translateY(0);
     }
 
-    .score-card,
-    .panel {
-        border: 1px solid rgba(255,255,255,.10);
-        background: rgba(255,255,255,.035);
-        backdrop-filter: blur(18px);
-        border-radius: 24px;
+    50%{
+        transform:translateY(-30px);
     }
 
-    .score-card {
-        min-height: 430px;
-        padding: 38px;
-        position: relative;
-        overflow: hidden;
-        animation: fadeUp .9s .3s ease both;
+}
+
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .hero{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
     }
 
-    .score-card::before {
-        content: "";
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        background: rgba(100,255,201,.07);
-        filter: blur(70px);
-        right: -100px;
-        top: -100px;
+    .visual{
+
+        height:250px;
+
+        order:-1;
+
     }
 
-    .label {
-        font-size: 10px;
-        letter-spacing: .22em;
-        opacity: .45;
+    .orbit{
+        width:210px;
+        height:210px;
     }
 
-    .score {
-        margin-top: 50px;
-        font-size: clamp(90px, 13vw, 150px);
-        line-height: .8;
-        font-weight: 800;
-        letter-spacing: -.08em;
+    .orbit2{
+        width:155px;
+        height:155px;
     }
 
-    .percent {
-        font-size: 38px;
-        opacity: .35;
-        letter-spacing: 0;
+    .core{
+        width:105px;
+        height:105px;
     }
 
-    .score-label {
-        margin-top: 35px;
-        font-size: 13px;
-        letter-spacing: .18em;
-        font-weight: 700;
+    .results{
+
+        grid-template-columns:1fr;
+
     }
 
-    .score-line {
-        width: 100%;
-        height: 4px;
-        background: rgba(255,255,255,.08);
-        margin-top: 40px;
-        overflow: hidden;
-        border-radius: 10px;
+    .bottom-grid{
+
+        grid-template-columns:1fr;
+
     }
 
-    .score-fill {
-        height: 100%;
-        width: 0%;
-        background: #64ffc9;
-        box-shadow: 0 0 18px rgba(100,255,201,.5);
-        transition: width 1.8s cubic-bezier(.16,1,.3,1);
+    h1{
+
+        letter-spacing:-4px;
+
     }
 
-    /* DOMAINS */
+}
 
-    .domains {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        animation: fadeUp .9s .45s ease both;
-    }
-
-    .domain {
-        padding: 25px;
-        min-height: 125px;
-        border: 1px solid rgba(255,255,255,.09);
-        border-radius: 18px;
-        background: rgba(255,255,255,.025);
-        transition: transform .3s ease, background .3s ease;
-    }
-
-    .domain:hover {
-        transform: translateY(-5px);
-        background: rgba(255,255,255,.06);
-    }
-
-    .domain-name {
-        font-size: 10px;
-        letter-spacing: .16em;
-        opacity: .45;
-    }
-
-    .domain-score {
-        margin-top: 23px;
-        font-size: 28px;
-        font-weight: 700;
-    }
-
-    .mini-line {
-        margin-top: 14px;
-        height: 2px;
-        background: rgba(255,255,255,.08);
-        overflow: hidden;
-    }
-
-    .mini-fill {
-        width: 0;
-        height: 100%;
-        background: #64ffc9;
-        transition: width 1.2s ease;
-    }
-
-    /* LOWER PANELS */
-
-    .lower-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 22px;
-        margin-top: 22px;
-    }
-
-    .panel {
-        padding: 32px;
-        animation: fadeUp .9s .65s ease both;
-    }
-
-    .panel h2 {
-        margin: 18px 0 14px;
-        font-size: 27px;
-        letter-spacing: -.03em;
-    }
-
-    .panel p {
-        color: rgba(255,255,255,.55);
-        line-height: 1.7;
-        font-size: 14px;
-        margin: 0;
-    }
-
-    .recommendation {
-        border-left: 2px solid #64ffc9;
-    }
-
-    /* BUTTON */
-
-    .action {
-        margin-top: 38px;
-        animation: fadeUp .9s .8s ease both;
-    }
-
-    .start-btn {
-        border: 1px solid rgba(255,255,255,.2);
-        background: #f4f5f7;
-        color: #080a0f;
-        padding: 17px 27px;
-        border-radius: 999px;
-        font-weight: 800;
-        letter-spacing: .08em;
-        cursor: pointer;
-        transition: transform .25s ease, box-shadow .25s ease;
-    }
-
-    .start-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px rgba(255,255,255,.12);
-    }
-
-    .error {
-        margin-top: 20px;
-        padding: 16px;
-        border: 1px solid rgba(255,100,100,.25);
-        border-radius: 12px;
-        color: #ff9d9d;
-        background: rgba(255,80,80,.05);
-        display: none;
-        font-size: 13px;
-        line-height: 1.6;
-    }
-
-    /* ANIMATIONS */
-
-    @keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes fadeDown {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes titleReveal {
-        from {
-            opacity: 0;
-            transform: translateY(35px);
-            letter-spacing: -.01em;
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-            letter-spacing: -.055em;
-        }
-    }
-
-    @media (max-width: 800px) {
-
-        .main-grid,
-        .lower-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .domains {
-            grid-template-columns: 1fr;
-        }
-
-        .page {
-            padding-top: 28px;
-        }
-
-        .score-card {
-            min-height: 360px;
-        }
-    }
 </style>
-```
 
 </head>
 
@@ -364,111 +883,200 @@
 <div class="page">
 
 ```
-<header class="topbar">
-    <div class="brand">
+<!-- TOP -->
+
+<div class="top">
+
+    <div class="logo">
         PLACEMIND<span>AI</span>
     </div>
 
     <div class="status">
-        <span class="status-dot"></span>
         AI ANALYSIS COMPLETE
     </div>
-</header>
 
-<section>
+</div>
 
-    <div class="eyebrow">
-        FINAL ANALYSIS / PLACEMENT READINESS
-    </div>
 
-    <h1 class="title">
-        YOUR<br>
-        PLACEMENT<br>
-        <span>READINESS.</span>
-    </h1>
+<!-- HERO -->
 
-    <p class="subtitle">
-        PLACEMIND AI has analyzed your academic trajectory,
-        coding ability, technical profile and aptitude to
-        generate your current placement-readiness profile.
-    </p>
+<section class="hero">
 
-</section>
+    <div>
 
-<section class="main-grid">
-
-    <div class="score-card">
-
-        <div class="label">
-            OVERALL AI ASSESSMENT
+        <div class="step">
+            FINAL ANALYSIS / PLACEMENT READINESS
         </div>
 
-        <div class="score">
-            <span id="readinessScore">--</span>
-            <span class="percent">%</span>
-        </div>
+        <h1>
+            YOUR<br>
+            PLACEMENT<br>
+            <span>READINESS.</span>
+        </h1>
 
-        <div id="readinessLabel" class="score-label">
-            ANALYZING PROFILE
-        </div>
+        <p class="description">
 
-        <div class="score-line">
-            <div id="scoreFill" class="score-fill"></div>
-        </div>
+            PLACEMIND AI has analyzed your academic trajectory,
+            coding ability and technical profile to generate
+            your current placement-readiness profile.
+
+        </p>
 
     </div>
 
-    <div class="domains">
 
-        <div class="domain">
-            <div class="domain-name">ACADEMIC READINESS</div>
-            <div id="academicResult" class="domain-score">--</div>
-            <div class="mini-line">
-                <div id="academicFill" class="mini-fill"></div>
-            </div>
-        </div>
+    <!-- ANIMATED AI VISUAL -->
 
-        <div class="domain">
-            <div class="domain-name">DSA & CODING</div>
-            <div id="codingResult" class="domain-score">--</div>
-            <div class="mini-line">
-                <div id="codingFill" class="mini-fill"></div>
-            </div>
-        </div>
+    <div class="visual">
 
-        <div class="domain">
-            <div class="domain-name">TECHNICAL PROFILE</div>
-            <div id="technicalResult" class="domain-score">--</div>
-            <div class="mini-line">
-                <div id="technicalFill" class="mini-fill"></div>
-            </div>
-        </div>
+        <div class="orbit"></div>
 
-        <div class="domain">
-            <div class="domain-name">APTITUDE</div>
-            <div id="aptitudeResult" class="domain-score">--</div>
-            <div class="mini-line">
-                <div id="aptitudeFill" class="mini-fill"></div>
-            </div>
-        </div>
+        <div class="orbit2"></div>
 
-        <div class="domain">
-            <div class="domain-name">INTERVIEW READINESS</div>
-            <div id="interviewResult" class="domain-score">--</div>
-            <div class="mini-line">
-                <div id="interviewFill" class="mini-fill"></div>
+        <div class="core">
+
+            <div class="core-text">
+                PLACEMIND<br>
+                AI
             </div>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="lower-grid">
 
-    <div class="panel">
+<!-- SCORE -->
 
-        <div class="label">
+<section class="score-card">
+
+    <div class="label">
+        OVERALL AI ASSESSMENT
+    </div>
+
+    <div class="score-line">
+
+        <div
+            class="score"
+            id="readinessScore"
+        >
+            --
+        </div>
+
+        <div class="percent">
+            %
+        </div>
+
+    </div>
+
+    <div
+        class="score-label"
+        id="readinessLabel"
+    >
+        ANALYZING PROFILE
+    </div>
+
+</section>
+
+
+<!-- THREE DOMAINS ONLY -->
+
+<section class="results">
+
+
+    <div class="result">
+
+        <div class="result-number">
+            01 / ACADEMIC
+        </div>
+
+        <div class="result-name">
+            ACADEMIC READINESS
+        </div>
+
+        <div
+            class="result-value"
+            id="academicResult"
+        >
+            --
+        </div>
+
+        <div class="bar">
+            <div
+                class="bar-fill"
+                id="academicBar"
+            ></div>
+        </div>
+
+    </div>
+
+
+    <div class="result">
+
+        <div class="result-number">
+            02 / CODING
+        </div>
+
+        <div class="result-name">
+            DSA & CODING
+        </div>
+
+        <div
+            class="result-value"
+            id="codingResult"
+        >
+            --
+        </div>
+
+        <div class="bar">
+            <div
+                class="bar-fill"
+                id="codingBar"
+            ></div>
+        </div>
+
+    </div>
+
+
+    <div class="result">
+
+        <div class="result-number">
+            03 / TECHNICAL
+        </div>
+
+        <div class="result-name">
+            TECHNICAL PROFILE
+        </div>
+
+        <div
+            class="result-value"
+            id="technicalResult"
+        >
+            --
+        </div>
+
+        <div class="bar">
+            <div
+                class="bar-fill"
+                id="technicalBar"
+            ></div>
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- FORECAST + RECOMMENDATION -->
+
+<section class="bottom-grid">
+
+
+    <div class="box">
+
+        <div class="box-label">
             ACADEMIC FORECAST
         </div>
 
@@ -482,9 +1090,10 @@
 
     </div>
 
-    <div class="panel recommendation">
 
-        <div class="label">
+    <div class="box recommendation">
+
+        <div class="box-label">
             AI RECOMMENDATION
         </div>
 
@@ -498,360 +1107,362 @@
 
     </div>
 
+
 </section>
 
-<div id="errorBox" class="error"></div>
 
-<div class="action">
-    <button class="start-btn" onclick="restartAssessment()">
-        START NEW ASSESSMENT ↻
-    </button>
-</div>
+<button
+    class="start-btn"
+    onclick="restartAssessment()"
+>
+    START NEW ASSESSMENT ↻
+</button>
 ```
 
 </div>
 
 <script>
 
-function getStoredData(primaryKey, possibleKeys = []) {
 
-    const keys = [primaryKey, ...possibleKeys];
+function animateValue(
+    element,
+    start,
+    end,
+    duration
+){
 
-    for (const key of keys) {
+    const startTime =
+        performance.now();
 
-        try {
 
-            const value = localStorage.getItem(key);
+    function update(time){
 
-            if (value) {
+        const progress =
+            Math.min(
+                (time - startTime) /
+                duration,
+                1
+            );
 
-                const parsed = JSON.parse(value);
 
-                if (
-                    parsed &&
-                    typeof parsed === "object" &&
-                    Object.keys(parsed).length > 0
-                ) {
-                    return parsed;
-                }
-            }
+        const value =
+            start +
+            (end - start) *
+            progress;
 
-        } catch (error) {
-            console.warn("Could not read:", key);
+
+        element.textContent =
+            value.toFixed(1);
+
+
+        if(progress < 1){
+
+            requestAnimationFrame(update);
+
         }
+
     }
 
-    return {};
+
+    requestAnimationFrame(update);
+
 }
 
 
-function setScore(elementId, value) {
-
-    const element = document.getElementById(elementId);
-
-    if (value === undefined || value === null || isNaN(value)) {
-        element.textContent = "--";
-        return;
-    }
-
-    element.textContent = Number(value).toFixed(1) + "%";
-}
-
-
-function animateBar(elementId, value) {
-
-    const element = document.getElementById(elementId);
-
-    if (
-        value === undefined ||
-        value === null ||
-        isNaN(value)
-    ) {
-        return;
-    }
+function setBar(id,value){
 
     setTimeout(() => {
 
-        element.style.width =
-            Math.max(0, Math.min(100, Number(value))) + "%";
+        document
+        .getElementById(id)
+        .style.width =
+            Math.min(
+                100,
+                Math.max(0,value)
+            ) + "%";
 
-    }, 250);
+    },300);
+
 }
 
 
-async function generateFinalAnalysis() {
+async function generateFinalAnalysis(){
 
-    try {
-
-        /*
-         * Read the data saved by the assessment pages.
-         * Multiple fallback names are supported so a visual
-         * redesign of a page does not break the final analysis.
-         */
-
-        const academic = getStoredData(
-            "studentAcademic",
-            [
-                "academicData",
-                "academic",
-                "student_academic"
-            ]
-        );
-
-        const coding = getStoredData(
-            "studentCoding",
-            [
-                "codingData",
-                "coding",
-                "student_coding"
-            ]
-        );
-
-        const technical = getStoredData(
-            "studentTechnical",
-            [
-                "technicalData",
-                "technical",
-                "student_technical"
-            ]
-        );
-
-        const aptitude = getStoredData(
-            "studentAptitude",
-            [
-                "aptitudeData",
-                "aptitude",
-                "student_aptitude"
-            ]
-        );
-
-
-        console.log("PLACEMIND INPUT");
-        console.log("Academic:", academic);
-        console.log("Coding:", coding);
-        console.log("Technical:", technical);
-        console.log("Aptitude:", aptitude);
-
+    try{
 
         /*
-         * Make sure academic data actually exists.
-         */
+        First check whether a result
+        already exists.
+        */
 
-        if (
-            !academic.sem1 ||
-            !academic.sem2 ||
-            !academic.sem3 ||
-            !academic.sem4
-        ) {
-
-            throw new Error(
-                "Academic assessment data is missing. Please complete the assessment again."
+        const storedResult =
+            localStorage.getItem(
+                "placementResult"
             );
+
+
+        if(storedResult){
+
+            const result =
+                JSON.parse(
+                    storedResult
+                );
+
+            displayResult(result);
+
+            return;
 
         }
 
 
-        const response = await fetch("/predict", {
+        /*
+        Fallback: request analysis
+        directly from the backend.
+        */
 
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-
-                academic: academic,
-                coding: coding,
-                technical: technical,
-                aptitude: aptitude
-
-            })
-
-        });
+        const academic =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentAcademic"
+                ) || "{}"
+            );
 
 
-        const result = await response.json();
+        const coding =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentCoding"
+                ) || "{}"
+            );
 
 
-        if (!response.ok) {
+        const technical =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentTechnical"
+                ) || "{}"
+            );
+
+
+        const aptitude =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentAptitude"
+                ) || "{}"
+            );
+
+
+        const response =
+            await fetch(
+                "/predict",
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            academic:
+                                academic,
+
+                            coding:
+                                coding,
+
+                            technical:
+                                technical,
+
+                            aptitude:
+                                aptitude
+
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if(!response.ok){
 
             throw new Error(
                 result.details ||
                 result.error ||
-                "Prediction failed"
+                "Analysis failed"
             );
 
         }
 
 
-        /* OVERALL SCORE */
-
-        const readiness =
-            Number(result.readinessScore);
-
-        document.getElementById(
-            "readinessScore"
-        ).textContent =
-            readiness.toFixed(1);
-
-
-        document.getElementById(
-            "readinessLabel"
-        ).textContent =
-            result.readinessLabel;
-
-
-        animateBar(
-            "scoreFill",
-            readiness
+        localStorage.setItem(
+            "placementResult",
+            JSON.stringify(result)
         );
 
 
-        /* DOMAIN SCORES */
-
-        setScore(
-            "academicResult",
-            result.academicResult
-        );
-
-        setScore(
-            "codingResult",
-            result.codingResult
-        );
-
-        setScore(
-            "technicalResult",
-            result.technicalResult
-        );
-
-        setScore(
-            "aptitudeResult",
-            result.aptitudeResult
-        );
-
-        setScore(
-            "interviewResult",
-            result.interviewResult
-        );
-
-
-        animateBar(
-            "academicFill",
-            result.academicResult
-        );
-
-        animateBar(
-            "codingFill",
-            result.codingResult
-        );
-
-        animateBar(
-            "technicalFill",
-            result.technicalResult
-        );
-
-        animateBar(
-            "aptitudeFill",
-            result.aptitudeResult
-        );
-
-        animateBar(
-            "interviewFill",
-            result.interviewResult
-        );
-
-
-        /* FORECAST */
-
-        if (
-            result.academicForecast !== null &&
-            result.academicForecast !== undefined
-        ) {
-
-            document.getElementById(
-                "forecastTitle"
-            ).textContent =
-                "PREDICTED SEM 5 GPA: " +
-                Number(
-                    result.academicForecast
-                ).toFixed(2);
-
-        } else {
-
-            document.getElementById(
-                "forecastTitle"
-            ).textContent =
-                "FORECAST UNAVAILABLE";
-
-        }
-
-
-        document.getElementById(
-            "forecastText"
-        ).textContent =
-            result.forecast ||
-            "Academic trajectory analyzed.";
-
-
-        /* RECOMMENDATION */
-
-        document.getElementById(
-            "recommendation"
-        ).textContent =
-            result.recommendation ||
-            "Continue strengthening your weakest assessment area.";
+        displayResult(result);
 
 
     }
 
-    catch (error) {
+    catch(error){
 
-        console.error(
-            "PLACEMIND analysis error:",
-            error
-        );
-
-
-        document.getElementById(
-            "readinessLabel"
-        ).textContent =
-            "ANALYSIS UNAVAILABLE";
-
-
-        document.getElementById(
-            "forecastTitle"
-        ).textContent =
-            "ANALYSIS FAILED";
-
+        console.error(error);
 
         document.getElementById(
             "forecastText"
         ).textContent =
-            "We could not generate your placement profile.";
-
-
-        document.getElementById(
-            "recommendation"
-        ).textContent =
-            "Please return to the assessment and complete all four domains.";
-
-
-        const errorBox =
-            document.getElementById("errorBox");
-
-        errorBox.textContent =
+            "Analysis failed: " +
             error.message;
-
-        errorBox.style.display =
-            "block";
 
     }
 
 }
 
 
-function restartAssessment() {
+function displayResult(result){
+
+
+    /* OVERALL */
+
+    const readiness =
+        Number(
+            result.readinessScore || 0
+        );
+
+
+    animateValue(
+        document.getElementById(
+            "readinessScore"
+        ),
+        0,
+        readiness,
+        1400
+    );
+
+
+    document.getElementById(
+        "readinessLabel"
+    ).textContent =
+        result.readinessLabel ||
+        "ANALYSIS COMPLETE";
+
+
+    /* ACADEMIC */
+
+    const academic =
+        Number(
+            result.academicResult || 0
+        );
+
+
+    document.getElementById(
+        "academicResult"
+    ).textContent =
+        academic.toFixed(1) + "%";
+
+
+    setBar(
+        "academicBar",
+        academic
+    );
+
+
+    /* CODING */
+
+    const coding =
+        Number(
+            result.codingResult || 0
+        );
+
+
+    document.getElementById(
+        "codingResult"
+    ).textContent =
+        coding.toFixed(1) + "%";
+
+
+    setBar(
+        "codingBar",
+        coding
+    );
+
+
+    /* TECHNICAL */
+
+    const technical =
+        Number(
+            result.technicalResult || 0
+        );
+
+
+    document.getElementById(
+        "technicalResult"
+    ).textContent =
+        technical.toFixed(1) + "%";
+
+
+    setBar(
+        "technicalBar",
+        technical
+    );
+
+
+    /* FORECAST */
+
+    const forecast =
+        Number(
+            result.academicForecast
+        );
+
+
+    if(
+        Number.isFinite(forecast)
+    ){
+
+        document.getElementById(
+            "forecastTitle"
+        ).textContent =
+            "PREDICTED SEM 5 GPA: " +
+            forecast.toFixed(2);
+
+    }
+
+    else{
+
+        document.getElementById(
+            "forecastTitle"
+        ).textContent =
+            "FORECAST UNAVAILABLE";
+
+    }
+
+
+    document.getElementById(
+        "forecastText"
+    ).textContent =
+        result.forecast ||
+        "Academic forecast generated by the trained model.";
+
+
+    /* RECOMMENDATION */
+
+    document.getElementById(
+        "recommendation"
+    ).textContent =
+        result.recommendation ||
+        "Continue improving your weakest preparation area.";
+
+}
+
+
+function restartAssessment(){
 
     localStorage.clear();
 

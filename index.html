@@ -1,792 +1,912 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>PLACEMIND AI</title>
+<title>PLACEMIND AI — Career Intelligence</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#f7f7ff;
+    background:#050711;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    z-index:0;
+    background:
+        radial-gradient(
+            circle at 85% 5%,
+            rgba(91,43,180,.38),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 5% 90%,
+            rgba(170,55,220,.30),
+            transparent 30%
+        ),
+        #050711;
+}
+
+/* TECH GRID */
+
+.grid{
+    position:absolute;
+    left:-10%;
+    right:-10%;
+    bottom:-20%;
+    height:65%;
+
+    background-image:
+        linear-gradient(
+            rgba(168,85,247,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(168,85,247,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    transform:
+        perspective(500px)
+        rotateX(58deg)
+        scale(1.5);
+
+    transform-origin:center bottom;
+
+    opacity:.7;
+
+    animation:gridMove 12s linear infinite;
+}
+
+/* LIGHT BLOBS */
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(100px);
+    pointer-events:none;
+}
+
+.orb.one{
+    width:430px;
+    height:430px;
+    right:-140px;
+    top:-180px;
+    background:#6d35d9;
+    opacity:.32;
+
+    animation:
+        floatOne 9s ease-in-out infinite;
+}
+
+.orb.two{
+    width:360px;
+    height:360px;
+    left:-150px;
+    bottom:-180px;
+    background:#a52de0;
+    opacity:.28;
+
+    animation:
+        floatTwo 11s ease-in-out infinite;
+}
+
+.orb.three{
+    width:220px;
+    height:220px;
+    left:42%;
+    top:40%;
+    background:#713cff;
+    opacity:.08;
+
+    animation:
+        floatThree 8s ease-in-out infinite;
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    position:relative;
+    z-index:2;
+
+    width:min(1420px,86%);
+    min-height:100vh;
+
+    margin:auto;
+
+    display:flex;
+    flex-direction:column;
+
+    padding:38px 0 28px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    opacity:0;
+
+    animation:
+        navIn .9s .15s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.logo{
+    font-size:17px;
+    font-weight:900;
+    letter-spacing:4px;
+
+    position:relative;
+}
+
+.logo span{
+    color:#bd72ff;
+}
+
+.logo:after{
+    content:"";
+    position:absolute;
+
+    left:0;
+    bottom:-10px;
+
+    width:42px;
+    height:1px;
+
+    background:#a855f7;
+
+    box-shadow:
+        0 0 12px #a855f7;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:10px;
+    letter-spacing:3px;
+
+    color:#777f96;
+}
+
+.status-dot{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#b56aff;
+
+    box-shadow:
+        0 0 8px #a855f7,
+        0 0 20px #a855f7;
+
+    animation:
+        statusPulse 1.7s infinite;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    flex:1;
+
+    display:flex;
+    align-items:center;
+
+    position:relative;
+}
+
+.hero-content{
+    width:100%;
+    padding-bottom:15px;
+}
+
+/* EYEBROW */
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    margin-bottom:27px;
+
+    color:#b77cff;
+
+    font-size:10px;
+    font-weight:700;
+
+    letter-spacing:4px;
+
+    opacity:0;
+
+    animation:
+        fadeUp .8s .35s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.eyebrow-line{
+    width:45px;
+    height:1px;
+
+    background:#a855f7;
+
+    box-shadow:
+        0 0 15px #a855f7;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+h1{
+    font-size:clamp(65px,8.7vw,128px);
+
+    line-height:.80;
+
+    letter-spacing:-8px;
+
+    font-weight:900;
+
+    max-width:1050px;
+}
+
+.title-line{
+    display:block;
+
+    overflow:hidden;
+}
+
+.title-inner{
+    display:block;
+
+    opacity:0;
+
+    transform:translateY(100%);
+
+    animation:
+        titleReveal 1.1s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.line-one .title-inner{
+    animation-delay:.45s;
+}
+
+.line-two .title-inner{
+    animation-delay:.58s;
+}
+
+.line-three .title-inner{
+    animation-delay:.71s;
+}
+
+.accent{
+    color:#bd72ff;
+
+    text-shadow:
+        0 0 50px rgba(168,85,247,.12);
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description{
+    max-width:720px;
+
+    margin-top:38px;
+
+    color:#9299ad;
+
+    font-size:15px;
+
+    line-height:1.75;
+
+    opacity:0;
+
+    animation:
+        fadeUp .9s .95s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta-row{
+    display:flex;
+    align-items:center;
+    gap:28px;
+
+    margin-top:38px;
+
+    opacity:0;
+
+    animation:
+        fadeUp .9s 1.1s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.start-btn{
+    position:relative;
+
+    overflow:hidden;
+
+    border:none;
+
+    background:#f6f5ff;
+
+    color:#070910;
+
+    padding:20px 31px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:1.7px;
+
+    cursor:pointer;
+
+    transition:
+        transform .35s,
+        box-shadow .35s;
+}
+
+.start-btn:before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-130%;
+
+    width:80%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.95),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    animation:
+        buttonShine 3.8s 2s infinite;
+}
+
+.start-btn:hover{
+    transform:
+        translateY(-5px)
+        scale(1.025);
+
+    box-shadow:
+        0 18px 50px rgba(168,85,247,.25),
+        0 0 35px rgba(255,255,255,.10);
+}
+
+.start-btn:active{
+    transform:scale(.97);
+}
+
+.arrow{
+    font-size:18px;
+    margin-left:10px;
+}
+
+.meta{
+    font-size:10px;
+    letter-spacing:2px;
+    color:#6f778c;
+}
+
+/* =========================================================
+   INTELLIGENCE PANEL
+========================================================= */
+
+.intelligence{
+    position:absolute;
+
+    right:0;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:275px;
+
+    opacity:0;
+
+    animation:
+        panelIn 1s 1.15s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+.panel{
+    position:relative;
+
+    padding:27px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,17,37,.72),
+            rgba(5,7,17,.78)
+        );
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.45);
+
+    overflow:hidden;
+}
+
+/* panel glow */
+
+.panel:before{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-80px;
+    top:-80px;
+
+    border-radius:50%;
+
+    background:#8b4dff;
+
+    filter:blur(70px);
+
+    opacity:.18;
+}
+
+/* PANEL HEADER */
+
+.panel-label{
+    position:relative;
+
+    font-size:9px;
+    letter-spacing:3px;
+
+    color:#727a91;
+
+    margin-bottom:24px;
+}
+
+/* SCANNER */
+
+.scan{
+    height:2px;
+
+    background:#171b2b;
+
+    margin-bottom:20px;
+
+    overflow:hidden;
+}
+
+.scan:after{
+    content:"";
+
+    display:block;
+
+    width:38%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #b66aff,
+            transparent
+        );
+
+    animation:
+        scanMove 2.3s linear infinite;
+}
+
+/* METRICS */
+
+.metric{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.055);
+
+    font-size:10px;
+
+    letter-spacing:1.5px;
+}
+
+.metric:last-child{
+    border-bottom:none;
+}
+
+.metric span{
+    color:#747d92;
+}
+
+.metric strong{
+    color:#dddff0;
+}
+
+.metric .live{
+    color:#bd72ff;
+
+    animation:
+        livePulse 1.5s infinite;
+}
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.bottom{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+    opacity:0;
+
+    animation:
+        fadeUp .8s 1.35s forwards;
+}
+
+.bottom-text{
+    color:#565e71;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+.steps{
+    display:flex;
+    gap:7px;
+}
+
+.step{
+    width:38px;
+    height:3px;
+
+    background:#1b1f2e;
+
+    transition:.4s;
+}
+
+.step.active{
+    background:#a855f7;
+
+    box-shadow:
+        0 0 15px #a855f7;
+}
+
+/* =========================================================
+   EXIT ANIMATION
+========================================================= */
+
+.page.exit{
+    animation:
+        pageExit .65s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
     }
 
-    html {
-        scroll-behavior: smooth;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes titleReveal{
+
+    from{
+        opacity:0;
+        transform:translateY(100%);
     }
 
-    body {
-        min-height: 100vh;
-        overflow: hidden;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #f7f7ff;
-        background: #050711;
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes navIn{
+
+    from{
+        opacity:0;
+        transform:translateY(-18px);
     }
 
-    /* BACKGROUND */
-
-    .background {
-        position: fixed;
-        inset: 0;
-        overflow: hidden;
-        z-index: 0;
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
+}
 
-    .grid {
-        position: absolute;
-        inset: -100px;
+@keyframes panelIn{
 
-        background-image:
-            linear-gradient(
-                rgba(255, 255, 255, 0.035) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.035) 1px,
-                transparent 1px
-            );
-
-        background-size: 60px 60px;
-
+    from{
+        opacity:0;
         transform:
-            perspective(600px)
+            translate(70px,-50%)
+            scale(.94);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translate(0,-50%)
+            scale(1);
+    }
+}
+
+@keyframes gridMove{
+
+    from{
+        transform:
+            perspective(500px)
             rotateX(58deg)
-            scale(1.4);
-
-        transform-origin: center bottom;
-        opacity: 0.45;
-
-        animation: gridMove 14s linear infinite;
+            scale(1.5)
+            translateY(0);
     }
 
-    .orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(70px);
-        opacity: 0.35;
-    }
-
-    .orb.one {
-        width: 420px;
-        height: 420px;
-        background: #713cff;
-        top: -170px;
-        right: -100px;
-        animation: orbOne 8s ease-in-out infinite;
-    }
-
-    .orb.two {
-        width: 330px;
-        height: 330px;
-        background: #e13fff;
-        bottom: -150px;
-        left: -100px;
-        animation: orbTwo 10s ease-in-out infinite;
-    }
-
-    .orb.three {
-        width: 180px;
-        height: 180px;
-        background: #3b82f6;
-        top: 42%;
-        left: 44%;
-        opacity: 0.12;
-        animation: orbThree 7s ease-in-out infinite;
-    }
-
-    /* PAGE */
-
-    .page {
-        position: relative;
-        z-index: 2;
-
-        width: min(1250px, 90%);
-        min-height: 100vh;
-
-        margin: auto;
-
-        display: flex;
-        flex-direction: column;
-
-        padding: 34px 0;
-    }
-
-    /* NAVIGATION */
-
-    .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        animation: navIn 1s ease forwards;
-    }
-
-    .logo {
-        font-size: 15px;
-        font-weight: 900;
-        letter-spacing: 4px;
-    }
-
-    .logo span {
-        color: #a855f7;
-    }
-
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        font-size: 10px;
-        letter-spacing: 3px;
-        color: #858da3;
-    }
-
-    .live-dot {
-        width: 7px;
-        height: 7px;
-
-        border-radius: 50%;
-
-        background: #a855f7;
-
-        box-shadow:
-            0 0 14px #a855f7;
-
-        animation: pulse 1.5s infinite;
-    }
-
-    /* HERO */
-
-    .hero {
-        flex: 1;
-
-        display: flex;
-        align-items: center;
-
-        position: relative;
-    }
-
-    .hero-content {
-        width: 100%;
-        padding-bottom: 20px;
-    }
-
-    .eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-
-        color: #bd8cff;
-
-        font-size: 10px;
-        letter-spacing: 4px;
-        font-weight: 700;
-
-        margin-bottom: 25px;
-
-        opacity: 0;
-
-        animation:
-            fadeUp 0.8s 0.35s forwards;
-    }
-
-    .eyebrow-line {
-        width: 42px;
-        height: 1px;
-
-        background: #a855f7;
-
-        box-shadow:
-            0 0 12px #a855f7;
-    }
-
-    h1 {
-        font-size: clamp(60px, 9vw, 125px);
-
-        line-height: 0.82;
-
-        letter-spacing: -8px;
-
-        font-weight: 900;
-
-        max-width: 1000px;
-
-        opacity: 0;
-
-        animation:
-            titleIn
-            1.1s
-            0.5s
-            cubic-bezier(0.16, 1, 0.3, 1)
-            forwards;
-    }
-
-    h1 .line {
-        display: block;
-        overflow: hidden;
-    }
-
-    h1 .accent {
-        color: #c084fc;
-    }
-
-    .description {
-        max-width: 650px;
-
-        margin-top: 34px;
-
-        color: #9299ad;
-
-        line-height: 1.75;
-
-        font-size: 15px;
-
-        opacity: 0;
-
-        animation:
-            fadeUp
-            0.9s
-            0.85s
-            forwards;
-    }
-
-    /* BUTTON */
-
-    .cta-row {
-        display: flex;
-        align-items: center;
-        gap: 25px;
-
-        margin-top: 40px;
-
-        opacity: 0;
-
-        animation:
-            fadeUp
-            0.9s
-            1.05s
-            forwards;
-    }
-
-    .start-btn {
-        position: relative;
-        overflow: hidden;
-
-        border: none;
-
-        background: #f5f5ff;
-        color: #070910;
-
-        padding: 18px 31px;
-
-        border-radius: 10px;
-
-        font-size: 12px;
-        font-weight: 900;
-        letter-spacing: 1.5px;
-
-        cursor: pointer;
-
-        transition: 0.35s;
-    }
-
-    .start-btn::before {
-        content: "";
-
-        position: absolute;
-
-        top: 0;
-        left: -120%;
-
-        width: 80%;
-        height: 100%;
-
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.9),
-                transparent
-            );
-
-        transform: skewX(-20deg);
-
-        animation:
-            shine
-            3s
-            2s
-            infinite;
-    }
-
-    .start-btn:hover {
+    to{
         transform:
-            translateY(-5px)
-            scale(1.02);
+            perspective(500px)
+            rotateX(58deg)
+            scale(1.5)
+            translateY(70px);
+    }
+}
 
-        box-shadow:
-            0 15px 45px rgba(168, 85, 247, 0.28),
-            0 0 30px rgba(255, 255, 255, 0.12);
+@keyframes floatOne{
+
+    0%,100%{
+        transform:translate(0,0);
     }
 
-    .arrow {
-        font-size: 18px;
-        margin-left: 8px;
+    50%{
+        transform:translate(-45px,35px);
+    }
+}
+
+@keyframes floatTwo{
+
+    0%,100%{
+        transform:translate(0,0);
     }
 
-    .meta {
-        color: #737b90;
+    50%{
+        transform:translate(45px,-35px);
+    }
+}
 
-        font-size: 10px;
+@keyframes floatThree{
 
-        letter-spacing: 2px;
+    0%,100%{
+        transform:scale(1);
     }
 
-    /* INTELLIGENCE PANEL */
+    50%{
+        transform:scale(1.5);
+    }
+}
 
-    .intelligence {
-        position: absolute;
+@keyframes buttonShine{
 
-        right: 0;
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        width: 250px;
-
-        opacity: 0;
-
-        animation:
-            panelIn
-            1s
-            1.1s
-            forwards;
+    0%{
+        left:-130%;
     }
 
-    .panel {
-        position: relative;
+    35%,100%{
+        left:150%;
+    }
+}
 
-        padding: 22px;
+@keyframes scanMove{
 
-        border:
-            1px solid
-            rgba(255, 255, 255, 0.09);
-
-        background:
-            rgba(9, 12, 25, 0.62);
-
-        backdrop-filter: blur(18px);
-
-        border-radius: 16px;
-
-        box-shadow:
-            0 25px 80px
-            rgba(0, 0, 0, 0.35);
+    from{
+        transform:translateX(-180%);
     }
 
-    .panel-label {
-        font-size: 9px;
+    to{
+        transform:translateX(350%);
+    }
+}
 
-        letter-spacing: 3px;
+@keyframes statusPulse{
 
-        color: #737c91;
-
-        margin-bottom: 22px;
+    0%,100%{
+        opacity:.4;
+        transform:scale(.8);
     }
 
-    .scan {
-        height: 2px;
+    50%{
+        opacity:1;
+        transform:scale(1.25);
+    }
+}
 
-        width: 100%;
+@keyframes livePulse{
 
-        background: #171b2b;
-
-        overflow: hidden;
-
-        margin-bottom: 20px;
+    0%,100%{
+        opacity:.5;
     }
 
-    .scan::after {
-        content: "";
+    50%{
+        opacity:1;
+    }
+}
 
-        display: block;
+@keyframes pageExit{
 
-        height: 100%;
-        width: 35%;
+    to{
+        opacity:0;
+        transform:scale(.975);
+        filter:blur(4px);
+    }
+}
 
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                #a855f7,
-                transparent
-            );
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-        animation:
-            scan
-            2s
-            linear
-            infinite;
+@media(max-width:1050px){
+
+    .intelligence{
+        display:none;
     }
 
-    .metric {
-        display: flex;
+    h1{
+        font-size:clamp(65px,10vw,110px);
+    }
+}
 
-        justify-content: space-between;
+@media(max-width:700px){
 
-        padding: 13px 0;
-
-        border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.06);
-
-        font-size: 10px;
-
-        letter-spacing: 1px;
+    body{
+        overflow:auto;
     }
 
-    .metric:last-child {
-        border-bottom: none;
+    .page{
+        width:88%;
+        padding:28px 0;
     }
 
-    .metric span {
-        color: #777f93;
+    .status{
+        display:none;
     }
 
-    .metric strong {
-        color: #dddff0;
+    h1{
+        font-size:58px;
+        letter-spacing:-5px;
     }
 
-    .metric strong.live {
-        color: #c084fc;
-
-        animation:
-            pulseText
-            1.5s
-            infinite;
+    .description{
+        font-size:14px;
+        margin-top:30px;
     }
 
-    /* FOOTER */
-
-    .bottom {
-        display: flex;
-
-        justify-content: space-between;
-
-        align-items: flex-end;
-
-        border-top:
-            1px solid
-            rgba(255, 255, 255, 0.08);
-
-        padding-top: 20px;
-
-        opacity: 0;
-
-        animation:
-            fadeUp
-            0.8s
-            1.3s
-            forwards;
+    .cta-row{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .bottom-left {
-        font-size: 9px;
-
-        letter-spacing: 3px;
-
-        color: #5f6678;
+    .bottom{
+        margin-top:25px;
     }
-
-    .steps {
-        display: flex;
-        gap: 7px;
-    }
-
-    .step {
-        width: 34px;
-        height: 3px;
-
-        background: #1b1f2e;
-    }
-
-    .step.active {
-        background: #a855f7;
-
-        box-shadow:
-            0 0 12px #a855f7;
-    }
-
-    /* EXIT ANIMATION */
-
-    .page.exit {
-        animation:
-            pageExit
-            0.7s
-            ease
-            forwards;
-    }
-
-    /* ANIMATIONS */
-
-    @keyframes fadeUp {
-
-        from {
-            opacity: 0;
-            transform: translateY(25px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-    }
-
-    @keyframes titleIn {
-
-        from {
-            opacity: 0;
-            transform: translateY(70px);
-            letter-spacing: -14px;
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-            letter-spacing: -8px;
-        }
-
-    }
-
-    @keyframes navIn {
-
-        from {
-            opacity: 0;
-            transform: translateY(-15px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-    }
-
-    @keyframes panelIn {
-
-        from {
-            opacity: 0;
-            transform:
-                translate(40px, -50%);
-        }
-
-        to {
-            opacity: 1;
-            transform:
-                translate(0, -50%);
-        }
-
-    }
-
-    @keyframes gridMove {
-
-        from {
-            transform:
-                perspective(600px)
-                rotateX(58deg)
-                scale(1.4)
-                translateY(0);
-        }
-
-        to {
-            transform:
-                perspective(600px)
-                rotateX(58deg)
-                scale(1.4)
-                translateY(60px);
-        }
-
-    }
-
-    @keyframes orbOne {
-
-        0%, 100% {
-            transform: translate(0, 0);
-        }
-
-        50% {
-            transform:
-                translate(-45px, 35px);
-        }
-
-    }
-
-    @keyframes orbTwo {
-
-        0%, 100% {
-            transform: translate(0, 0);
-        }
-
-        50% {
-            transform:
-                translate(40px, -35px);
-        }
-
-    }
-
-    @keyframes orbThree {
-
-        0%, 100% {
-            transform: scale(1);
-        }
-
-        50% {
-            transform: scale(1.5);
-        }
-
-    }
-
-    @keyframes shine {
-
-        0% {
-            left: -120%;
-        }
-
-        35%, 100% {
-            left: 150%;
-        }
-
-    }
-
-    @keyframes scan {
-
-        from {
-            transform: translateX(-150%);
-        }
-
-        to {
-            transform: translateX(350%);
-        }
-
-    }
-
-    @keyframes pulse {
-
-        0%, 100% {
-            opacity: 0.4;
-            transform: scale(0.8);
-        }
-
-        50% {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-    }
-
-    @keyframes pulseText {
-
-        0%, 100% {
-            opacity: 0.5;
-        }
-
-        50% {
-            opacity: 1;
-        }
-
-    }
-
-    @keyframes pageExit {
-
-        to {
-            opacity: 0;
-            transform: scale(0.98);
-        }
-
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-
-        body {
-            overflow: auto;
-        }
-
-        .page {
-            min-height: 100vh;
-        }
-
-        .intelligence {
-            display: none;
-        }
-
-        h1 {
-            font-size:
-                clamp(58px, 12vw, 100px);
-        }
-
-    }
-
-    @media (max-width: 600px) {
-
-        .page {
-            width: 88%;
-            padding: 25px 0;
-        }
-
-        .nav-right {
-            display: none;
-        }
-
-        h1 {
-            font-size: 58px;
-            letter-spacing: -5px;
-        }
-
-        .description {
-            font-size: 14px;
-        }
-
-        .cta-row {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .bottom {
-            margin-top: 20px;
-        }
-
-    }
+}
 
 </style>
-```
-
 </head>
+
 
 <body>
 
-```
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
+
 <div class="background">
 
     <div class="grid"></div>
 
     <div class="orb one"></div>
-
     <div class="orb two"></div>
-
     <div class="orb three"></div>
 
 </div>
 
 
+<!-- =======================================================
+     PAGE
+======================================================= -->
+
 <div class="page" id="page">
+
+
+    <!-- NAV -->
 
     <nav class="nav">
 
@@ -794,9 +914,9 @@
             PLACEMIND<span>AI</span>
         </div>
 
-        <div class="nav-right">
+        <div class="status">
 
-            <span class="live-dot"></span>
+            <span class="status-dot"></span>
 
             AI READINESS ENGINE · ONLINE
 
@@ -805,9 +925,14 @@
     </nav>
 
 
+    <!-- HERO -->
+
     <main class="hero">
 
         <div class="hero-content">
+
+
+            <!-- EYEBROW -->
 
             <div class="eyebrow">
 
@@ -818,22 +943,38 @@
             </div>
 
 
+            <!-- TITLE -->
+
             <h1>
 
-                <span class="line">
-                    KNOW YOUR
+                <span class="title-line line-one">
+                    <span class="title-inner">
+                        KNOW YOUR
+                    </span>
                 </span>
 
-                <span class="line accent">
-                    READINESS.
+                <span class="title-line line-two">
+                    <span class="title-inner accent">
+                        READINESS.
+                    </span>
                 </span>
 
-                <span class="line">
-                    BUILD YOUR FUTURE.
+                <span class="title-line line-three">
+                    <span class="title-inner">
+                        BUILD YOUR
+                    </span>
+                </span>
+
+                <span class="title-line line-three">
+                    <span class="title-inner">
+                        FUTURE.
+                    </span>
                 </span>
 
             </h1>
 
+
+            <!-- DESCRIPTION -->
 
             <p class="description">
 
@@ -844,19 +985,18 @@
             </p>
 
 
+            <!-- CTA -->
+
             <div class="cta-row">
 
                 <button
                     class="start-btn"
-                    id="startButton"
                     onclick="startAssessment()"
                 >
 
                     BEGIN ASSESSMENT
 
-                    <span class="arrow">
-                        ↗
-                    </span>
+                    <span class="arrow">↗</span>
 
                 </button>
 
@@ -869,10 +1009,13 @@
 
             </div>
 
+
         </div>
 
 
-        <div class="intelligence">
+        <!-- INTELLIGENCE PANEL -->
+
+        <aside class="intelligence">
 
             <div class="panel">
 
@@ -888,48 +1031,34 @@
 
                 <div class="metric">
 
-                    <span>
-                        ACADEMIC
-                    </span>
+                    <span>ACADEMIC</span>
 
-                    <strong>
-                        01
-                    </strong>
+                    <strong>01</strong>
 
                 </div>
 
 
                 <div class="metric">
 
-                    <span>
-                        CODING
-                    </span>
+                    <span>CODING</span>
 
-                    <strong>
-                        02
-                    </strong>
+                    <strong>02</strong>
 
                 </div>
 
 
                 <div class="metric">
 
-                    <span>
-                        TECHNICAL
-                    </span>
+                    <span>TECHNICAL</span>
 
-                    <strong>
-                        03
-                    </strong>
+                    <strong>03</strong>
 
                 </div>
 
 
                 <div class="metric">
 
-                    <span>
-                        AI ENGINE
-                    </span>
+                    <span>AI ENGINE</span>
 
                     <strong class="live">
                         READY
@@ -939,14 +1068,17 @@
 
             </div>
 
-        </div>
+        </aside>
+
 
     </main>
 
 
+    <!-- FOOTER -->
+
     <footer class="bottom">
 
-        <div class="bottom-left">
+        <div class="bottom-text">
 
             PLACEMIND AI · READINESS ANALYTICS
 
@@ -967,48 +1099,55 @@
 
     </footer>
 
+
 </div>
 
 
 <script>
 
-    function startAssessment() {
+function startAssessment(){
 
-        const page =
-            document.getElementById("page");
+    const page =
+        document.getElementById("page");
 
-        const button =
-            document.getElementById("startButton");
-
-
-        button.disabled = true;
-
-        button.innerHTML =
-            'INITIALIZING AI <span class="arrow">↗</span>';
+    const button =
+        document.querySelector(".start-btn");
 
 
-        page.classList.add("exit");
+    /* Prevent double clicking */
+
+    button.disabled = true;
 
 
-        setTimeout(function () {
+    button.innerHTML =
+        "INITIALIZING AI ENGINE <span class='arrow'>↗</span>";
 
-            /*
-             * academic.html is in the ROOT
-             * of your Render project.
-             *
-             * There is NO /pages/ folder.
-             */
 
-            window.location.href =
-                "academic.html";
+    /* Exit animation */
 
-        }, 700);
+    page.classList.add("exit");
 
-    }
+
+    /*
+       IMPORTANT:
+       Your Render project has academic.html
+       in the ROOT directory.
+
+       Therefore DO NOT use:
+       pages/academic.html
+    */
+
+    setTimeout(function(){
+
+        window.location.href =
+            "academic.html";
+
+    },650);
+
+}
 
 </script>
-```
+
 
 </body>
-
 </html>

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Coding Profile</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+<body>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="brand">
+                PLACEMIND<span>AI</span>
+            </div>
+
+            <p class="step-text">
+                STEP 03 / CODING & DSA
+            </p>
+
+            <div class="tagline">
+                HOW<br>
+                STRONG IS<br>
+                YOUR CODE?
+            </div>
+
+            <p class="description">
+                Your coding preparation is one of the strongest
+                indicators of technical placement readiness.
+            </p>
+
+
+            <div style="margin-top: 40px; max-width: 500px;">
+
+                <input
+                    type="number"
+                    id="dsaSolved"
+                    placeholder="DSA problems solved"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="easyProblems"
+                    placeholder="Easy problems solved"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="mediumProblems"
+                    placeholder="Medium problems solved"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="hardProblems"
+                    placeholder="Hard problems solved"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="codingScore"
+                    placeholder="Average coding test score (%)"
+                    min="0"
+                    max="100"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="contestRating"
+                    placeholder="Coding contest rating"
+                    min="0"
+                    style="width:100%; padding:18px;"
+                >
+
+            </div>
+
+
+            <button
+                class="start-btn"
+                onclick="goToTechnical()">
+
+                CONTINUE →
+
+            </button>
+
+
+            <div class="progress">
+
+                <span></span>
+                <span></span>
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function goToTechnical() {
+
+            const dsaSolved =
+                document.getElementById("dsaSolved").value;
+
+            const easyProblems =
+                document.getElementById("easyProblems").value;
+
+            const mediumProblems =
+                document.getElementById("mediumProblems").value;
+
+            const hardProblems =
+                document.getElementById("hardProblems").value;
+
+            const codingScore =
+                document.getElementById("codingScore").value;
+
+            const contestRating =
+                document.getElementById("contestRating").value;
+
+
+            if (
+                !dsaSolved ||
+                !easyProblems ||
+                !mediumProblems ||
+                !hardProblems ||
+                !codingScore ||
+                !contestRating
+            ) {
+
+                alert("Please complete your coding profile.");
+
+                return;
+
+            }
+
+
+            const coding = {
+
+                dsaSolved: Number(dsaSolved),
+
+                easyProblems: Number(easyProblems),
+
+                mediumProblems: Number(mediumProblems),
+
+                hardProblems: Number(hardProblems),
+
+                codingScore: Number(codingScore),
+
+                contestRating: Number(contestRating)
+
+            };
+
+
+            localStorage.setItem(
+                "studentCoding",
+                JSON.stringify(coding)
+            );
+
+
+            window.location.href =
+                "technical.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

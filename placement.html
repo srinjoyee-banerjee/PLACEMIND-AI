@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Placement Profile</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+<body>
+
+<main class="hero">
+
+    <div class="hero-content">
+
+        <div class="brand">
+            PLACEMIND<span>AI</span>
+        </div>
+
+        <p class="step-text">
+            STEP 06 / PLACEMENT PROFILE
+        </p>
+
+        <div class="tagline">
+            HOW<br>
+            READY ARE<br>
+            YOU TO BE PLACED?
+        </div>
+
+        <p class="description">
+
+            Your academic background, work experience,
+            employability test performance and specialization
+            will be evaluated using the trained placement model.
+
+        </p>
+
+
+        <!-- ================================================= -->
+        <!-- PLACEMENT INPUTS -->
+        <!-- ================================================= -->
+
+        <div style="
+            margin-top:40px;
+            max-width:500px;
+        ">
+
+
+            <!-- GENDER -->
+
+            <select
+                id="gender"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    Gender
+                </option>
+
+                <option value="M">
+                    Male
+                </option>
+
+                <option value="F">
+                    Female
+                </option>
+
+            </select>
+
+
+            <!-- SSC -->
+
+            <input
+                type="number"
+                id="ssc_p"
+                placeholder="SSC percentage"
+                min="0"
+                max="100"
+                step="0.01"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                "
+            >
+
+
+            <!-- SSC BOARD -->
+
+            <select
+                id="ssc_b"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    SSC Board
+                </option>
+
+                <option value="Central">
+                    Central
+                </option>
+
+                <option value="Others">
+                    Others
+                </option>
+
+            </select>
+
+
+            <!-- HSC -->
+
+            <input
+                type="number"
+                id="hsc_p"
+                placeholder="HSC percentage"
+                min="0"
+                max="100"
+                step="0.01"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                "
+            >
+
+
+            <!-- HSC BOARD -->
+
+            <select
+                id="hsc_b"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    HSC Board
+                </option>
+
+                <option value="Central">
+                    Central
+                </option>
+
+                <option value="Others">
+                    Others
+                </option>
+
+            </select>
+
+
+            <!-- HSC STREAM -->
+
+            <select
+                id="hsc_s"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    HSC Stream
+                </option>
+
+                <option value="Science">
+                    Science
+                </option>
+
+                <option value="Commerce">
+                    Commerce
+                </option>
+
+                <option value="Arts">
+                    Arts
+                </option>
+
+            </select>
+
+
+            <!-- DEGREE -->
+
+            <input
+                type="number"
+                id="degree_p"
+                placeholder="Degree percentage"
+                min="0"
+                max="100"
+                step="0.01"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                "
+            >
+
+
+            <!-- DEGREE TYPE -->
+
+            <select
+                id="degree_t"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    Degree Type
+                </option>
+
+                <option value="Sci&Tech">
+                    Science & Technology
+                </option>
+
+                <option value="Comm&Mgmt">
+                    Commerce & Management
+                </option>
+
+                <option value="Others">
+                    Others
+                </option>
+
+            </select>
+
+
+            <!-- WORK EXPERIENCE -->
+
+            <select
+                id="workex"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    Work Experience
+                </option>
+
+                <option value="Yes">
+                    Yes
+                </option>
+
+                <option value="No">
+                    No
+                </option>
+
+            </select>
+
+
+            <!-- EMPLOYABILITY TEST -->
+
+            <input
+                type="number"
+                id="etest_p"
+                placeholder="Employability test score (%)"
+                min="0"
+                max="100"
+                step="0.01"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                "
+            >
+
+
+            <!-- SPECIALISATION -->
+
+            <select
+                id="specialisation"
+                style="
+                    width:100%;
+                    padding:18px;
+                    margin-bottom:15px;
+                    background:#08090d;
+                    color:white;
+                    border:1px solid #292b32;
+                "
+            >
+
+                <option value="">
+                    MBA Specialisation
+                </option>
+
+                <option value="Mkt&Fin">
+                    Marketing & Finance
+                </option>
+
+                <option value="Mkt&HR">
+                    Marketing & HR
+                </option>
+
+            </select>
+
+
+            <!-- MBA -->
+
+            <input
+                type="number"
+                id="mba_p"
+                placeholder="MBA percentage"
+                min="0"
+                max="100"
+                step="0.01"
+                style="
+                    width:100%;
+                    padding:18px;
+                "
+            >
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- BUTTON -->
+        <!-- ================================================= -->
+
+        <button
+            class="start-btn"
+            onclick="submitPlacement()"
+        >
+
+            ANALYZE PLACEMENT →
+
+        </button>
+
+
+        <!-- ================================================= -->
+        <!-- PROGRESS -->
+        <!-- ================================================= -->
+
+        <div class="progress">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <span class="active"></span>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+async function submitPlacement() {
+
+
+    // ========================================================
+    // READ INPUTS
+    // ========================================================
+
+    const gender =
+        document.getElementById("gender").value;
+
+    const ssc_p =
+        document.getElementById("ssc_p").value;
+
+    const ssc_b =
+        document.getElementById("ssc_b").value;
+
+    const hsc_p =
+        document.getElementById("hsc_p").value;
+
+    const hsc_b =
+        document.getElementById("hsc_b").value;
+
+    const hsc_s =
+        document.getElementById("hsc_s").value;
+
+    const degree_p =
+        document.getElementById("degree_p").value;
+
+    const degree_t =
+        document.getElementById("degree_t").value;
+
+    const workex =
+        document.getElementById("workex").value;
+
+    const etest_p =
+        document.getElementById("etest_p").value;
+
+    const specialisation =
+        document.getElementById("specialisation").value;
+
+    const mba_p =
+        document.getElementById("mba_p").value;
+
+
+    // ========================================================
+    // VALIDATION
+    // ========================================================
+
+    if (
+
+        gender === "" ||
+        ssc_p === "" ||
+        ssc_b === "" ||
+        hsc_p === "" ||
+        hsc_b === "" ||
+        hsc_s === "" ||
+        degree_p === "" ||
+        degree_t === "" ||
+        workex === "" ||
+        etest_p === "" ||
+        specialisation === "" ||
+        mba_p === ""
+
+    ) {
+
+        alert(
+            "Please complete your placement profile."
+        );
+
+        return;
+
+    }
+
+
+    // ========================================================
+    // NUMERIC VALIDATION
+    // ========================================================
+
+    const values = [
+
+        Number(ssc_p),
+        Number(hsc_p),
+        Number(degree_p),
+        Number(etest_p),
+        Number(mba_p)
+
+    ];
+
+
+    for (const value of values) {
+
+        if (
+            value < 0 ||
+            value > 100
+        ) {
+
+            alert(
+                "Academic and test percentages must be between 0 and 100."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    // ========================================================
+    // CREATE PLACEMENT PROFILE
+    // ========================================================
+
+    const placement = {
+
+        gender: gender,
+
+        ssc_p: Number(ssc_p),
+
+        ssc_b: ssc_b,
+
+        hsc_p: Number(hsc_p),
+
+        hsc_b: hsc_b,
+
+        hsc_s: hsc_s,
+
+        degree_p: Number(degree_p),
+
+        degree_t: degree_t,
+
+        workex: workex,
+
+        etest_p: Number(etest_p),
+
+        specialisation: specialisation,
+
+        mba_p: Number(mba_p)
+
+    };
+
+
+    // ========================================================
+    // SAVE FOR FINAL ANALYSIS
+    // ========================================================
+
+    localStorage.setItem(
+
+        "studentPlacement",
+
+        JSON.stringify(placement)
+
+    );
+
+
+    // ========================================================
+    // GO TO ACADEMIC FORECAST
+    // ========================================================
+
+    window.location.href =
+        "forecast.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

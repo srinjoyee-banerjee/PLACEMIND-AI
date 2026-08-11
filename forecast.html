@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Academic Forecast</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<main class="hero">
+
+<div class="hero-content">
+
+<div class="brand">
+    PLACEMIND<span>AI</span>
+</div>
+
+<p class="step-text">
+    STEP 06 / ACADEMIC FORECAST
+</p>
+
+<div class="tagline">
+    WHERE IS<br>
+    YOUR ACADEMIC<br>
+    PATH HEADING?
+</div>
+
+<p class="description">
+    Your semester history is being analyzed by the
+    trained PLACEMIND AI academic models.
+</p>
+
+<div
+    id="forecastBox"
+    style="
+        margin-top:40px;
+        max-width:600px;
+        padding:30px;
+        border:1px solid #292b32;
+    "
+>
+
+<p class="section-label">
+    ML ACADEMIC FORECAST
+</p>
+
+<h2 id="forecastValue">
+    ANALYZING...
+</h2>
+
+<p id="declineStatus">
+    Checking academic trajectory...
+</p>
+
+<p id="declineProbability">
+</p>
+
+</div>
+
+<button
+    class="start-btn"
+    onclick="continueToResult()"
+    id="continueBtn"
+    disabled
+>
+    CONTINUE TO FINAL ANALYSIS →
+</button>
+
+<div class="progress">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span class="active"></span>
+
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+async function runForecast() {
+
+    const academic =
+        JSON.parse(
+            localStorage.getItem("studentAcademic")
+            || "{}"
+        );
+
+    if (
+        academic.sem1 === undefined ||
+        academic.sem2 === undefined ||
+        academic.sem3 === undefined ||
+        academic.sem4 === undefined
+    ) {
+
+        document.getElementById(
+            "forecastValue"
+        ).textContent =
+            "Academic data missing.";
+
+        return;
+    }
+
+    try {
+
+        const response =
+            await fetch("/predict", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    academic: academic,
+
+                    coding:
+                        JSON.parse(
+                            localStorage.getItem(
+                                "studentCoding"
+                            ) || "{}"
+                        ),
+
+                    technical:
+                        JSON.parse(
+                            localStorage.getItem(
+                                "studentTechnical"
+                            ) || "{}"
+                        ),
+
+                    aptitude:
+                        JSON.parse(
+                            localStorage.getItem(
+                                "studentAptitude"
+                            ) || "{}"
+                        )
+
+                })
+
+            });
+
+        const result =
+            await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.error ||
+                "Forecast failed"
+            );
+
+        }
+
+        if (
+            result.academicForecast !== null &&
+            result.academicForecast !== undefined
+        ) {
+
+            document.getElementById(
+                "forecastValue"
+            ).textContent =
+                "Predicted SEM 5 GPA: "
+                +
+                Number(
+                    result.academicForecast
+                ).toFixed(2);
+
+        }
+
+        document.getElementById(
+            "declineStatus"
+        ).textContent =
+            result.academicStatus;
+
+        if (
+            result.academicDeclineProbability
+            !== null &&
+            result.academicDeclineProbability
+            !== undefined
+        ) {
+
+            document.getElementById(
+                "declineProbability"
+            ).textContent =
+                "Academic decline probability: "
+                +
+                (
+                    Number(
+                        result.academicDeclineProbability
+                    ) * 100
+                ).toFixed(1)
+                +
+                "%";
+
+        }
+
+        document.getElementById(
+            "continueBtn"
+        ).disabled = false;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+            "forecastValue"
+        ).textContent =
+            "Forecast failed";
+
+        document.getElementById(
+            "declineStatus"
+        ).textContent =
+            error.message;
+
+    }
+
+}
+
+function continueToResult() {
+
+    window.location.href =
+        "result.html";
+
+}
+
+runForecast();
+
+</script>
+
+</body>
+</html>

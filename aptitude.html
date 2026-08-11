@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Interview Profile</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+<body>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="brand">
+                PLACEMIND<span>AI</span>
+            </div>
+
+            <p class="step-text">
+                STEP 05 / APTITUDE & INTERVIEW
+            </p>
+
+            <div class="tagline">
+                ARE YOU<br>
+                INTERVIEW<br>
+                READY?
+            </div>
+
+            <p class="description">
+                Technical knowledge is only one part of placement
+                preparation. Aptitude, communication and interview
+                performance also matter.
+            </p>
+
+
+            <div style="margin-top: 40px; max-width: 500px;">
+
+                <input
+                    type="number"
+                    id="aptitudeScore"
+                    placeholder="Aptitude test score (%)"
+                    min="0"
+                    max="100"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="communicationScore"
+                    placeholder="Communication score (%)"
+                    min="0"
+                    max="100"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="mockInterviews"
+                    placeholder="Mock interviews completed"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="interviewScore"
+                    placeholder="Average mock interview score (%)"
+                    min="0"
+                    max="100"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="preparationHours"
+                    placeholder="Placement preparation hours/week"
+                    min="0"
+                    style="width:100%; padding:18px;"
+                >
+
+            </div>
+
+
+            <button
+                class="start-btn"
+                onclick="generateAssessment()">
+
+                ANALYZE MY READINESS →
+
+            </button>
+
+
+            <div class="progress">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span class="active"></span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function generateAssessment() {
+
+            const aptitudeScore =
+                document.getElementById("aptitudeScore").value;
+
+            const communicationScore =
+                document.getElementById("communicationScore").value;
+
+            const mockInterviews =
+                document.getElementById("mockInterviews").value;
+
+            const interviewScore =
+                document.getElementById("interviewScore").value;
+
+            const preparationHours =
+                document.getElementById("preparationHours").value;
+
+
+            if (
+                !aptitudeScore ||
+                !communicationScore ||
+                !mockInterviews ||
+                !interviewScore ||
+                !preparationHours
+            ) {
+
+                alert("Please complete your interview profile.");
+
+                return;
+
+            }
+
+
+            const aptitude = {
+
+                aptitudeScore: Number(aptitudeScore),
+
+                communicationScore:
+                    Number(communicationScore),
+
+                mockInterviews:
+                    Number(mockInterviews),
+
+                interviewScore:
+                    Number(interviewScore),
+
+                preparationHours:
+                    Number(preparationHours)
+
+            };
+
+
+            localStorage.setItem(
+                "studentAptitude",
+                JSON.stringify(aptitude)
+            );
+
+
+            window.location.href =
+                "forecast.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Technical Profile</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+<body>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="brand">
+                PLACEMIND<span>AI</span>
+            </div>
+
+            <p class="step-text">
+                STEP 04 / PROJECTS & TECHNICAL SKILLS
+            </p>
+
+            <div class="tagline">
+                WHAT<br>
+                CAN YOU<br>
+                BUILD?
+            </div>
+
+            <p class="description">
+                Projects and technical depth help us understand
+                how prepared you are to apply your knowledge
+                beyond academic coursework.
+            </p>
+
+
+            <div style="margin-top: 40px; max-width: 500px;">
+
+                <input
+                    type="number"
+                    id="projects"
+                    placeholder="Number of completed projects"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="majorProjects"
+                    placeholder="Major / advanced projects"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="internships"
+                    placeholder="Internships completed"
+                    min="0"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="technicalScore"
+                    placeholder="Technical assessment score (%)"
+                    min="0"
+                    max="100"
+                    style="width:100%; padding:18px; margin-bottom:15px;"
+                >
+
+                <input
+                    type="number"
+                    id="languages"
+                    placeholder="Programming languages known"
+                    min="0"
+                    style="width:100%; padding:18px;"
+                >
+
+            </div>
+
+
+            <button
+                class="start-btn"
+                onclick="goToAptitude()">
+
+                CONTINUE →
+
+            </button>
+
+
+            <div class="progress">
+
+                <span></span>
+                <span></span>
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function goToAptitude() {
+
+            const projects =
+                document.getElementById("projects").value;
+
+            const majorProjects =
+                document.getElementById("majorProjects").value;
+
+            const internships =
+                document.getElementById("internships").value;
+
+            const technicalScore =
+                document.getElementById("technicalScore").value;
+
+            const languages =
+                document.getElementById("languages").value;
+
+
+            if (
+                !projects ||
+                !majorProjects ||
+                !internships ||
+                !technicalScore ||
+                !languages
+            ) {
+
+                alert("Please complete your technical profile.");
+
+                return;
+
+            }
+
+
+            const technical = {
+
+                projects: Number(projects),
+
+                majorProjects: Number(majorProjects),
+
+                internships: Number(internships),
+
+                technicalScore: Number(technicalScore),
+
+                languages: Number(languages)
+
+            };
+
+
+            localStorage.setItem(
+                "studentTechnical",
+                JSON.stringify(technical)
+            );
+
+
+            window.location.href =
+                "aptitude.html";
+
+        }
+
+    </script>
+
+</body>
+
+</html>

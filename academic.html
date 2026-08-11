@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Academic Profile</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<main class="hero">
+
+<div class="hero-content">
+
+<div class="brand">
+    PLACEMIND<span>AI</span>
+</div>
+
+<p class="step-text">
+    STEP 02 / ACADEMIC PROFILE
+</p>
+
+<div class="tagline">
+    YOUR<br>
+    ACADEMIC<br>
+    TRAJECTORY.
+</div>
+
+<p class="description">
+    Enter your semester performance. PLACEMIND AI will
+    use your academic history to forecast your next
+    semester and identify decline risk.
+</p>
+
+<div style="margin-top:40px; max-width:500px;">
+
+<input
+    type="number"
+    id="sem1"
+    placeholder="Semester 1 GPA"
+    step="0.01"
+    min="0"
+    max="10"
+    style="width:100%; padding:18px; margin-bottom:15px;"
+>
+
+<input
+    type="number"
+    id="sem2"
+    placeholder="Semester 2 GPA"
+    step="0.01"
+    min="0"
+    max="10"
+    style="width:100%; padding:18px; margin-bottom:15px;"
+>
+
+<input
+    type="number"
+    id="sem3"
+    placeholder="Semester 3 GPA"
+    step="0.01"
+    min="0"
+    max="10"
+    style="width:100%; padding:18px; margin-bottom:15px;"
+>
+
+<input
+    type="number"
+    id="sem4"
+    placeholder="Semester 4 GPA"
+    step="0.01"
+    min="0"
+    max="10"
+    style="width:100%; padding:18px;"
+>
+
+</div>
+
+<button
+    class="start-btn"
+    onclick="goToCoding()">
+
+    CONTINUE →
+
+</button>
+
+<div class="progress">
+    <span></span>
+    <span class="active"></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+function goToCoding() {
+
+    const sem1 =
+        document.getElementById("sem1").value;
+
+    const sem2 =
+        document.getElementById("sem2").value;
+
+    const sem3 =
+        document.getElementById("sem3").value;
+
+    const sem4 =
+        document.getElementById("sem4").value;
+
+    if (
+        sem1 === "" ||
+        sem2 === "" ||
+        sem3 === "" ||
+        sem4 === ""
+    ) {
+
+        alert(
+            "Please enter all four semester GPAs."
+        );
+
+        return;
+    }
+
+    const student = {
+
+        sem1: Number(sem1),
+        sem2: Number(sem2),
+        sem3: Number(sem3),
+        sem4: Number(sem4)
+
+    };
+
+    localStorage.setItem(
+        "studentAcademic",
+        JSON.stringify(student)
+    );
+
+    window.location.href =
+        "coding.html";
+}
+
+</script>
+
+</body>
+</html>

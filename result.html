@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PLACEMIND AI — Final Analysis</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<main class="hero">
+
+<div class="hero-content">
+
+<div class="brand">
+    PLACEMIND<span>AI</span>
+</div>
+
+<p class="step-text">
+    FINAL ANALYSIS / PLACEMENT READINESS
+</p>
+
+<div class="tagline">
+    YOUR<br>
+    PLACEMENT<br>
+    READINESS.
+</div>
+
+<div class="score-section">
+
+<p class="section-label">
+    AI ASSESSMENT
+</p>
+
+<div class="score">
+    <span id="readinessScore">--</span>%
+</div>
+
+<p id="readinessLabel" class="score-label">
+    ANALYZING PROFILE
+</p>
+
+</div>
+
+<div class="analysis-section">
+
+<div class="result-row">
+    <span>ACADEMIC READINESS</span>
+    <strong id="academicResult">--</strong>
+</div>
+
+<div class="result-row">
+    <span>DSA & CODING</span>
+    <strong id="codingResult">--</strong>
+</div>
+
+<div class="result-row">
+    <span>TECHNICAL PROFILE</span>
+    <strong id="technicalResult">--</strong>
+</div>
+
+<div class="result-row">
+    <span>APTITUDE</span>
+    <strong id="aptitudeResult">--</strong>
+</div>
+
+<div class="result-row">
+    <span>INTERVIEW READINESS</span>
+    <strong id="interviewResult">--</strong>
+</div>
+
+</div>
+
+<div class="forecast-box">
+
+<p class="section-label">
+    ACADEMIC FORECAST
+</p>
+
+<h2 id="forecastTitle">
+    ANALYZING...
+</h2>
+
+<p id="forecastText">
+    Connecting to the trained academic model...
+</p>
+
+</div>
+
+<div class="recommendation-box">
+
+<p class="section-label">
+    AI RECOMMENDATION
+</p>
+
+<p id="recommendation">
+    Generating recommendation...
+</p>
+
+</div>
+
+<button
+    class="start-btn"
+    onclick="restartAssessment()">
+
+    START NEW ASSESSMENT ↻
+
+</button>
+
+</div>
+
+</main>
+
+<script>
+
+async function generateFinalAnalysis() {
+
+    try {
+
+        const academic =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentAcademic"
+                ) || "{}"
+            );
+
+        const coding =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentCoding"
+                ) || "{}"
+            );
+
+        const technical =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentTechnical"
+                ) || "{}"
+            );
+
+        const aptitude =
+            JSON.parse(
+                localStorage.getItem(
+                    "studentAptitude"
+                ) || "{}"
+            );
+
+
+        const response =
+            await fetch(
+                "/predict",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        academic:
+                            academic,
+
+                        coding:
+                            coding,
+
+                        technical:
+                            technical,
+
+                        aptitude:
+                            aptitude
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.error ||
+                "Analysis failed"
+            );
+
+        }
+
+
+        document.getElementById(
+            "readinessScore"
+        ).textContent =
+            Number(
+                result.readinessScore
+            ).toFixed(1);
+
+
+        document.getElementById(
+            "readinessLabel"
+        ).textContent =
+            result.readinessLabel;
+
+
+        document.getElementById(
+            "academicResult"
+        ).textContent =
+            Number(
+                result.academicResult
+            ).toFixed(1) + "%";
+
+
+        document.getElementById(
+            "codingResult"
+        ).textContent =
+            Number(
+                result.codingResult
+            ).toFixed(1) + "%";
+
+
+        document.getElementById(
+            "technicalResult"
+        ).textContent =
+            Number(
+                result.technicalResult
+            ).toFixed(1) + "%";
+
+
+        document.getElementById(
+            "aptitudeResult"
+        ).textContent =
+            Number(
+                result.aptitudeResult
+            ).toFixed(1) + "%";
+
+
+        document.getElementById(
+            "interviewResult"
+        ).textContent =
+            Number(
+                result.interviewResult
+            ).toFixed(1) + "%";
+
+
+        document.getElementById(
+            "forecastTitle"
+        ).textContent =
+            result.academicForecast !== null
+            ? "PREDICTED SEM 5 GPA: "
+              +
+              Number(
+                  result.academicForecast
+              ).toFixed(2)
+            : "FORECAST UNAVAILABLE";
+
+
+        document.getElementById(
+            "forecastText"
+        ).textContent =
+            result.forecast;
+
+
+        document.getElementById(
+            "recommendation"
+        ).textContent =
+            result.recommendation;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+            "forecastText"
+        ).textContent =
+            "Analysis failed: "
+            + error.message;
+
+    }
+
+}
+
+
+function restartAssessment() {
+
+    localStorage.clear();
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+generateFinalAnalysis();
+
+</script>
+
+</body>
+
+</html>

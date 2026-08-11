@@ -1,207 +1,699 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PLACEMIND AI — Final Analysis</title>
+```
+<title>PLACEMIND AI — Final Analysis</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at 80% 15%, rgba(80, 110, 255, 0.16), transparent 32%),
+            radial-gradient(circle at 15% 85%, rgba(0, 220, 180, 0.08), transparent 30%),
+            #080a0f;
+        color: #f4f5f7;
+        font-family: Arial, Helvetica, sans-serif;
+        overflow-x: hidden;
+    }
+
+    .page {
+        width: min(1180px, 92%);
+        margin: auto;
+        padding: 42px 0 70px;
+    }
+
+    /* HEADER */
+
+    .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 55px;
+        animation: fadeDown 0.8s ease both;
+    }
+
+    .brand {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+    }
+
+    .brand span {
+        opacity: 0.45;
+    }
+
+    .status {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        opacity: 0.55;
+    }
+
+    .status-dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #64ffc9;
+        margin-right: 8px;
+        box-shadow: 0 0 14px rgba(100,255,201,.8);
+    }
+
+    /* INTRO */
+
+    .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.25em;
+        opacity: 0.45;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: clamp(48px, 8vw, 104px);
+        line-height: 0.88;
+        letter-spacing: -0.055em;
+        margin: 0;
+        max-width: 850px;
+        animation: titleReveal 1s ease both;
+    }
+
+    .title span {
+        opacity: 0.42;
+    }
+
+    .subtitle {
+        max-width: 620px;
+        margin-top: 28px;
+        font-size: 15px;
+        line-height: 1.7;
+        color: rgba(255,255,255,.55);
+        animation: fadeUp 1s .25s ease both;
+    }
+
+    /* SCORE */
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 22px;
+        margin-top: 65px;
+    }
+
+    .score-card,
+    .panel {
+        border: 1px solid rgba(255,255,255,.10);
+        background: rgba(255,255,255,.035);
+        backdrop-filter: blur(18px);
+        border-radius: 24px;
+    }
+
+    .score-card {
+        min-height: 430px;
+        padding: 38px;
+        position: relative;
+        overflow: hidden;
+        animation: fadeUp .9s .3s ease both;
+    }
+
+    .score-card::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(100,255,201,.07);
+        filter: blur(70px);
+        right: -100px;
+        top: -100px;
+    }
+
+    .label {
+        font-size: 10px;
+        letter-spacing: .22em;
+        opacity: .45;
+    }
+
+    .score {
+        margin-top: 50px;
+        font-size: clamp(90px, 13vw, 150px);
+        line-height: .8;
+        font-weight: 800;
+        letter-spacing: -.08em;
+    }
+
+    .percent {
+        font-size: 38px;
+        opacity: .35;
+        letter-spacing: 0;
+    }
+
+    .score-label {
+        margin-top: 35px;
+        font-size: 13px;
+        letter-spacing: .18em;
+        font-weight: 700;
+    }
+
+    .score-line {
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,.08);
+        margin-top: 40px;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .score-fill {
+        height: 100%;
+        width: 0%;
+        background: #64ffc9;
+        box-shadow: 0 0 18px rgba(100,255,201,.5);
+        transition: width 1.8s cubic-bezier(.16,1,.3,1);
+    }
+
+    /* DOMAINS */
+
+    .domains {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        animation: fadeUp .9s .45s ease both;
+    }
+
+    .domain {
+        padding: 25px;
+        min-height: 125px;
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 18px;
+        background: rgba(255,255,255,.025);
+        transition: transform .3s ease, background .3s ease;
+    }
+
+    .domain:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,.06);
+    }
+
+    .domain-name {
+        font-size: 10px;
+        letter-spacing: .16em;
+        opacity: .45;
+    }
+
+    .domain-score {
+        margin-top: 23px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .mini-line {
+        margin-top: 14px;
+        height: 2px;
+        background: rgba(255,255,255,.08);
+        overflow: hidden;
+    }
+
+    .mini-fill {
+        width: 0;
+        height: 100%;
+        background: #64ffc9;
+        transition: width 1.2s ease;
+    }
+
+    /* LOWER PANELS */
+
+    .lower-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+        margin-top: 22px;
+    }
+
+    .panel {
+        padding: 32px;
+        animation: fadeUp .9s .65s ease both;
+    }
+
+    .panel h2 {
+        margin: 18px 0 14px;
+        font-size: 27px;
+        letter-spacing: -.03em;
+    }
+
+    .panel p {
+        color: rgba(255,255,255,.55);
+        line-height: 1.7;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .recommendation {
+        border-left: 2px solid #64ffc9;
+    }
+
+    /* BUTTON */
+
+    .action {
+        margin-top: 38px;
+        animation: fadeUp .9s .8s ease both;
+    }
+
+    .start-btn {
+        border: 1px solid rgba(255,255,255,.2);
+        background: #f4f5f7;
+        color: #080a0f;
+        padding: 17px 27px;
+        border-radius: 999px;
+        font-weight: 800;
+        letter-spacing: .08em;
+        cursor: pointer;
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .start-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(255,255,255,.12);
+    }
+
+    .error {
+        margin-top: 20px;
+        padding: 16px;
+        border: 1px solid rgba(255,100,100,.25);
+        border-radius: 12px;
+        color: #ff9d9d;
+        background: rgba(255,80,80,.05);
+        display: none;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes titleReveal {
+        from {
+            opacity: 0;
+            transform: translateY(35px);
+            letter-spacing: -.01em;
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+            letter-spacing: -.055em;
+        }
+    }
+
+    @media (max-width: 800px) {
+
+        .main-grid,
+        .lower-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .domains {
+            grid-template-columns: 1fr;
+        }
+
+        .page {
+            padding-top: 28px;
+        }
+
+        .score-card {
+            min-height: 360px;
+        }
+    }
+</style>
+```
+
 </head>
 
 <body>
 
-<main class="hero">
+<div class="page">
 
-<div class="hero-content">
+```
+<header class="topbar">
+    <div class="brand">
+        PLACEMIND<span>AI</span>
+    </div>
 
-<div class="brand">
-    PLACEMIND<span>AI</span>
+    <div class="status">
+        <span class="status-dot"></span>
+        AI ANALYSIS COMPLETE
+    </div>
+</header>
+
+<section>
+
+    <div class="eyebrow">
+        FINAL ANALYSIS / PLACEMENT READINESS
+    </div>
+
+    <h1 class="title">
+        YOUR<br>
+        PLACEMENT<br>
+        <span>READINESS.</span>
+    </h1>
+
+    <p class="subtitle">
+        PLACEMIND AI has analyzed your academic trajectory,
+        coding ability, technical profile and aptitude to
+        generate your current placement-readiness profile.
+    </p>
+
+</section>
+
+<section class="main-grid">
+
+    <div class="score-card">
+
+        <div class="label">
+            OVERALL AI ASSESSMENT
+        </div>
+
+        <div class="score">
+            <span id="readinessScore">--</span>
+            <span class="percent">%</span>
+        </div>
+
+        <div id="readinessLabel" class="score-label">
+            ANALYZING PROFILE
+        </div>
+
+        <div class="score-line">
+            <div id="scoreFill" class="score-fill"></div>
+        </div>
+
+    </div>
+
+    <div class="domains">
+
+        <div class="domain">
+            <div class="domain-name">ACADEMIC READINESS</div>
+            <div id="academicResult" class="domain-score">--</div>
+            <div class="mini-line">
+                <div id="academicFill" class="mini-fill"></div>
+            </div>
+        </div>
+
+        <div class="domain">
+            <div class="domain-name">DSA & CODING</div>
+            <div id="codingResult" class="domain-score">--</div>
+            <div class="mini-line">
+                <div id="codingFill" class="mini-fill"></div>
+            </div>
+        </div>
+
+        <div class="domain">
+            <div class="domain-name">TECHNICAL PROFILE</div>
+            <div id="technicalResult" class="domain-score">--</div>
+            <div class="mini-line">
+                <div id="technicalFill" class="mini-fill"></div>
+            </div>
+        </div>
+
+        <div class="domain">
+            <div class="domain-name">APTITUDE</div>
+            <div id="aptitudeResult" class="domain-score">--</div>
+            <div class="mini-line">
+                <div id="aptitudeFill" class="mini-fill"></div>
+            </div>
+        </div>
+
+        <div class="domain">
+            <div class="domain-name">INTERVIEW READINESS</div>
+            <div id="interviewResult" class="domain-score">--</div>
+            <div class="mini-line">
+                <div id="interviewFill" class="mini-fill"></div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="lower-grid">
+
+    <div class="panel">
+
+        <div class="label">
+            ACADEMIC FORECAST
+        </div>
+
+        <h2 id="forecastTitle">
+            ANALYZING...
+        </h2>
+
+        <p id="forecastText">
+            Connecting to the trained academic model...
+        </p>
+
+    </div>
+
+    <div class="panel recommendation">
+
+        <div class="label">
+            AI RECOMMENDATION
+        </div>
+
+        <h2>
+            NEXT MOVE.
+        </h2>
+
+        <p id="recommendation">
+            Generating recommendation...
+        </p>
+
+    </div>
+
+</section>
+
+<div id="errorBox" class="error"></div>
+
+<div class="action">
+    <button class="start-btn" onclick="restartAssessment()">
+        START NEW ASSESSMENT ↻
+    </button>
 </div>
-
-<p class="step-text">
-    FINAL ANALYSIS / PLACEMENT READINESS
-</p>
-
-<div class="tagline">
-    YOUR<br>
-    PLACEMENT<br>
-    READINESS.
-</div>
-
-<div class="score-section">
-
-<p class="section-label">
-    AI ASSESSMENT
-</p>
-
-<div class="score">
-    <span id="readinessScore">--</span>%
-</div>
-
-<p id="readinessLabel" class="score-label">
-    ANALYZING PROFILE
-</p>
+```
 
 </div>
-
-<div class="analysis-section">
-
-<div class="result-row">
-    <span>ACADEMIC READINESS</span>
-    <strong id="academicResult">--</strong>
-</div>
-
-<div class="result-row">
-    <span>DSA & CODING</span>
-    <strong id="codingResult">--</strong>
-</div>
-
-<div class="result-row">
-    <span>TECHNICAL PROFILE</span>
-    <strong id="technicalResult">--</strong>
-</div>
-
-<div class="result-row">
-    <span>APTITUDE</span>
-    <strong id="aptitudeResult">--</strong>
-</div>
-
-<div class="result-row">
-    <span>INTERVIEW READINESS</span>
-    <strong id="interviewResult">--</strong>
-</div>
-
-</div>
-
-<div class="forecast-box">
-
-<p class="section-label">
-    ACADEMIC FORECAST
-</p>
-
-<h2 id="forecastTitle">
-    ANALYZING...
-</h2>
-
-<p id="forecastText">
-    Connecting to the trained academic model...
-</p>
-
-</div>
-
-<div class="recommendation-box">
-
-<p class="section-label">
-    AI RECOMMENDATION
-</p>
-
-<p id="recommendation">
-    Generating recommendation...
-</p>
-
-</div>
-
-<button
-    class="start-btn"
-    onclick="restartAssessment()">
-
-    START NEW ASSESSMENT ↻
-
-</button>
-
-</div>
-
-</main>
 
 <script>
+
+function getStoredData(primaryKey, possibleKeys = []) {
+
+    const keys = [primaryKey, ...possibleKeys];
+
+    for (const key of keys) {
+
+        try {
+
+            const value = localStorage.getItem(key);
+
+            if (value) {
+
+                const parsed = JSON.parse(value);
+
+                if (
+                    parsed &&
+                    typeof parsed === "object" &&
+                    Object.keys(parsed).length > 0
+                ) {
+                    return parsed;
+                }
+            }
+
+        } catch (error) {
+            console.warn("Could not read:", key);
+        }
+    }
+
+    return {};
+}
+
+
+function setScore(elementId, value) {
+
+    const element = document.getElementById(elementId);
+
+    if (value === undefined || value === null || isNaN(value)) {
+        element.textContent = "--";
+        return;
+    }
+
+    element.textContent = Number(value).toFixed(1) + "%";
+}
+
+
+function animateBar(elementId, value) {
+
+    const element = document.getElementById(elementId);
+
+    if (
+        value === undefined ||
+        value === null ||
+        isNaN(value)
+    ) {
+        return;
+    }
+
+    setTimeout(() => {
+
+        element.style.width =
+            Math.max(0, Math.min(100, Number(value))) + "%";
+
+    }, 250);
+}
+
 
 async function generateFinalAnalysis() {
 
     try {
 
-        const academic =
-            JSON.parse(
-                localStorage.getItem(
-                    "studentAcademic"
-                ) || "{}"
-            );
+        /*
+         * Read the data saved by the assessment pages.
+         * Multiple fallback names are supported so a visual
+         * redesign of a page does not break the final analysis.
+         */
 
-        const coding =
-            JSON.parse(
-                localStorage.getItem(
-                    "studentCoding"
-                ) || "{}"
-            );
+        const academic = getStoredData(
+            "studentAcademic",
+            [
+                "academicData",
+                "academic",
+                "student_academic"
+            ]
+        );
 
-        const technical =
-            JSON.parse(
-                localStorage.getItem(
-                    "studentTechnical"
-                ) || "{}"
-            );
+        const coding = getStoredData(
+            "studentCoding",
+            [
+                "codingData",
+                "coding",
+                "student_coding"
+            ]
+        );
 
-        const aptitude =
-            JSON.parse(
-                localStorage.getItem(
-                    "studentAptitude"
-                ) || "{}"
-            );
+        const technical = getStoredData(
+            "studentTechnical",
+            [
+                "technicalData",
+                "technical",
+                "student_technical"
+            ]
+        );
 
-
-        const response =
-            await fetch(
-                "/predict",
-                {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        academic:
-                            academic,
-
-                        coding:
-                            coding,
-
-                        technical:
-                            technical,
-
-                        aptitude:
-                            aptitude
-
-                    })
-
-                }
-            );
+        const aptitude = getStoredData(
+            "studentAptitude",
+            [
+                "aptitudeData",
+                "aptitude",
+                "student_aptitude"
+            ]
+        );
 
 
-        const result =
-            await response.json();
+        console.log("PLACEMIND INPUT");
+        console.log("Academic:", academic);
+        console.log("Coding:", coding);
+        console.log("Technical:", technical);
+        console.log("Aptitude:", aptitude);
 
 
-        if (!response.ok) {
+        /*
+         * Make sure academic data actually exists.
+         */
+
+        if (
+            !academic.sem1 ||
+            !academic.sem2 ||
+            !academic.sem3 ||
+            !academic.sem4
+        ) {
 
             throw new Error(
-                result.error ||
-                "Analysis failed"
+                "Academic assessment data is missing. Please complete the assessment again."
             );
 
         }
 
 
+        const response = await fetch("/predict", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                academic: academic,
+                coding: coding,
+                technical: technical,
+                aptitude: aptitude
+
+            })
+
+        });
+
+
+        const result = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.details ||
+                result.error ||
+                "Prediction failed"
+            );
+
+        }
+
+
+        /* OVERALL SCORE */
+
+        const readiness =
+            Number(result.readinessScore);
+
         document.getElementById(
             "readinessScore"
         ).textContent =
-            Number(
-                result.readinessScore
-            ).toFixed(1);
+            readiness.toFixed(1);
 
 
         document.getElementById(
@@ -210,80 +702,149 @@ async function generateFinalAnalysis() {
             result.readinessLabel;
 
 
-        document.getElementById(
-            "academicResult"
-        ).textContent =
-            Number(
-                result.academicResult
-            ).toFixed(1) + "%";
+        animateBar(
+            "scoreFill",
+            readiness
+        );
 
 
-        document.getElementById(
-            "codingResult"
-        ).textContent =
-            Number(
-                result.codingResult
-            ).toFixed(1) + "%";
+        /* DOMAIN SCORES */
+
+        setScore(
+            "academicResult",
+            result.academicResult
+        );
+
+        setScore(
+            "codingResult",
+            result.codingResult
+        );
+
+        setScore(
+            "technicalResult",
+            result.technicalResult
+        );
+
+        setScore(
+            "aptitudeResult",
+            result.aptitudeResult
+        );
+
+        setScore(
+            "interviewResult",
+            result.interviewResult
+        );
 
 
-        document.getElementById(
-            "technicalResult"
-        ).textContent =
-            Number(
-                result.technicalResult
-            ).toFixed(1) + "%";
+        animateBar(
+            "academicFill",
+            result.academicResult
+        );
+
+        animateBar(
+            "codingFill",
+            result.codingResult
+        );
+
+        animateBar(
+            "technicalFill",
+            result.technicalResult
+        );
+
+        animateBar(
+            "aptitudeFill",
+            result.aptitudeResult
+        );
+
+        animateBar(
+            "interviewFill",
+            result.interviewResult
+        );
 
 
-        document.getElementById(
-            "aptitudeResult"
-        ).textContent =
-            Number(
-                result.aptitudeResult
-            ).toFixed(1) + "%";
+        /* FORECAST */
 
+        if (
+            result.academicForecast !== null &&
+            result.academicForecast !== undefined
+        ) {
 
-        document.getElementById(
-            "interviewResult"
-        ).textContent =
-            Number(
-                result.interviewResult
-            ).toFixed(1) + "%";
+            document.getElementById(
+                "forecastTitle"
+            ).textContent =
+                "PREDICTED SEM 5 GPA: " +
+                Number(
+                    result.academicForecast
+                ).toFixed(2);
 
+        } else {
 
-        document.getElementById(
-            "forecastTitle"
-        ).textContent =
-            result.academicForecast !== null
-            ? "PREDICTED SEM 5 GPA: "
-              +
-              Number(
-                  result.academicForecast
-              ).toFixed(2)
-            : "FORECAST UNAVAILABLE";
+            document.getElementById(
+                "forecastTitle"
+            ).textContent =
+                "FORECAST UNAVAILABLE";
+
+        }
 
 
         document.getElementById(
             "forecastText"
         ).textContent =
-            result.forecast;
+            result.forecast ||
+            "Academic trajectory analyzed.";
 
+
+        /* RECOMMENDATION */
 
         document.getElementById(
             "recommendation"
         ).textContent =
-            result.recommendation;
+            result.recommendation ||
+            "Continue strengthening your weakest assessment area.";
+
 
     }
 
     catch (error) {
 
-        console.error(error);
+        console.error(
+            "PLACEMIND analysis error:",
+            error
+        );
+
+
+        document.getElementById(
+            "readinessLabel"
+        ).textContent =
+            "ANALYSIS UNAVAILABLE";
+
+
+        document.getElementById(
+            "forecastTitle"
+        ).textContent =
+            "ANALYSIS FAILED";
+
 
         document.getElementById(
             "forecastText"
         ).textContent =
-            "Analysis failed: "
-            + error.message;
+            "We could not generate your placement profile.";
+
+
+        document.getElementById(
+            "recommendation"
+        ).textContent =
+            "Please return to the assessment and complete all four domains.";
+
+
+        const errorBox =
+            document.getElementById("errorBox");
+
+        errorBox.textContent =
+            error.message;
+
+        errorBox.style.display =
+            "block";
 
     }
 

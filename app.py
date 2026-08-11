@@ -9,7 +9,7 @@ app = Flask(__name__, static_folder="../frontend")
 CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_DIR = os.path.join(BASE_DIR, "models")
+MODEL_DIR = BASE_DIR
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 
 # ============================================================

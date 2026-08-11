@@ -1,170 +1,283 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>PLACEMIND AI — Placement Readiness Intelligence</title>
+    <title>PLACEMIND AI</title>
 
-<link rel="stylesheet" href="style.css">
-```
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070707;
+            color: #f5f5f5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 32px 55px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #292929;
+            padding-bottom: 22px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: #7cffc4;
+        }
+
+        .status {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #7cffc4;
+        }
+
+        .status::before {
+            content: "●";
+            margin-right: 8px;
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 70px 0;
+        }
+
+        .hero-left {
+            width: 65%;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: #7cffc4;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 8vw, 125px);
+            line-height: 0.88;
+            letter-spacing: -6px;
+            font-weight: 800;
+            margin-bottom: 35px;
+        }
+
+        h1 span {
+            color: #7cffc4;
+        }
+
+        .description {
+            max-width: 620px;
+            color: #9c9c9c;
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 42px;
+        }
+
+        .start-btn {
+            border: 1px solid #7cffc4;
+            background: #7cffc4;
+            color: #050505;
+            padding: 18px 30px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .start-btn:hover {
+            background: transparent;
+            color: #7cffc4;
+            transform: translateY(-3px);
+        }
+
+        .hero-right {
+            width: 35%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .system-box {
+            width: 310px;
+            border: 1px solid #292929;
+            padding: 25px;
+            background: #0b0b0b;
+        }
+
+        .system-title {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .domain {
+            display: flex;
+            justify-content: space-between;
+            padding: 17px 0;
+            border-top: 1px solid #222;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .domain span {
+            color: #777;
+        }
+
+        .domain b {
+            color: #f5f5f5;
+        }
+
+        .bottom {
+            border-top: 1px solid #292929;
+            padding-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 800px) {
+
+            .page {
+                padding: 25px;
+            }
+
+            .hero {
+                display: block;
+            }
+
+            .hero-left,
+            .hero-right {
+                width: 100%;
+            }
+
+            .hero-right {
+                margin-top: 50px;
+                justify-content: flex-start;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            .system-box {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-```
 <div class="page">
 
-    <!-- TOP NAVIGATION -->
-    <header class="nav">
-
+    <div class="top">
         <div class="logo">
-            PLACE<span>MIND</span><small>AI</small>
+            PLACEMIND<span>AI</span>
         </div>
 
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            AI READINESS ENGINE
+        <div class="status">
+            PLACEMENT INTELLIGENCE LIVE
+        </div>
+    </div>
+
+
+    <section class="hero">
+
+        <div class="hero-left">
+
+            <div class="eyebrow">
+                01 / INTELLIGENCE FOR YOUR CAREER
+            </div>
+
+            <h1>
+                KNOW YOUR<br>
+                <span>READINESS.</span><br>
+                BUILD YOUR<br>
+                FUTURE.
+            </h1>
+
+            <p class="description">
+                PLACEMIND AI analyzes your academic trajectory,
+                coding ability, technical knowledge and aptitude
+                to determine how prepared you are for placement.
+            </p>
+
+            <button
+                class="start-btn"
+                onclick="window.location.href='academic.html'">
+                BEGIN ASSESSMENT ↗
+            </button>
+
         </div>
 
-    </header>
 
+        <div class="hero-right">
 
-    <!-- HERO -->
-    <main class="hero">
+            <div class="system-box">
 
-        <div class="hero-grid">
+                <div class="system-title">
+                    04 / ASSESSMENT DOMAINS
+                </div>
 
-            <!-- LEFT SIDE -->
-            <section class="hero-content">
-
-                <div class="eyebrow">
+                <div class="domain">
                     <span>01</span>
-                    INTELLIGENCE FOR YOUR CAREER
+                    <b>ACADEMIC</b>
                 </div>
 
-                <h1>
-                    KNOW YOUR
-                    <strong>READINESS.</strong>
-                    <br>
-                    BUILD YOUR
-                    <strong>FUTURE.</strong>
-                </h1>
-
-                <p class="description">
-                    PLACEMIND AI analyzes your academic trajectory,
-                    coding ability, technical knowledge and aptitude
-                    to determine how prepared you are for placement.
-                </p>
-
-                <div class="actions">
-
-                    <button class="start-btn" onclick="startAssessment()">
-                        BEGIN ASSESSMENT
-                        <span>↗</span>
-                    </button>
-
-                    <div class="assessment-info">
-                        <span>04</span>
-                        <p>
-                            ASSESSMENT<br>
-                            DOMAINS
-                        </p>
-                    </div>
-
+                <div class="domain">
+                    <span>02</span>
+                    <b>CODING</b>
                 </div>
 
-            </section>
-
-
-            <!-- RIGHT SIDE -->
-            <section class="intelligence-panel">
-
-                <div class="panel-header">
-                    <span>PLACEMENT INTELLIGENCE</span>
-                    <span>LIVE</span>
+                <div class="domain">
+                    <span>03</span>
+                    <b>TECHNICAL</b>
                 </div>
 
-                <div class="radar">
-
-                    <div class="ring ring-one"></div>
-                    <div class="ring ring-two"></div>
-                    <div class="ring ring-three"></div>
-
-                    <div class="axis horizontal"></div>
-                    <div class="axis vertical"></div>
-
-                    <div class="radar-point point-one"></div>
-                    <div class="radar-point point-two"></div>
-                    <div class="radar-point point-three"></div>
-                    <div class="radar-point point-four"></div>
-
-                    <div class="radar-core">
-                        <span>AI</span>
-                    </div>
-
+                <div class="domain">
+                    <span>04</span>
+                    <b>APTITUDE</b>
                 </div>
 
-                <div class="metrics">
-
-                    <div class="metric">
-                        <span>ACADEMIC</span>
-                        <strong>01</strong>
-                    </div>
-
-                    <div class="metric">
-                        <span>CODING</span>
-                        <strong>02</strong>
-                    </div>
-
-                    <div class="metric">
-                        <span>TECHNICAL</span>
-                        <strong>03</strong>
-                    </div>
-
-                    <div class="metric">
-                        <span>APTITUDE</span>
-                        <strong>04</strong>
-                    </div>
-
-                </div>
-
-            </section>
-
-        </div>
-
-
-        <!-- BOTTOM -->
-        <div class="hero-footer">
-
-            <div>
-                <span class="footer-number">01</span>
-                <span>INTRODUCTION</span>
-            </div>
-
-            <div class="scroll-indicator">
-                SCROLL TO BEGIN
-                <span>↓</span>
-            </div>
-
-            <div>
-                AI-DRIVEN
-                <span>READINESS ANALYSIS</span>
             </div>
 
         </div>
 
-    </main>
+    </section>
+
+
+    <div class="bottom">
+        <span>01 / INTRODUCTION</span>
+        <span>AI-DRIVEN READINESS ANALYSIS</span>
+        <span>SCROLL TO BEGIN ↓</span>
+    </div>
 
 </div>
 
-<script src="app.js"></script>
-```
-
 </body>
-
 </html>

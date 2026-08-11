@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PLACEMIND AI</title>
 
 <style>
@@ -19,103 +18,90 @@ html{
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:#f5f7ff;
     min-height:100vh;
     overflow:hidden;
-    background:#050812;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#f7f7ff;
+    background:#050711;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
+/* ================= BACKGROUND ================= */
 
-.bg{
+.background{
     position:fixed;
     inset:0;
     overflow:hidden;
-    pointer-events:none;
+    z-index:0;
 }
 
 .grid{
     position:absolute;
-    inset:-50%;
+    inset:-100px;
     background-image:
         linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
         linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
     background-size:60px 60px;
-    transform:perspective(600px) rotateX(62deg);
+    transform:perspective(600px) rotateX(58deg) scale(1.4);
     transform-origin:center bottom;
-    animation:gridMove 18s linear infinite;
+    opacity:.45;
+    animation:gridMove 14s linear infinite;
 }
 
-.glow{
+.orb{
     position:absolute;
     border-radius:50%;
-    filter:blur(10px);
+    filter:blur(70px);
+    opacity:.35;
 }
 
-.glow.one{
-    width:500px;
-    height:500px;
-    background:rgba(124,58,237,.18);
-    top:-180px;
+.orb.one{
+    width:420px;
+    height:420px;
+    background:#713cff;
+    top:-170px;
     right:-100px;
-    animation:floatOne 8s ease-in-out infinite;
+    animation:orbOne 8s ease-in-out infinite;
 }
 
-.glow.two{
-    width:400px;
-    height:400px;
-    background:rgba(236,72,153,.12);
-    bottom:-180px;
-    left:-120px;
-    animation:floatTwo 10s ease-in-out infinite;
+.orb.two{
+    width:330px;
+    height:330px;
+    background:#e13fff;
+    bottom:-150px;
+    left:-100px;
+    animation:orbTwo 10s ease-in-out infinite;
 }
 
-/* =========================
-   PARTICLES
-========================= */
-
-.particles span{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:#c084fc;
-    border-radius:50%;
-    opacity:.5;
-    animation:particle 7s linear infinite;
+.orb.three{
+    width:180px;
+    height:180px;
+    background:#3b82f6;
+    top:42%;
+    left:44%;
+    opacity:.12;
+    animation:orbThree 7s ease-in-out infinite;
 }
 
-.particles span:nth-child(1){left:12%;top:22%;animation-delay:0s}
-.particles span:nth-child(2){left:28%;top:68%;animation-delay:1s}
-.particles span:nth-child(3){left:46%;top:18%;animation-delay:2s}
-.particles span:nth-child(4){left:64%;top:73%;animation-delay:3s}
-.particles span:nth-child(5){left:82%;top:32%;animation-delay:4s}
-.particles span:nth-child(6){left:91%;top:67%;animation-delay:5s}
-.particles span:nth-child(7){left:38%;top:86%;animation-delay:2.5s}
-.particles span:nth-child(8){left:71%;top:12%;animation-delay:1.5s}
-
-/* =========================
-   NAV
-========================= */
+/* ================= MAIN ================= */
 
 .page{
     position:relative;
     z-index:2;
-    width:min(1240px,90%);
+    width:min(1250px,90%);
     min-height:100vh;
     margin:auto;
     display:flex;
     flex-direction:column;
+    padding:34px 0;
 }
+
+/* ================= NAV ================= */
 
 .nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:34px 0;
-    animation:navIn 1s ease both;
+    animation:navIn 1s ease forwards;
 }
 
 .logo{
@@ -125,113 +111,115 @@ body{
 }
 
 .logo span{
-    color:#c084fc;
+    color:#a855f7;
 }
 
-.live{
+.nav-right{
     display:flex;
     align-items:center;
-    gap:9px;
+    gap:12px;
     font-size:10px;
     letter-spacing:3px;
-    color:#858da2;
+    color:#858da3;
 }
 
 .live-dot{
     width:7px;
     height:7px;
     border-radius:50%;
-    background:#c084fc;
-    box-shadow:0 0 15px #c084fc;
+    background:#a855f7;
+    box-shadow:0 0 14px #a855f7;
     animation:pulse 1.5s infinite;
 }
 
-/* =========================
-   HERO
-========================= */
+/* ================= HERO ================= */
 
 .hero{
     flex:1;
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
+    display:flex;
     align-items:center;
-    gap:70px;
-    padding-bottom:45px;
+    position:relative;
 }
 
-.left{
-    animation:heroIn 1.1s .15s cubic-bezier(.2,.8,.2,1) both;
+.hero-content{
+    width:100%;
+    padding-bottom:20px;
 }
 
 .eyebrow{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
+    color:#bd8cff;
     font-size:10px;
     letter-spacing:4px;
-    color:#c084fc;
-    font-weight:bold;
+    font-weight:700;
     margin-bottom:25px;
+    opacity:0;
+    animation:fadeUp .8s .35s forwards;
 }
 
-.eyebrow:before{
-    content:"";
-    width:35px;
+.eyebrow-line{
+    width:42px;
     height:1px;
-    background:#c084fc;
-    box-shadow:0 0 12px #c084fc;
+    background:#a855f7;
+    box-shadow:0 0 12px #a855f7;
 }
 
 h1{
-    font-size:clamp(54px,7vw,94px);
-    line-height:.88;
-    letter-spacing:-6px;
-    max-width:850px;
+    font-size:clamp(60px,9vw,125px);
+    line-height:.82;
+    letter-spacing:-8px;
+    font-weight:900;
+    max-width:1000px;
+    opacity:0;
+    animation:titleIn 1.1s .5s cubic-bezier(.16,1,.3,1) forwards;
 }
 
-h1 .purple{
+h1 .line{
+    display:block;
+    overflow:hidden;
+}
+
+h1 .accent{
     color:#c084fc;
     position:relative;
 }
 
-h1 .purple:after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-8px;
-    width:100%;
-    height:2px;
-    background:linear-gradient(90deg,#c084fc,transparent);
-    animation:lineGrow 1.4s 1s ease both;
-}
-
 .description{
-    max-width:630px;
+    max-width:650px;
     margin-top:34px;
-    color:#8d96aa;
-    line-height:1.8;
+    color:#9299ad;
+    line-height:1.75;
     font-size:15px;
+    opacity:0;
+    animation:fadeUp .9s .85s forwards;
 }
 
-.actions{
-    margin-top:36px;
+/* ================= CTA ================= */
+
+.cta-row{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:25px;
+    margin-top:40px;
+    opacity:0;
+    animation:fadeUp .9s 1.05s forwards;
 }
 
 .start-btn{
-    border:0;
-    padding:17px 28px;
-    border-radius:10px;
-    background:#f7f8ff;
-    color:#070a12;
-    font-weight:900;
-    letter-spacing:.5px;
-    cursor:pointer;
-    transition:.35s;
     position:relative;
     overflow:hidden;
+    border:none;
+    background:#f5f5ff;
+    color:#070910;
+    padding:18px 31px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    cursor:pointer;
+    transition:.35s;
 }
 
 .start-btn:before{
@@ -242,397 +230,419 @@ h1 .purple:after{
     width:80%;
     height:100%;
     background:linear-gradient(
-        100deg,
+        90deg,
         transparent,
-        rgba(255,255,255,.8),
+        rgba(255,255,255,.9),
         transparent
     );
-    animation:shine 3.5s 2s infinite;
+    transform:skewX(-20deg);
+    animation:shine 3s 2s infinite;
 }
 
 .start-btn:hover{
-    transform:translateY(-4px);
+    transform:translateY(-5px) scale(1.02);
     box-shadow:
-        0 15px 45px rgba(192,132,252,.25),
-        0 0 35px rgba(192,132,252,.12);
+        0 15px 45px rgba(168,85,247,.28),
+        0 0 30px rgba(255,255,255,.12);
+}
+
+.arrow{
+    font-size:18px;
+    margin-left:8px;
 }
 
 .meta{
-    color:#636c80;
+    color:#737b90;
     font-size:10px;
     letter-spacing:2px;
 }
 
-/* =========================
-   AI VISUAL
-========================= */
+/* ================= SIDE INTELLIGENCE PANEL ================= */
 
-.visual{
+.intelligence{
+    position:absolute;
+    right:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:250px;
+    opacity:0;
+    animation:panelIn 1s 1.1s forwards;
+}
+
+.panel{
     position:relative;
-    height:460px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    animation:visualIn 1.2s .4s cubic-bezier(.2,.8,.2,1) both;
+    padding:22px;
+    border:1px solid rgba(255,255,255,.09);
+    background:rgba(9,12,25,.62);
+    backdrop-filter:blur(18px);
+    border-radius:16px;
+    box-shadow:0 25px 80px rgba(0,0,0,.35);
 }
 
-.core{
-    width:170px;
-    height:170px;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-        radial-gradient(circle,
-        rgba(192,132,252,.35),
-        rgba(124,58,237,.08) 45%,
-        transparent 70%);
-    border:1px solid rgba(192,132,252,.35);
-    box-shadow:
-        0 0 50px rgba(168,85,247,.25),
-        inset 0 0 50px rgba(168,85,247,.15);
-    animation:corePulse 3s ease-in-out infinite;
-}
-
-.core-inner{
-    width:82px;
-    height:82px;
-    border-radius:50%;
-    background:#090d19;
-    border:1px solid rgba(255,255,255,.12);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#c084fc;
-    box-shadow:0 0 30px rgba(192,132,252,.18);
-}
-
-.orbit{
-    position:absolute;
-    border:1px solid rgba(192,132,252,.18);
-    border-radius:50%;
-}
-
-.orbit.one{
-    width:300px;
-    height:300px;
-    animation:orbit 12s linear infinite;
-}
-
-.orbit.two{
-    width:410px;
-    height:410px;
-    transform:rotate(55deg);
-    animation:orbitReverse 17s linear infinite;
-}
-
-.orbit.three{
-    width:470px;
-    height:220px;
-    transform:rotate(-30deg);
-    animation:orbit 14s linear infinite;
-}
-
-.node{
-    position:absolute;
-    width:9px;
-    height:9px;
-    border-radius:50%;
-    background:#d8b4fe;
-    box-shadow:0 0 20px #c084fc;
-}
-
-.node.a{top:20%;right:15%}
-.node.b{bottom:18%;left:15%}
-.node.c{top:43%;right:2%}
-
-.visual-label{
-    position:absolute;
-    padding:9px 13px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(7,11,20,.72);
-    backdrop-filter:blur(10px);
+.panel-label{
     font-size:9px;
-    letter-spacing:2px;
-    color:#858da2;
-    animation:labelFloat 4s ease-in-out infinite;
+    letter-spacing:3px;
+    color:#737c91;
+    margin-bottom:22px;
 }
 
-.label-one{top:15%;left:3%}
-.label-two{bottom:18%;right:0}
-.label-three{bottom:4%;left:17%;animation-delay:1.5s}
+.scan{
+    height:2px;
+    width:100%;
+    background:#171b2b;
+    overflow:hidden;
+    margin-bottom:20px;
+}
 
-/* =========================
-   BOTTOM
-========================= */
+.scan:after{
+    content:"";
+    display:block;
+    height:100%;
+    width:35%;
+    background:linear-gradient(90deg,transparent,#a855f7,transparent);
+    animation:scan 2s linear infinite;
+}
+
+.metric{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:10px;
+    letter-spacing:1px;
+}
+
+.metric:last-child{
+    border-bottom:0;
+}
+
+.metric span{
+    color:#777f93;
+}
+
+.metric strong{
+    color:#dddff0;
+}
+
+.metric strong.live{
+    color:#c084fc;
+    animation:pulseText 1.5s infinite;
+}
+
+/* ================= BOTTOM ================= */
 
 .bottom{
     display:flex;
     justify-content:space-between;
-    align-items:center;
-    border-top:1px solid rgba(255,255,255,.07);
-    padding:19px 0;
-    animation:fadeIn 1s 1.1s both;
+    align-items:end;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:20px;
+    opacity:0;
+    animation:fadeUp .8s 1.3s forwards;
 }
 
-.domains{
-    display:flex;
-    gap:28px;
-}
-
-.domain{
-    font-size:9px;
-    letter-spacing:2px;
-    color:#70798d;
-}
-
-.domain strong{
-    color:#c084fc;
-    margin-right:5px;
-}
-
-.scroll{
+.bottom-left{
     font-size:9px;
     letter-spacing:3px;
-    color:#626b7e;
+    color:#5f6678;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+.steps{
+    display:flex;
+    gap:7px;
+}
+
+.step{
+    width:34px;
+    height:3px;
+    background:#1b1f2e;
+}
+
+.step.active{
+    background:#a855f7;
+    box-shadow:0 0 12px #a855f7;
+}
+
+/* ================= TRANSITION ================= */
+
+.page.exit{
+    animation:pageExit .7s ease forwards;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes titleIn{
+    from{
+        opacity:0;
+        transform:translateY(70px);
+        letter-spacing:-14px;
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+        letter-spacing:-8px;
+    }
+}
 
 @keyframes navIn{
-    from{opacity:0;transform:translateY(-20px)}
-    to{opacity:1;transform:none}
+    from{
+        opacity:0;
+        transform:translateY(-15px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-@keyframes heroIn{
-    from{opacity:0;transform:translateY(45px)}
-    to{opacity:1;transform:none}
+@keyframes panelIn{
+    from{
+        opacity:0;
+        transform:translate(40px,-50%);
+    }
+    to{
+        opacity:1;
+        transform:translate(0,-50%);
+    }
 }
 
-@keyframes visualIn{
-    from{opacity:0;transform:scale(.75)}
-    to{opacity:1;transform:scale(1)}
+@keyframes gridMove{
+    from{
+        transform:perspective(600px) rotateX(58deg) scale(1.4) translateY(0);
+    }
+    to{
+        transform:perspective(600px) rotateX(58deg) scale(1.4) translateY(60px);
+    }
 }
 
-@keyframes fadeIn{
-    from{opacity:0}
-    to{opacity:1}
+@keyframes orbOne{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(-45px,35px)}
 }
 
-@keyframes lineGrow{
-    from{width:0}
-    to{width:100%}
+@keyframes orbTwo{
+    0%,100%{transform:translate(0,0)}
+    50%{transform:translate(40px,-35px)}
+}
+
+@keyframes orbThree{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.5)}
 }
 
 @keyframes shine{
     0%{left:-120%}
-    30%,100%{left:140%}
+    35%,100%{left:150%}
 }
 
-@keyframes corePulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.08)}
-}
-
-@keyframes orbit{
-    from{transform:rotate(0deg)}
-    to{transform:rotate(360deg)}
-}
-
-@keyframes orbitReverse{
-    from{transform:rotate(55deg)}
-    to{transform:rotate(-305deg)}
-}
-
-@keyframes labelFloat{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
+@keyframes scan{
+    from{transform:translateX(-150%)}
+    to{transform:translateX(350%)}
 }
 
 @keyframes pulse{
-    0%,100%{opacity:.4}
+    0%,100%{
+        opacity:.4;
+        transform:scale(.8);
+    }
+    50%{
+        opacity:1;
+        transform:scale(1.2);
+    }
+}
+
+@keyframes pulseText{
+    0%,100%{opacity:.5}
     50%{opacity:1}
 }
 
-@keyframes particle{
-    0%{transform:translateY(30px);opacity:0}
-    20%{opacity:.7}
-    80%{opacity:.7}
-    100%{transform:translateY(-120px);opacity:0}
+@keyframes pageExit{
+    to{
+        opacity:0;
+        transform:scale(.98);
+    }
 }
 
-@keyframes gridMove{
-    from{transform:perspective(600px) rotateX(62deg) translateY(0)}
-    to{transform:perspective(600px) rotateX(62deg) translateY(60px)}
-}
+/* ================= RESPONSIVE ================= */
 
-@keyframes floatOne{
-    0%,100%{transform:translate(0,0)}
-    50%{transform:translate(-40px,35px)}
-}
-
-@keyframes floatTwo{
-    0%,100%{transform:translate(0,0)}
-    50%{transform:translate(45px,-30px)}
-}
-
-@media(max-width:850px){
+@media(max-width:900px){
 
     body{
         overflow:auto;
     }
 
-    .hero{
-        grid-template-columns:1fr;
-        gap:20px;
-        padding:60px 0 30px;
+    .page{
+        min-height:100vh;
     }
 
-    .visual{
-        height:300px;
-        transform:scale(.75);
+    .intelligence{
+        display:none;
     }
 
-    .bottom{
-        gap:15px;
+    h1{
+        font-size:clamp(58px,12vw,100px);
+    }
+}
+
+@media(max-width:600px){
+
+    .page{
+        width:88%;
+        padding:25px 0;
+    }
+
+    .nav-right{
+        display:none;
+    }
+
+    h1{
+        font-size:58px;
+        letter-spacing:-5px;
+    }
+
+    .description{
+        font-size:14px;
+    }
+
+    .cta-row{
         flex-direction:column;
         align-items:flex-start;
     }
 
-    .domains{
-        flex-wrap:wrap;
-        gap:15px;
+    .bottom{
+        margin-top:20px;
     }
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="bg">
+<div class="background">
     <div class="grid"></div>
-    <div class="glow one"></div>
-    <div class="glow two"></div>
-
-    <div class="particles">
-        <span></span><span></span><span></span><span></span>
-        <span></span><span></span><span></span><span></span>
-    </div>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
 </div>
 
-<div class="page">
+<div class="page" id="page">
 
-    <nav class="nav">
+```
+<nav class="nav">
 
-        <div class="logo">
-            PLACEMIND<span>AI</span>
+    <div class="logo">
+        PLACEMIND<span>AI</span>
+    </div>
+
+    <div class="nav-right">
+        <span class="live-dot"></span>
+        AI READINESS ENGINE · ONLINE
+    </div>
+
+</nav>
+
+<main class="hero">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            INTELLIGENCE FOR YOUR CAREER
         </div>
 
-        <div class="live">
-            <span class="live-dot"></span>
-            AI READINESS ENGINE
-        </div>
+        <h1>
+            <span class="line">KNOW YOUR</span>
+            <span class="line accent">READINESS.</span>
+            <span class="line">BUILD YOUR FUTURE.</span>
+        </h1>
 
-    </nav>
+        <p class="description">
+            PLACEMIND AI analyzes your academic trajectory,
+            coding ability and technical profile to generate
+            a personalized assessment of your placement readiness.
+        </p>
 
-    <main class="hero">
+        <div class="cta-row">
 
-        <section class="left">
+            <button
+                class="start-btn"
+                onclick="startAssessment()"
+            >
+                BEGIN ASSESSMENT
+                <span class="arrow">↗</span>
+            </button>
 
-            <div class="eyebrow">
-                INTELLIGENCE FOR YOUR CAREER
-            </div>
-
-            <h1>
-                KNOW YOUR<br>
-                <span class="purple">READINESS.</span><br>
-                BUILD YOUR FUTURE.
-            </h1>
-
-            <p class="description">
-                PLACEMIND AI analyzes your academic trajectory,
-                coding ability and technical profile to generate
-                a personalized assessment of your placement readiness.
-            </p>
-
-            <div class="actions">
-
-                <button
-                    class="start-btn"
-                    onclick="startAssessment()"
-                >
-                    BEGIN ASSESSMENT ↗
-                </button>
-
-                <span class="meta">
-                    5–7 MINUTES · 03 DOMAINS
-                </span>
-
-            </div>
-
-        </section>
-
-        <section class="visual">
-
-            <div class="orbit one"></div>
-            <div class="orbit two"></div>
-            <div class="orbit three"></div>
-
-            <div class="core">
-                <div class="core-inner">
-                    AI
-                </div>
-            </div>
-
-            <div class="node a"></div>
-            <div class="node b"></div>
-            <div class="node c"></div>
-
-            <div class="visual-label label-one">
-                ACADEMIC
-            </div>
-
-            <div class="visual-label label-two">
-                TECHNICAL
-            </div>
-
-            <div class="visual-label label-three">
-                CODING
-            </div>
-
-        </section>
-
-    </main>
-
-    <footer class="bottom">
-
-        <div class="domains">
-
-            <div class="domain">
-                <strong>01</strong> ACADEMIC
-            </div>
-
-            <div class="domain">
-                <strong>02</strong> CODING
-            </div>
-
-            <div class="domain">
-                <strong>03</strong> TECHNICAL
+            <div class="meta">
+                5–7 MINUTES · 03 DOMAINS
             </div>
 
         </div>
 
-        <div class="scroll">
-            SCROLL TO EXPLORE ↓
+    </div>
+
+    <div class="intelligence">
+
+        <div class="panel">
+
+            <div class="panel-label">
+                PLACEMENT INTELLIGENCE / LIVE
+            </div>
+
+            <div class="scan"></div>
+
+            <div class="metric">
+                <span>ACADEMIC</span>
+                <strong>01</strong>
+            </div>
+
+            <div class="metric">
+                <span>CODING</span>
+                <strong>02</strong>
+            </div>
+
+            <div class="metric">
+                <span>TECHNICAL</span>
+                <strong>03</strong>
+            </div>
+
+            <div class="metric">
+                <span>AI ENGINE</span>
+                <strong class="live">READY</strong>
+            </div>
+
         </div>
 
-    </footer>
+    </div>
+
+</main>
+
+<footer class="bottom">
+
+    <div class="bottom-left">
+        PLACEMIND AI · READINESS ANALYTICS
+    </div>
+
+    <div class="steps">
+        <div class="step active"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+        <div class="step"></div>
+    </div>
+
+</footer>
+```
 
 </div>
 
@@ -640,26 +650,20 @@ h1 .purple:after{
 
 function startAssessment(){
 
-    document.body.animate(
-        [
-            {opacity:1, transform:"scale(1)"},
-            {opacity:0, transform:"scale(1.025)"}
-        ],
-        {
-            duration:650,
-            easing:"ease-in-out"
-        }
-    );
+    const page =
+        document.getElementById("page");
 
-    setTimeout(function(){
+    page.classList.add("exit");
 
-        window.location.href="academic.html";
+    setTimeout(() => {
 
-    },600);
+        window.location.href =
+            "pages/academic.html";
+
+    },700);
 }
 
 </script>
 
 </body>
 </html>
-```

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,6 +27,7 @@ body{
     background:#03070b;
     overflow-x:hidden;
 }
+
 
 /* =========================================================
    BACKGROUND
@@ -121,6 +123,7 @@ body{
     animation:pulseGlow 7s ease-in-out infinite;
 }
 
+
 /* =========================================================
    PAGE
 ========================================================= */
@@ -134,6 +137,7 @@ body{
 
     padding:32px 0 70px;
 }
+
 
 /* =========================================================
    NAV
@@ -192,6 +196,7 @@ body{
     animation:statusPulse 1.6s infinite;
 }
 
+
 /* =========================================================
    HEADER
 ========================================================= */
@@ -249,6 +254,7 @@ h1 span{
     line-height:1.75;
 }
 
+
 /* =========================================================
    ANALYSIS GRID
 ========================================================= */
@@ -266,6 +272,7 @@ h1 span{
     align-items:stretch;
 }
 
+
 /* =========================================================
    SCORE CARD
 ========================================================= */
@@ -273,7 +280,7 @@ h1 span{
 .score-card{
     position:relative;
 
-    min-height:380px;
+    min-height:420px;
 
     display:flex;
     flex-direction:column;
@@ -349,6 +356,7 @@ h1 span{
     box-shadow:
         0 0 20px rgba(25,217,255,.8);
 }
+
 
 /* =========================================================
    SCORE RING
@@ -455,6 +463,7 @@ h1 span{
     text-align:center;
 }
 
+
 /* =========================================================
    DOMAINS
 ========================================================= */
@@ -462,6 +471,7 @@ h1 span{
 .domains{
     display:flex;
     flex-direction:column;
+
     gap:12px;
 }
 
@@ -585,12 +595,13 @@ h1 span{
         cubic-bezier(.16,1,.3,1);
 }
 
+
 /* =========================================================
    FORECAST
 ========================================================= */
 
 .forecast{
-    margin-top:30px;
+    margin-top:0;
 
     display:grid;
 
@@ -652,12 +663,13 @@ h1 span{
     margin-top:8px;
 }
 
+
 /* =========================================================
    RECOMMENDATION
 ========================================================= */
 
 .recommendation{
-    margin-top:12px;
+    margin-top:0;
 
     padding:25px 27px;
 
@@ -707,6 +719,7 @@ h1 span{
 
     line-height:1.7;
 }
+
 
 /* =========================================================
    BOTTOM ACTION
@@ -777,29 +790,6 @@ h1 span{
         rgba(0,190,255,.10);
 }
 
-/* =========================================================
-   ERROR MESSAGE
-========================================================= */
-
-.error-message{
-    display:none;
-
-    margin-top:25px;
-
-    padding:18px 22px;
-
-    border:1px solid rgba(255,80,80,.25);
-
-    border-radius:12px;
-
-    background:rgba(120,20,20,.12);
-
-    color:#ff9d9d;
-
-    font-size:12px;
-
-    line-height:1.6;
-}
 
 /* =========================================================
    ANIMATIONS
@@ -926,6 +916,7 @@ h1 span{
     }
 }
 
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -988,7 +979,9 @@ h1 span{
 
 </head>
 
+
 <body>
+
 
 <div class="background">
 
@@ -1005,355 +998,382 @@ h1 span{
 
 <div class="page">
 
-    <!-- =====================================================
-         NAV
-    ===================================================== -->
 
-    <nav class="nav">
+<!-- =======================================================
+     NAV
+======================================================= -->
 
-        <div class="logo">
-            PLACEMIND<span>AI</span>
-        </div>
+<nav class="nav">
 
-        <div class="status">
+    <div class="logo">
+        PLACEMIND<span>AI</span>
+    </div>
 
-            <span class="status-dot"></span>
+    <div class="status">
 
-            AI ANALYSIS COMPLETE
+        <span class="status-dot"></span>
 
-        </div>
+        AI ANALYSIS COMPLETE
 
-    </nav>
+    </div>
 
+</nav>
 
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
 
-    <section class="header">
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-        <div class="eyebrow">
-            FINAL ANALYSIS / PLACEMENT READINESS
-        </div>
+<section class="header">
 
-        <h1>
-            YOUR<br>
-            <span>PLACEMENT</span><br>
-            READINESS.
-        </h1>
+    <div class="eyebrow">
+        FINAL ANALYSIS / PLACEMENT READINESS
+    </div>
 
-        <p class="description">
-            PLACEMIND AI has analyzed your academic trajectory,
-            coding ability, technical profile and aptitude
-            performance to generate your current
-            placement-readiness profile.
-        </p>
+    <h1>
+        YOUR<br>
+        <span>PLACEMENT</span><br>
+        READINESS.
+    </h1>
 
-    </section>
+    <p class="description">
+        PLACEMIND AI has analyzed your academic trajectory,
+        coding ability, technical profile and aptitude
+        performance to generate your current
+        placement-readiness profile.
+    </p>
 
+</section>
 
-    <!-- =====================================================
-         ANALYSIS
-    ===================================================== -->
 
-    <section class="analysis">
+<!-- =======================================================
+     ANALYSIS
+======================================================= -->
 
+<section class="analysis">
 
-        <!-- SCORE CARD -->
 
-        <div class="score-card">
+<!-- SCORE -->
 
-            <div
-                class="score-ring"
-                id="scoreRing"
-            >
-
-                <div class="score-content">
-
-                    <div class="score-label">
-                        OVERALL AI ASSESSMENT
-                    </div>
-
-                    <div class="score-number">
-
-                        <span id="overallScore">
-                            0.0
-                        </span>
-
-                        <span>%</span>
-
-                    </div>
-
-                    <div
-                        class="score-status"
-                        id="overallStatus"
-                    >
-                        ANALYZING
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- DOMAINS -->
-
-        <div class="domains">
-
-
-            <!-- ACADEMIC -->
-
-            <div class="domain">
-
-                <div class="domain-header">
-
-                    <div class="domain-name">
-                        01 / ACADEMIC
-                    </div>
-
-                    <div
-                        class="domain-score"
-                        id="academicScore"
-                    >
-                        0.0
-                    </div>
-
-                </div>
-
-                <div class="bar">
-
-                    <div
-                        class="bar-fill"
-                        id="academicBar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- CODING -->
-
-            <div class="domain">
-
-                <div class="domain-header">
-
-                    <div class="domain-name">
-                        02 / CODING
-                    </div>
-
-                    <div
-                        class="domain-score"
-                        id="codingScore"
-                    >
-                        0.0
-                    </div>
-
-                </div>
-
-                <div class="bar">
-
-                    <div
-                        class="bar-fill"
-                        id="codingBar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- TECHNICAL -->
-
-            <div class="domain">
-
-                <div class="domain-header">
-
-                    <div class="domain-name">
-                        03 / TECHNICAL
-                    </div>
-
-                    <div
-                        class="domain-score"
-                        id="technicalScore"
-                    >
-                        0.0
-                    </div>
-
-                </div>
-
-                <div class="bar">
-
-                    <div
-                        class="bar-fill"
-                        id="technicalBar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- APTITUDE -->
-
-            <div class="domain">
-
-                <div class="domain-header">
-
-                    <div class="domain-name">
-                        04 / APTITUDE
-                    </div>
-
-                    <div
-                        class="domain-score"
-                        id="aptitudeScore"
-                    >
-                        0.0
-                    </div>
-
-                </div>
-
-                <div class="bar">
-
-                    <div
-                        class="bar-fill"
-                        id="aptitudeBar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- FORECAST -->
-
-            <div class="forecast">
-
-                <div class="forecast-card">
-
-                    <div class="small-label">
-                        ACADEMIC FORECAST
-                    </div>
-
-                    <div class="forecast-value">
-
-                        <span id="gpa">
-                            0.00
-                        </span>
-
-                    </div>
-
-                    <div
-                        class="forecast-description"
-                        id="forecastText"
-                    >
-                        Predicted next-semester GPA.
-                    </div>
-
-                </div>
-
-
-                <div class="forecast-card">
-
-                    <div class="small-label">
-                        RISK ASSESSMENT
-                    </div>
-
-                    <div
-                        class="forecast-value"
-                        id="risk"
-                    >
-                        —
-                    </div>
-
-                    <div class="forecast-description">
-                        AI-estimated academic decline risk.
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- RECOMMENDATION -->
-
-            <div class="recommendation">
-
-                <div class="recommendation-label">
-                    AI RECOMMENDATION
-                </div>
-
-                <div
-                    class="recommendation-title"
-                    id="recommendationTitle"
-                >
-                    NEXT MOVE.
-                </div>
-
-                <div
-                    class="recommendation-text"
-                    id="recommendationText"
-                >
-                    Loading your personalized recommendation...
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ERROR -->
+<div class="score-card">
 
     <div
-        class="error-message"
-        id="errorMessage"
-    ></div>
+        class="score-ring"
+        id="scoreRing"
+    >
 
+        <div class="score-content">
 
-    <!-- ACTIONS -->
+            <div class="score-label">
+                OVERALL AI ASSESSMENT
+            </div>
 
-    <div class="actions">
+            <div class="score-number">
 
-        <div class="action-status">
-            PLACEMIND AI · READINESS ANALYTICS
+                <span id="overallScore">
+                    0.0
+                </span>
+
+                <span>%</span>
+
+            </div>
+
+            <div
+                class="score-status"
+                id="overallStatus"
+            >
+                ANALYZING
+            </div>
+
         </div>
-
-        <button
-            class="new-assessment"
-            onclick="newAssessment()"
-        >
-            START NEW ASSESSMENT ↻
-        </button>
 
     </div>
 
 </div>
 
 
+<!-- DOMAINS -->
+
+<div class="domains">
+
+
+<!-- ACADEMIC -->
+
+<div class="domain">
+
+    <div class="domain-header">
+
+        <div class="domain-name">
+            01 / ACADEMIC
+        </div>
+
+        <div
+            class="domain-score"
+            id="academicScore"
+        >
+            0.0
+        </div>
+
+    </div>
+
+    <div class="bar">
+
+        <div
+            class="bar-fill"
+            id="academicBar"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- CODING -->
+
+<div class="domain">
+
+    <div class="domain-header">
+
+        <div class="domain-name">
+            02 / CODING
+        </div>
+
+        <div
+            class="domain-score"
+            id="codingScore"
+        >
+            0.0
+        </div>
+
+    </div>
+
+    <div class="bar">
+
+        <div
+            class="bar-fill"
+            id="codingBar"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- TECHNICAL -->
+
+<div class="domain">
+
+    <div class="domain-header">
+
+        <div class="domain-name">
+            03 / TECHNICAL
+        </div>
+
+        <div
+            class="domain-score"
+            id="technicalScore"
+        >
+            0.0
+        </div>
+
+    </div>
+
+    <div class="bar">
+
+        <div
+            class="bar-fill"
+            id="technicalBar"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- APTITUDE -->
+
+<div class="domain">
+
+    <div class="domain-header">
+
+        <div class="domain-name">
+            04 / APTITUDE
+        </div>
+
+        <div
+            class="domain-score"
+            id="aptitudeScore"
+        >
+            0.0
+        </div>
+
+    </div>
+
+    <div class="bar">
+
+        <div
+            class="bar-fill"
+            id="aptitudeBar"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- FORECAST -->
+
+<div class="forecast">
+
+
+<div class="forecast-card">
+
+    <div class="small-label">
+        ACADEMIC FORECAST
+    </div>
+
+    <div class="forecast-value">
+
+        <span id="gpa">
+            0.00
+        </span>
+
+    </div>
+
+    <div
+        class="forecast-description"
+        id="forecastText"
+    >
+        Predicted next-semester GPA.
+    </div>
+
+</div>
+
+
+<div class="forecast-card">
+
+    <div class="small-label">
+        RISK ASSESSMENT
+    </div>
+
+    <div
+        class="forecast-value"
+        id="risk"
+    >
+        —
+    </div>
+
+    <div class="forecast-description">
+        AI-estimated academic decline risk.
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- RECOMMENDATION -->
+
+<div class="recommendation">
+
+    <div class="recommendation-label">
+        AI RECOMMENDATION
+    </div>
+
+    <div
+        class="recommendation-title"
+        id="recommendationTitle"
+    >
+        NEXT MOVE.
+    </div>
+
+    <div
+        class="recommendation-text"
+        id="recommendationText"
+    >
+        Loading your personalized recommendation...
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ACTIONS -->
+
+<div class="actions">
+
+    <div class="action-status">
+        PLACEMIND AI · READINESS ANALYTICS
+    </div>
+
+    <button
+        class="new-assessment"
+        onclick="newAssessment()"
+    >
+        START NEW ASSESSMENT ↻
+    </button>
+
+</div>
+
+
+</div>
+
+
 <script>
 
+
 /* =========================================================
-   NUMBER SAFETY
+   HELPERS
 ========================================================= */
 
-function safeNumber(value, fallback = 0){
+function getNumber(obj, names){
 
-    const number = Number(value);
+    for(const name of names){
 
-    if(
-        value === null ||
-        value === undefined ||
-        value === "" ||
-        Number.isNaN(number)
-    ){
-        return fallback;
+        if(
+            obj &&
+            obj[name] !== undefined &&
+            obj[name] !== null &&
+            obj[name] !== ""
+        ){
+
+            const value = Number(obj[name]);
+
+            if(!isNaN(value)){
+                return value;
+            }
+
+        }
+
     }
 
-    return number;
+    return 0;
+}
+
+
+function getText(obj, names, fallback){
+
+    for(const name of names){
+
+        if(
+            obj &&
+            obj[name] !== undefined &&
+            obj[name] !== null &&
+            obj[name] !== ""
+        ){
+
+            return String(obj[name]);
+
+        }
+
+    }
+
+    return fallback;
 }
 
 
@@ -1369,20 +1389,21 @@ function loadResult(){
 
     if(!stored){
 
-        showError(
-            "No placement assessment result was found. Please complete the assessment first."
+        console.warn(
+            "No placementResult found in localStorage."
         );
 
         return;
+
     }
 
 
     let result;
 
+
     try{
 
-        result =
-            JSON.parse(stored);
+        result = JSON.parse(stored);
 
     }
     catch(error){
@@ -1392,68 +1413,118 @@ function loadResult(){
             error
         );
 
-        showError(
-            "The stored placement result is invalid. Please start a new assessment."
-        );
-
         return;
+
     }
 
 
     console.log(
-        "PLACEMIND AI RESULT:",
+        "PLACEMIND RESULT:",
         result
     );
 
 
     /* =====================================================
-       THESE NAMES NOW MATCH app.py EXACTLY
+       BACKEND VALUES
     ===================================================== */
 
     const overall =
-        safeNumber(
-            result.readinessScore
+        getNumber(
+            result,
+            [
+                "readinessScore",
+                "overallScore",
+                "overall",
+                "placementReadiness",
+                "placement_score",
+                "finalScore"
+            ]
         );
 
 
     const academic =
-        safeNumber(
-            result.academicResult
+        getNumber(
+            result,
+            [
+                "academicResult",
+                "academicScore",
+                "academic"
+            ]
         );
 
 
     const coding =
-        safeNumber(
-            result.codingResult
+        getNumber(
+            result,
+            [
+                "codingResult",
+                "codingScore",
+                "coding"
+            ]
         );
 
 
     const technical =
-        safeNumber(
-            result.technicalResult
+        getNumber(
+            result,
+            [
+                "technicalResult",
+                "technicalScore",
+                "technical"
+            ]
         );
 
 
     const aptitude =
-        safeNumber(
-            result.aptitudeResult
+        getNumber(
+            result,
+            [
+                "aptitudeResult",
+                "aptitudeScore",
+                "aptitude"
+            ]
         );
 
 
     const gpa =
-        safeNumber(
-            result.academicForecast
+        getNumber(
+            result,
+            [
+                "academicForecast",
+                "predictedGPA",
+                "predicted_gpa",
+                "forecastGPA",
+                "forecast_gpa"
+            ]
         );
 
 
     const risk =
-        result.academicStatus ||
-        "Low Risk";
+        getText(
+            result,
+            [
+                "academicStatus",
+                "risk",
+                "academicRisk",
+                "academic_risk",
+                "declineRisk",
+                "decline_risk"
+            ],
+            "Low Risk"
+        );
 
 
     const recommendation =
-        result.recommendation ||
-        "Continue strengthening your weakest placement-readiness area.";
+        getText(
+            result,
+            [
+                "recommendation",
+                "aiRecommendation",
+                "ai_recommendation",
+                "recommendationText"
+            ],
+            "Continue strengthening your weakest placement-readiness area."
+        );
 
 
     /* =====================================================
@@ -1496,34 +1567,18 @@ function loadResult(){
 
 
     /* =====================================================
-       GPA
+       GPA / RISK / RECOMMENDATION
     ===================================================== */
 
     document.getElementById("gpa").innerText =
         gpa.toFixed(2);
 
 
-    document.getElementById("forecastText").innerText =
-        "Predicted next-semester GPA: " +
-        gpa.toFixed(2) +
-        ".";
-
-
-    /* =====================================================
-       RISK
-    ===================================================== */
-
     document.getElementById("risk").innerText =
         risk;
 
 
-    /* =====================================================
-       RECOMMENDATION
-    ===================================================== */
-
-    document.getElementById(
-        "recommendationText"
-    ).innerText =
+    document.getElementById("recommendationText").innerText =
         recommendation;
 
 
@@ -1532,6 +1587,7 @@ function loadResult(){
     ===================================================== */
 
     let status;
+
 
     if(overall >= 80){
 
@@ -1555,8 +1611,21 @@ function loadResult(){
 
     document.getElementById(
         "overallStatus"
+    ).innerText = status;
+
+
+    /* =====================================================
+       FORECAST
+    ===================================================== */
+
+    document.getElementById(
+        "forecastText"
     ).innerText =
-        status;
+        "Predicted next-semester GPA: "
+        +
+        gpa.toFixed(2)
+        +
+        ".";
 
 
     /* =====================================================
@@ -1605,18 +1674,15 @@ function loadResult(){
             academic
         );
 
-
         setBar(
             "codingBar",
             coding
         );
 
-
         setBar(
             "technicalBar",
             technical
         );
-
 
         setBar(
             "aptitudeBar",
@@ -1657,7 +1723,7 @@ function loadResult(){
 
 
 /* =========================================================
-   BAR
+   BAR HELPER
 ========================================================= */
 
 function setBar(id,value){
@@ -1667,13 +1733,14 @@ function setBar(id,value){
             0,
             Math.min(
                 100,
-                safeNumber(value)
+                value
             )
         );
 
 
     document.getElementById(id).style.width =
         safeValue + "%";
+
 }
 
 
@@ -1736,27 +1803,6 @@ function animateNumber(
         update
     );
 
-}
-
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-function showError(message){
-
-    const error =
-        document.getElementById(
-            "errorMessage"
-        );
-
-
-    error.innerText =
-        message;
-
-
-    error.style.display =
-        "block";
 }
 
 

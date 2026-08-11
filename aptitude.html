@@ -746,7 +746,463 @@ async function finish(){
 
 }
 
+<script>
+
+const ids = [
+    "aptitude",
+    "communication",
+    "interview",
+    "preparation"
+];
+
+ids.forEach(id => {
+    document.getElementById(id).addEventListener("change", update);
+});
+
+
+function update(){
+
+    const count = ids.filter(id =>
+        document.getElementById(id).value !== ""
+    ).length;
+
+    document.getElementById("status").innerText =
+        count + " / 4 COMPLETED";
+}
+
+
+/* ============================================================
+   FIND SAVED DATA FROM PREVIOUS PAGES
+   ============================================================ */
+
+function findStorageData(names){
+
+    for(const name of names){
+
+        const value =
+            localStorage.getItem(name);
+
+        if(value){
+
+            try{
+
+                const parsed =
+                    JSON.parse(value);
+
+                if(
+                    parsed &&
+                    typeof parsed === "object" &&
+                    Object.keys(parsed).length > 0
+                ){
+
+                    console.log(
+                        "PLACEMIND FOUND:",
+                        name,
+                        parsed
+                    );
+
+                    return parsed;
+
+                }
+
+            }catch(e){}
+
+        }
+
+    }
+
+    return {};
+}
+
+
+/* ============================================================
+   GET A VALUE FROM MULTIPLE POSSIBLE FIELD NAMES
+   ============================================================ */
+
+function getValue(obj, names){
+
+    for(const name of names){
+
+        if(
+            obj[name] !== undefined &&
+            obj[name] !== null &&
+            obj[name] !== ""
+        ){
+
+            return Number(obj[name]);
+
+        }
+
+    }
+
+    return 0;
+}
+
+
+/* ============================================================
+   FINAL ANALYSIS
+   ============================================================ */
+
+async function finish(){
+
+    const values = ids.map(id =>
+        document.getElementById(id).value
+    );
+
+
+    if(values.includes("")){
+
+        document
+            .querySelector(".assessment")
+            .animate(
+                [
+                    {transform:"translateX(0)"},
+                    {transform:"translateX(-7px)"},
+                    {transform:"translateX(7px)"},
+                    {transform:"translateX(-4px)"},
+                    {transform:"translateX(0)"}
+                ],
+                {
+                    duration:400
+                }
+            );
+
+        return;
+    }
+
+
+    /* ========================================================
+       READ ALL POSSIBLE ACADEMIC STORAGE NAMES
+       ======================================================== */
+
+    const academic = findStorageData([
+        "studentAcademic",
+        "academicData",
+        "academic",
+        "academicProfile",
+        "studentAcademicData"
+    ]);
+
+
+    /* ========================================================
+       READ ALL POSSIBLE CODING STORAGE NAMES
+       ======================================================== */
+
+    const coding = findStorageData([
+        "studentCoding",
+        "codingData",
+        "coding",
+        "codingProfile",
+        "studentCodingData"
+    ]);
+
+
+    /* ========================================================
+       READ ALL POSSIBLE TECHNICAL STORAGE NAMES
+       ======================================================== */
+
+    const technical = findStorageData([
+        "studentTechnical",
+        "technicalData",
+        "technical",
+        "technicalProfile",
+        "studentTechnicalData"
+    ]);
+
+
+    console.log(
+        "========== PLACEMIND DEBUG =========="
+    );
+
+    console.log(
+        "ACADEMIC:",
+        academic
+    );
+
+    console.log(
+        "CODING:",
+        coding
+    );
+
+    console.log(
+        "TECHNICAL:",
+        technical
+    );
+
+
+    /* ========================================================
+       EXTRACT ACADEMIC VALUES
+       ======================================================== */
+
+    const sem1 = getValue(
+        academic,
+        [
+            "sem1",
+            "SEM 1",
+            "SEM1",
+            "semester1",
+            "semester_1"
+        ]
+    );
+
+
+    const sem2 = getValue(
+        academic,
+        [
+            "sem2",
+            "SEM 2",
+            "SEM2",
+            "semester2",
+            "semester_2"
+        ]
+    );
+
+
+    const sem3 = getValue(
+        academic,
+        [
+            "sem3",
+            "SEM 3",
+            "SEM3",
+            "semester3",
+            "semester_3"
+        ]
+    );
+
+
+    const sem4 = getValue(
+        academic,
+        [
+            "sem4",
+            "SEM 4",
+            "SEM4",
+            "semester4",
+            "semester_4"
+        ]
+    );
+
+
+    /* ========================================================
+       EXTRACT CODING
+       ======================================================== */
+
+    const codingScore = getValue(
+        coding,
+        [
+            "codingScore",
+            "coding",
+            "score",
+            "dsaScore",
+            "coding_result"
+        ]
+    );
+
+
+    /* ========================================================
+       EXTRACT TECHNICAL
+       ======================================================== */
+
+    const technicalScore = getValue(
+        technical,
+        [
+            "technicalScore",
+            "technical",
+            "score",
+            "technical_result"
+        ]
+    );
+
+
+    /* ========================================================
+       APTITUDE
+       ======================================================== */
+
+    const aptitudeScore =
+        Number(values[0]);
+
+
+    const communicationScore =
+        Number(values[1]);
+
+
+    const interviewScore =
+        Number(values[2]);
+
+
+    /* ========================================================
+       SHOW WHAT IS ACTUALLY BEING SENT
+       ======================================================== */
+
+    console.log(
+        "SEMESTERS:",
+        sem1,
+        sem2,
+        sem3,
+        sem4
+    );
+
+    console.log(
+        "CODING:",
+        codingScore
+    );
+
+    console.log(
+        "TECHNICAL:",
+        technicalScore
+    );
+
+
+    /* ========================================================
+       BUILD API REQUEST
+       ======================================================== */
+
+    const data = {
+
+        academic: {
+
+            sem1: sem1,
+            sem2: sem2,
+            sem3: sem3,
+            sem4: sem4
+
+        },
+
+        coding: {
+
+            codingScore:
+                codingScore
+
+        },
+
+        technical: {
+
+            technicalScore:
+                technicalScore
+
+        },
+
+        aptitude: {
+
+            aptitudeScore:
+                aptitudeScore,
+
+            communicationScore:
+                communicationScore,
+
+            interviewScore:
+                interviewScore
+
+        }
+
+    };
+
+
+    console.log(
+        "========== FINAL API INPUT =========="
+    );
+
+    console.log(data);
+
+
+    const button =
+        document.getElementById(
+            "analysisButton"
+        );
+
+
+    button.innerText =
+        "ANALYZING PROFILE...";
+
+    button.disabled = true;
+
+
+    try{
+
+        const response =
+            await fetch(
+                "/predict",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(data)
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        console.log(
+            "========== AI RESULT =========="
+        );
+
+        console.log(result);
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.details ||
+                result.error ||
+                "Prediction failed"
+            );
+
+        }
+
+
+        localStorage.setItem(
+            "placementResult",
+            JSON.stringify(result)
+        );
+
+
+        document.body.animate(
+            [
+                {opacity:1},
+                {opacity:0}
+            ],
+            {
+                duration:550
+            }
+        );
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "result.html";
+
+        },550);
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        button.innerText =
+            "TRY AGAIN";
+
+        button.disabled = false;
+
+        alert(
+            "AI analysis failed:\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
 </script>
+
 
 </body>
 </html>

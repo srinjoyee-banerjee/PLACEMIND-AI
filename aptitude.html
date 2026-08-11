@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PLACEMIND AI — Final Assessment</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -18,10 +19,12 @@ body{
     font-family:Arial,Helvetica,sans-serif;
     color:#f5f7ff;
     min-height:100vh;
+
     background:
         radial-gradient(circle at 80% 20%,rgba(168,85,247,.18),transparent 30%),
         radial-gradient(circle at 10% 80%,rgba(236,72,153,.10),transparent 30%),
         #070b14;
+
     overflow-x:hidden;
 }
 
@@ -30,9 +33,11 @@ body:before{
     position:fixed;
     inset:0;
     pointer-events:none;
+
     background-image:
         linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
         linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+
     background-size:55px 55px;
 }
 
@@ -76,8 +81,12 @@ body:before{
 .fill{
     height:100%;
     width:100%;
-    background:linear-gradient(90deg,#6c63ff,#d946ef);
+
+    background:
+        linear-gradient(90deg,#6c63ff,#d946ef);
+
     box-shadow:0 0 18px #a855f7;
+
     animation:progressGlow 2s infinite alternate;
 }
 
@@ -120,30 +129,46 @@ h1 span{
 
 .block{
     padding:28px;
+
     border:1px solid rgba(255,255,255,.08);
+
     background:rgba(255,255,255,.035);
+
     border-radius:16px;
+
     transition:.3s;
+
     position:relative;
     overflow:hidden;
 }
 
 .block:before{
     content:"";
+
     position:absolute;
+
     width:120px;
     height:120px;
+
     right:-60px;
     top:-60px;
+
     border-radius:50%;
+
     background:rgba(168,85,247,.08);
+
     transition:.4s;
 }
 
 .block:hover{
     transform:translateY(-5px);
-    border-color:rgba(192,132,252,.5);
-    box-shadow:0 15px 45px rgba(0,0,0,.25);
+
+    border-color:
+        rgba(192,132,252,.5);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.25);
 }
 
 .block:hover:before{
@@ -164,32 +189,53 @@ h2{
 
 select{
     width:100%;
+
     padding:14px;
+
     border-radius:10px;
+
     background:#111725;
-    border:1px solid rgba(255,255,255,.1);
+
+    border:1px solid
+        rgba(255,255,255,.1);
+
     color:white;
+
     outline:none;
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 select:hover{
-    border-color:rgba(192,132,252,.45);
+    border-color:
+        rgba(192,132,252,.45);
 }
 
 select:focus{
     border-color:#c084fc;
-    box-shadow:0 0 15px rgba(192,132,252,.12);
+
+    box-shadow:
+        0 0 15px
+        rgba(192,132,252,.12);
 }
 
 .bottom{
     grid-column:1/-1;
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    border-top:1px solid rgba(255,255,255,.08);
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
     padding-top:25px;
+
     margin-top:15px;
 }
 
@@ -202,17 +248,26 @@ select:focus{
 button{
     background:#f5f7ff;
     color:#080b13;
+
     border:0;
+
     border-radius:9px;
+
     padding:16px 28px;
+
     font-weight:800;
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 button:hover{
     transform:translateY(-3px);
-    box-shadow:0 12px 35px rgba(255,255,255,.12);
+
+    box-shadow:
+        0 12px 35px
+        rgba(255,255,255,.12);
 }
 
 button:disabled{
@@ -225,10 +280,12 @@ button:disabled{
 }
 
 @keyframes up{
+
     from{
         opacity:0;
         transform:translateY(30px);
     }
+
     to{
         opacity:1;
         transform:none;
@@ -236,16 +293,29 @@ button:disabled{
 }
 
 @keyframes progressGlow{
-    from{opacity:.65}
-    to{opacity:1}
+
+    from{
+        opacity:.65;
+    }
+
+    to{
+        opacity:1;
+    }
 }
 
 @keyframes pulse{
-    0%,100%{opacity:.55}
-    50%{opacity:1}
+
+    0%,100%{
+        opacity:.55;
+    }
+
+    50%{
+        opacity:1;
+    }
 }
 
 @media(max-width:700px){
+
     .assessment{
         grid-template-columns:1fr;
     }
@@ -259,7 +329,9 @@ button:disabled{
     h1{
         letter-spacing:-3px;
     }
+
 }
+
 </style>
 
 </head>
@@ -268,150 +340,232 @@ button:disabled{
 
 <div class="page">
 
-```
-<div class="top">
+    <div class="top">
 
-    <div class="logo">
-        PLACEMIND<span>AI</span>
+        <div class="logo">
+            PLACEMIND<span>AI</span>
+        </div>
+
+        <div class="step">
+            FINAL ASSESSMENT
+        </div>
+
     </div>
 
-    <div class="step">
-        FINAL ASSESSMENT
+
+    <div class="progress">
+        <div class="fill"></div>
+    </div>
+
+
+    <section class="hero">
+
+        <div class="eyebrow">
+            FINAL READINESS INPUT
+        </div>
+
+        <h1>
+            READY FOR<br>
+            <span>YOUR ANALYSIS?</span>
+        </h1>
+
+        <p class="desc">
+            Complete these final preparation indicators.
+            PLACEMIND AI will combine them with your academic,
+            coding and technical profile to generate your final
+            placement-readiness assessment.
+        </p>
+
+    </section>
+
+
+    <div class="assessment">
+
+
+        <!-- APTITUDE -->
+
+        <div class="block">
+
+            <div class="num">
+                01 / APTITUDE
+            </div>
+
+            <h2>
+                Quantitative & Logical Reasoning
+            </h2>
+
+            <select id="aptitude">
+
+                <option value="">
+                    Select your level
+                </option>
+
+                <option value="30">
+                    Beginner
+                </option>
+
+                <option value="50">
+                    Developing
+                </option>
+
+                <option value="70">
+                    Strong
+                </option>
+
+                <option value="90">
+                    Advanced
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- COMMUNICATION -->
+
+        <div class="block">
+
+            <div class="num">
+                02 / COMMUNICATION
+            </div>
+
+            <h2>
+                Communication Skills
+            </h2>
+
+            <select id="communication">
+
+                <option value="">
+                    Select your level
+                </option>
+
+                <option value="30">
+                    Needs Work
+                </option>
+
+                <option value="50">
+                    Developing
+                </option>
+
+                <option value="70">
+                    Strong
+                </option>
+
+                <option value="90">
+                    Excellent
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- INTERVIEW -->
+
+        <div class="block">
+
+            <div class="num">
+                03 / INTERVIEW
+            </div>
+
+            <h2>
+                Interview Confidence
+            </h2>
+
+            <select id="interview">
+
+                <option value="">
+                    Select confidence
+                </option>
+
+                <option value="30">
+                    Low
+                </option>
+
+                <option value="50">
+                    Moderate
+                </option>
+
+                <option value="70">
+                    High
+                </option>
+
+                <option value="90">
+                    Very High
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PREPARATION -->
+
+        <div class="block">
+
+            <div class="num">
+                04 / PREPARATION
+            </div>
+
+            <h2>
+                Placement Preparation
+            </h2>
+
+            <select id="preparation">
+
+                <option value="">
+                    Select your level
+                </option>
+
+                <option value="30">
+                    Just Started
+                </option>
+
+                <option value="50">
+                    Developing
+                </option>
+
+                <option value="70">
+                    Well Prepared
+                </option>
+
+                <option value="90">
+                    Highly Prepared
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="bottom">
+
+            <div
+                class="status"
+                id="status"
+            >
+                0 / 4 COMPLETED
+            </div>
+
+            <button
+                id="analysisButton"
+                onclick="finish()"
+            >
+                GENERATE AI ANALYSIS ↗
+            </button>
+
+        </div>
+
     </div>
 
 </div>
 
-
-<div class="progress">
-    <div class="fill"></div>
-</div>
-
-
-<section class="hero">
-
-    <div class="eyebrow">
-        FINAL READINESS INPUT
-    </div>
-
-    <h1>
-        READY FOR<br>
-        <span>YOUR ANALYSIS?</span>
-    </h1>
-
-    <p class="desc">
-        Complete these final preparation indicators.
-        PLACEMIND AI will combine them with your academic,
-        coding and technical profile to generate your final
-        placement-readiness assessment.
-    </p>
-
-</section>
-
-
-<div class="assessment">
-
-    <div class="block">
-
-        <div class="num">
-            01 / APTITUDE
-        </div>
-
-        <h2>
-            Quantitative & Logical Reasoning
-        </h2>
-
-        <select id="aptitude">
-            <option value="">Select your level</option>
-            <option value="30">Beginner</option>
-            <option value="50">Developing</option>
-            <option value="70">Strong</option>
-            <option value="90">Advanced</option>
-        </select>
-
-    </div>
-
-
-    <div class="block">
-
-        <div class="num">
-            02 / COMMUNICATION
-        </div>
-
-        <h2>
-            Communication Skills
-        </h2>
-
-        <select id="communication">
-            <option value="">Select your level</option>
-            <option value="30">Needs Work</option>
-            <option value="50">Developing</option>
-            <option value="70">Strong</option>
-            <option value="90">Excellent</option>
-        </select>
-
-    </div>
-
-
-    <div class="block">
-
-        <div class="num">
-            03 / INTERVIEW
-        </div>
-
-        <h2>
-            Interview Confidence
-        </h2>
-
-        <select id="interview">
-            <option value="">Select confidence</option>
-            <option value="30">Low</option>
-            <option value="50">Moderate</option>
-            <option value="70">High</option>
-            <option value="90">Very High</option>
-        </select>
-
-    </div>
-
-
-    <div class="block">
-
-        <div class="num">
-            04 / PREPARATION
-        </div>
-
-        <h2>
-            Placement Preparation
-        </h2>
-
-        <select id="preparation">
-            <option value="">Select your level</option>
-            <option value="30">Just Started</option>
-            <option value="50">Developing</option>
-            <option value="70">Well Prepared</option>
-            <option value="90">Highly Prepared</option>
-        </select>
-
-    </div>
-
-
-    <div class="bottom">
-
-        <div class="status" id="status">
-            0 / 4 COMPLETED
-        </div>
-
-        <button id="analysisButton" onclick="finish()">
-            GENERATE AI ANALYSIS ↗
-        </button>
-
-    </div>
-
-</div>
-```
-
-</div>
 
 <script>
+
+/* =========================================================
+   INPUTS
+========================================================= */
 
 const ids = [
     "aptitude",
@@ -421,284 +575,464 @@ const ids = [
 ];
 
 
-ids.forEach(id => {
+/* =========================================================
+   UPDATE COMPLETION COUNT
+========================================================= */
+
+ids.forEach(function(id){
 
     document
         .getElementById(id)
-        .addEventListener("change", update);
+        .addEventListener(
+            "change",
+            update
+        );
 
 });
 
 
 function update(){
 
-    const count = ids.filter(id => {
+    let count = 0;
 
-        return document
-            .getElementById(id)
-            .value !== "";
+    ids.forEach(function(id){
 
-    }).length;
+        if(
+            document
+                .getElementById(id)
+                .value !== ""
+        ){
+
+            count++;
+
+        }
+
+    });
 
 
-    document.getElementById("status").innerText =
+    document.getElementById(
+        "status"
+    ).innerText =
         count + " / 4 COMPLETED";
+
 }
 
 
-function findStorageData(names){
+/* =========================================================
+   READ PREVIOUS DATA
+========================================================= */
 
-    for(const name of names){
+function readStorage(names){
 
-        const value =
-            localStorage.getItem(name);
+    for(
+        let i = 0;
+        i < names.length;
+        i++
+    ){
 
-        if(!value){
+        const key = names[i];
+
+        const raw =
+            localStorage.getItem(key);
+
+
+        if(!raw){
             continue;
         }
 
+
         try{
 
-            const parsed =
-                JSON.parse(value);
+            const data =
+                JSON.parse(raw);
+
 
             if(
-                parsed &&
-                typeof parsed === "object" &&
-                Object.keys(parsed).length > 0
+                data &&
+                typeof data === "object"
             ){
 
                 console.log(
-                    "PLACEMIND FOUND:",
-                    name,
-                    parsed
+                    "PLACEMIND STORAGE FOUND:",
+                    key,
+                    data
                 );
 
-                return parsed;
+                return data;
 
             }
 
-        }catch(error){
+        }
+        catch(error){
 
-            console.log(
-                "Storage parse error:",
-                name
+            console.warn(
+                "Could not parse:",
+                key
             );
 
         }
 
     }
 
+
     return {};
+
 }
 
 
-function getValue(obj,names){
+/* =========================================================
+   NUMBER HELPER
+========================================================= */
 
-    for(const name of names){
+function numberFrom(obj,names){
+
+    if(
+        !obj ||
+        typeof obj !== "object"
+    ){
+
+        return 0;
+
+    }
+
+
+    for(
+        let i = 0;
+        i < names.length;
+        i++
+    ){
+
+        const key = names[i];
 
         if(
-            obj[name] !== undefined &&
-            obj[name] !== null &&
-            obj[name] !== ""
+            obj[key] !== undefined &&
+            obj[key] !== null &&
+            obj[key] !== ""
         ){
 
-            const value = Number(obj[name]);
+            const n =
+                Number(obj[key]);
 
-            if(!Number.isNaN(value)){
-                return value;
+
+            if(
+                Number.isFinite(n)
+            ){
+
+                return n;
+
             }
 
         }
 
     }
 
+
     return 0;
+
 }
 
+
+/* =========================================================
+   FINAL ANALYSIS
+========================================================= */
 
 async function finish(){
 
-    const values = ids.map(id =>
-        document.getElementById(id).value
-    );
+    /* -----------------------------------------------------
+       CHECK FOUR FINAL INPUTS
+    ----------------------------------------------------- */
+
+    const aptitude =
+        Number(
+            document.getElementById(
+                "aptitude"
+            ).value
+        );
 
 
-    if(values.includes("")){
+    const communication =
+        Number(
+            document.getElementById(
+                "communication"
+            ).value
+        );
 
-        document
-            .querySelector(".assessment")
-            .animate(
-                [
-                    {transform:"translateX(0)"},
-                    {transform:"translateX(-7px)"},
-                    {transform:"translateX(7px)"},
-                    {transform:"translateX(-4px)"},
-                    {transform:"translateX(0)"}
-                ],
-                {
-                    duration:400
-                }
-            );
 
-        alert("Please complete all four sections before generating the analysis.");
+    const interview =
+        Number(
+            document.getElementById(
+                "interview"
+            ).value
+        );
+
+
+    const preparation =
+        Number(
+            document.getElementById(
+                "preparation"
+            ).value
+        );
+
+
+    if(
+        !Number.isFinite(aptitude) ||
+        !Number.isFinite(communication) ||
+        !Number.isFinite(interview) ||
+        !Number.isFinite(preparation)
+    ){
+
+        alert(
+            "Please complete all four sections before generating the analysis."
+        );
 
         return;
+
     }
 
 
-    const academic = findStorageData([
-        "studentAcademic",
-        "academicData",
-        "academic",
-        "academicProfile",
-        "studentAcademicData"
-    ]);
+    /* -----------------------------------------------------
+       LOAD PREVIOUS SECTIONS
+    ----------------------------------------------------- */
+
+    const academic =
+        readStorage([
+            "studentAcademic",
+            "academicData",
+            "academic",
+            "academicProfile",
+            "studentAcademicData"
+        ]);
 
 
-    const coding = findStorageData([
-        "studentCoding",
-        "codingData",
-        "coding",
-        "codingProfile",
-        "studentCodingData"
-    ]);
-
-
-    const technical = findStorageData([
-        "studentTechnical",
-        "technicalData",
-        "technical",
-        "technicalProfile",
-        "studentTechnicalData"
-    ]);
-
-
-    const sem1 = getValue(
-        academic,
-        [
-            "sem1",
-            "SEM 1",
-            "SEM1",
-            "semester1",
-            "semester_1"
-        ]
-    );
-
-
-    const sem2 = getValue(
-        academic,
-        [
-            "sem2",
-            "SEM 2",
-            "SEM2",
-            "semester2",
-            "semester_2"
-        ]
-    );
-
-
-    const sem3 = getValue(
-        academic,
-        [
-            "sem3",
-            "SEM 3",
-            "SEM3",
-            "semester3",
-            "semester_3"
-        ]
-    );
-
-
-    const sem4 = getValue(
-        academic,
-        [
-            "sem4",
-            "SEM 4",
-            "SEM4",
-            "semester4",
-            "semester_4"
-        ]
-    );
-
-
-    const codingScore = getValue(
-        coding,
-        [
-            "codingScore",
+    const coding =
+        readStorage([
+            "studentCoding",
+            "codingData",
             "coding",
-            "score",
-            "dsaScore",
-            "coding_result"
-        ]
-    );
+            "codingProfile",
+            "studentCodingData"
+        ]);
 
 
-    const technicalScore = getValue(
-        technical,
-        [
-            "technicalScore",
+    const technical =
+        readStorage([
+            "studentTechnical",
+            "technicalData",
             "technical",
-            "score",
-            "technical_result"
-        ]
+            "technicalProfile",
+            "studentTechnicalData"
+        ]);
+
+
+    console.log(
+        "ACADEMIC DATA:",
+        academic
     );
 
 
-    const aptitudeScore =
-        Number(values[0]);
+    console.log(
+        "CODING DATA:",
+        coding
+    );
 
 
-    const communicationScore =
-        Number(values[1]);
+    console.log(
+        "TECHNICAL DATA:",
+        technical
+    );
 
 
-    const interviewScore =
-        Number(values[2]);
+    /* -----------------------------------------------------
+       ACADEMIC VALUES
+    ----------------------------------------------------- */
 
+    const sem1 =
+        numberFrom(
+            academic,
+            [
+                "sem1",
+                "SEM1",
+                "SEM 1",
+                "semester1",
+                "semester_1"
+            ]
+        );
+
+
+    const sem2 =
+        numberFrom(
+            academic,
+            [
+                "sem2",
+                "SEM2",
+                "SEM 2",
+                "semester2",
+                "semester_2"
+            ]
+        );
+
+
+    const sem3 =
+        numberFrom(
+            academic,
+            [
+                "sem3",
+                "SEM3",
+                "SEM 3",
+                "semester3",
+                "semester_3"
+            ]
+        );
+
+
+    const sem4 =
+        numberFrom(
+            academic,
+            [
+                "sem4",
+                "SEM4",
+                "SEM 4",
+                "semester4",
+                "semester_4"
+            ]
+        );
+
+
+    /* -----------------------------------------------------
+       CODING SCORE
+    ----------------------------------------------------- */
+
+    const codingScore =
+        numberFrom(
+            coding,
+            [
+                "codingScore",
+                "coding_score",
+                "coding",
+                "score",
+                "dsaScore",
+                "dsa_score",
+                "coding_result"
+            ]
+        );
+
+
+    /* -----------------------------------------------------
+       TECHNICAL SCORE
+    ----------------------------------------------------- */
+
+    const technicalScore =
+        numberFrom(
+            technical,
+            [
+                "technicalScore",
+                "technical_score",
+                "technical",
+                "score",
+                "technical_result"
+            ]
+        );
+
+
+    /* -----------------------------------------------------
+       IMPORTANT:
+       KEEP PREPARATION TOO
+    ----------------------------------------------------- */
 
     const data = {
 
         academic: {
+
             sem1: sem1,
             sem2: sem2,
             sem3: sem3,
             sem4: sem4
+
         },
+
 
         coding: {
+
             codingScore: codingScore
+
         },
+
 
         technical: {
+
             technicalScore: technicalScore
+
         },
 
+
         aptitude: {
-            aptitudeScore: aptitudeScore,
-            communicationScore: communicationScore,
-            interviewScore: interviewScore
+
+            aptitudeScore: aptitude,
+
+            communicationScore:
+                communication,
+
+            interviewScore:
+                interview,
+
+            preparationScore:
+                preparation
+
         }
 
     };
 
 
+    /* -----------------------------------------------------
+       DEBUG
+    ----------------------------------------------------- */
+
     console.log(
-        "PLACEMIND AI FINAL INPUT:",
-        data
+        "================================"
+    );
+
+    console.log(
+        "PLACEMIND FINAL DATA SENT TO API:"
+    );
+
+    console.log(
+        JSON.stringify(
+            data,
+            null,
+            2
+        )
+    );
+
+    console.log(
+        "================================"
     );
 
 
+    /* -----------------------------------------------------
+       BUTTON
+    ----------------------------------------------------- */
+
     const button =
-        document.getElementById("analysisButton");
+        document.getElementById(
+            "analysisButton"
+        );
 
 
     button.innerText =
         "ANALYZING PROFILE...";
 
-    button.classList.add("loading");
+
+    button.classList.add(
+        "loading"
+    );
+
+
     button.disabled = true;
 
+
+    /* -----------------------------------------------------
+       SEND TO BACKEND
+    ----------------------------------------------------- */
 
     try{
 
@@ -724,7 +1058,7 @@ async function finish(){
 
 
         console.log(
-            "PLACEMIND AI RESULT:",
+            "PLACEMIND API RESULT:",
             result
         );
 
@@ -740,16 +1074,40 @@ async function finish(){
         }
 
 
+        /* -------------------------------------------------
+           SAVE FINAL RESULT
+        ------------------------------------------------- */
+
         localStorage.setItem(
             "placementResult",
             JSON.stringify(result)
         );
 
 
+        console.log(
+            "PLACEMIND RESULT SAVED:"
+        );
+
+
+        console.log(
+            localStorage.getItem(
+                "placementResult"
+            )
+        );
+
+
+        /* -------------------------------------------------
+           GO TO RESULT PAGE
+        ------------------------------------------------- */
+
         document.body.animate(
             [
-                {opacity:1},
-                {opacity:0}
+                {
+                    opacity:1
+                },
+                {
+                    opacity:0
+                }
             ],
             {
                 duration:550,
@@ -758,12 +1116,15 @@ async function finish(){
         );
 
 
-        setTimeout(() => {
+        setTimeout(
+            function(){
 
-            window.location.href =
-                "result.html";
+                window.location.href =
+                    "/result.html";
 
-        },550);
+            },
+            550
+        );
 
 
     }
@@ -778,8 +1139,14 @@ async function finish(){
         button.innerText =
             "TRY AGAIN";
 
-        button.classList.remove("loading");
-        button.disabled = false;
+
+        button.classList.remove(
+            "loading"
+        );
+
+
+        button.disabled =
+            false;
 
 
         alert(
@@ -794,4 +1161,5 @@ async function finish(){
 </script>
 
 </body>
+
 </html>

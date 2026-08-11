@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import joblib
@@ -12,13 +11,20 @@ FRONTEND_DIR = BASE_DIR
 app = Flask(__name__)
 CORS(app)
 
+
+# ============================================================
+# FRONTEND
+# ============================================================
+
 @app.route("/")
 def home():
     return send_from_directory(FRONTEND_DIR, "index.html")
 
+
 @app.route("/<path:filename>")
 def frontend_files(filename):
     return send_from_directory(FRONTEND_DIR, filename)
+
 
 # ============================================================
 # LOAD REAL ML MODELS
@@ -39,19 +45,6 @@ placement_model = joblib.load(
 print("✅ Academic Forecast model loaded")
 print("✅ Academic Decline model loaded")
 print("✅ Placement model loaded")
-
-# ============================================================
-# FRONTEND
-# ============================================================
-
-@app.route("/")
-def home():
-    return send_from_directory(FRONTEND_DIR, "index.html")
-
-
-@app.route("/<path:path>")
-def frontend_files(path):
-    return send_from_directory(FRONTEND_DIR, path)
 
 
 # ============================================================
@@ -108,9 +101,7 @@ def predict():
         # ====================================================
 
         academic_forecast = float(
-            academic_model.predict(
-                academic_input
-            )[0]
+            academic_model.predict(academic_input)[0]
         )
 
         # ====================================================
@@ -118,67 +109,40 @@ def predict():
         # ====================================================
 
         decline_prediction = int(
-            decline_model.predict(
-                academic_input
-            )[0]
+            decline_model.predict(academic_input)[0]
         )
 
         decline_probability = None
 
-        if hasattr(
-            decline_model,
-            "predict_proba"
-        ):
+        if hasattr(decline_model, "predict_proba"):
 
-            probabilities = (
-                decline_model.predict_proba(
-                    academic_input
-                )[0]
-            )
+            probabilities = decline_model.predict_proba(
+                academic_input
+            )[0]
 
-            classes = list(
-                decline_model.classes_
-            )
+            classes = list(decline_model.classes_)
 
             if 1 in classes:
-
                 decline_probability = float(
-                    probabilities[
-                        classes.index(1)
-                    ]
+                    probabilities[classes.index(1)]
                 )
 
         if decline_probability is not None:
 
             if decline_probability >= 0.70:
-
-                academic_status = (
-                    "High Risk of Academic Decline"
-                )
+                academic_status = "High Risk of Academic Decline"
 
             elif decline_probability >= 0.40:
-
-                academic_status = (
-                    "Moderate Risk of Academic Decline"
-                )
+                academic_status = "Moderate Risk of Academic Decline"
 
             else:
-
-                academic_status = (
-                    "Low Risk of Academic Decline"
-                )
+                academic_status = "Low Risk of Academic Decline"
 
         else:
-
-            academic_status = (
-                "Academic trajectory analyzed"
-            )
+            academic_status = "Academic trajectory analyzed"
 
         # ====================================================
         # ACADEMIC READINESS
-        #
-        # Uses actual SEM 1–4 performance.
-        # Latest semester gets slightly higher weight.
         # ====================================================
 
         academic_average = (
@@ -190,10 +154,7 @@ def predict():
 
         academic_score = min(
             100,
-            max(
-                0,
-                academic_average * 10
-            )
+            max(0, academic_average * 10)
         )
 
         # ====================================================
@@ -204,12 +165,7 @@ def predict():
             100,
             max(
                 0,
-                float(
-                    coding.get(
-                        "codingScore",
-                        0
-                    )
-                )
+                float(coding.get("codingScore", 0))
             )
         )
 
@@ -221,12 +177,7 @@ def predict():
             100,
             max(
                 0,
-                float(
-                    technical.get(
-                        "technicalScore",
-                        0
-                    )
-                )
+                float(technical.get("technicalScore", 0))
             )
         )
 
@@ -264,10 +215,7 @@ def predict():
         )
 
         interview_score = float(
-            aptitude.get(
-                "interviewScore",
-                0
-            )
+            aptitude.get("interviewScore", 0)
         )
 
         # ====================================================
@@ -275,53 +223,31 @@ def predict():
         # ====================================================
 
         readiness = round(
-
             academic_score * 0.25 +
-
             coding_score * 0.25 +
-
             technical_score * 0.20 +
-
             aptitude_score * 0.30,
-
             1
         )
 
         if readiness >= 80:
-
-            readiness_label = (
-                "HIGH PLACEMENT READINESS"
-            )
+            readiness_label = "HIGH PLACEMENT READINESS"
 
         elif readiness >= 60:
-
-            readiness_label = (
-                "MODERATE PLACEMENT READINESS"
-            )
+            readiness_label = "MODERATE PLACEMENT READINESS"
 
         else:
-
-            readiness_label = (
-                "NEEDS IMPROVEMENT"
-            )
+            readiness_label = "NEEDS IMPROVEMENT"
 
         # ====================================================
         # WEAKEST AREA
         # ====================================================
 
         scores = {
-
-            "Academic":
-                academic_score,
-
-            "Coding":
-                coding_score,
-
-            "Technical":
-                technical_score,
-
-            "Aptitude":
-                aptitude_score
+            "Academic": academic_score,
+            "Coding": coding_score,
+            "Technical": technical_score,
+            "Aptitude": aptitude_score
         }
 
         weakest_area = min(
@@ -330,14 +256,9 @@ def predict():
         )
 
         recommendation = (
-
-            f"Your weakest area is "
-            f"{weakest_area}. "
-
-            f"Focus your preparation there "
-            f"to improve overall placement "
-            f"readiness."
-
+            f"Your weakest area is {weakest_area}. "
+            f"Focus your preparation there to improve "
+            f"overall placement readiness."
         )
 
         # ====================================================
@@ -345,12 +266,9 @@ def predict():
         # ====================================================
 
         forecast_text = (
-
             f"Predicted next-semester GPA: "
             f"{academic_forecast:.2f}. "
-
             f"{academic_status}."
-
         )
 
         # ====================================================
@@ -359,44 +277,36 @@ def predict():
 
         return jsonify({
 
-            "readinessScore":
-                readiness,
+            "readinessScore": readiness,
 
-            "readinessLabel":
-                readiness_label,
+            "readinessLabel": readiness_label,
 
-            "academicResult":
-                round(
-                    academic_score,
-                    1
-                ),
+            "academicResult": round(
+                academic_score,
+                1
+            ),
 
-            "codingResult":
-                round(
-                    coding_score,
-                    1
-                ),
+            "codingResult": round(
+                coding_score,
+                1
+            ),
 
-            "technicalResult":
-                round(
-                    technical_score,
-                    1
-                ),
+            "technicalResult": round(
+                technical_score,
+                1
+            ),
 
-            "aptitudeResult":
-                round(
-                    aptitude_score,
-                    1
-                ),
+            "aptitudeResult": round(
+                aptitude_score,
+                1
+            ),
 
-            "interviewResult":
-                round(
-                    interview_score,
-                    1
-                ),
+            "interviewResult": round(
+                interview_score,
+                1
+            ),
 
-            "academicForecast":
-                academic_forecast,
+            "academicForecast": academic_forecast,
 
             "academicDeclineProbability":
                 decline_probability,
@@ -409,7 +319,6 @@ def predict():
 
             "recommendation":
                 recommendation
-
         })
 
     except Exception as e:
@@ -420,13 +329,8 @@ def predict():
         )
 
         return jsonify({
-
-            "error":
-                "Prediction failed",
-
-            "details":
-                str(e)
-
+            "error": "Prediction failed",
+            "details": str(e)
         }), 500
 
 

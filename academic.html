@@ -1,151 +1,679 @@
 <!DOCTYPE html>
+
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PLACEMIND AI — Academic Profile</title>
+<title>PLACEMIND AI — Academic Profile</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(79,70,229,.18), transparent 30%),
+        radial-gradient(circle at 15% 80%, rgba(14,165,233,.12), transparent 30%),
+        #070b14;
+    color: #f5f7ff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 55px 55px;
+    pointer-events: none;
+}
+
+.page {
+    width: min(1180px, 92%);
+    margin: auto;
+    min-height: 100vh;
+    padding: 32px 0 60px;
+    position: relative;
+}
+
+/* Top bar */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 70px;
+    animation: fadeDown .8s ease forwards;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.logo span {
+    color: #6c63ff;
+}
+
+.step {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #8b93a7;
+}
+
+/* Progress */
+
+.progress {
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255,255,255,.08);
+}
+
+.progress-fill {
+    height: 100%;
+    width: 25%;
+    background: linear-gradient(90deg,#6c63ff,#38bdf8);
+    box-shadow: 0 0 15px rgba(108,99,255,.8);
+    animation: progressIn 1.2s ease;
+}
+
+/* Heading */
+
+.hero {
+    max-width: 850px;
+    animation: fadeUp .9s ease forwards;
+}
+
+.eyebrow {
+    color: #6c63ff;
+    font-size: 11px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+h1 {
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: .9;
+    letter-spacing: -5px;
+    margin-bottom: 28px;
+}
+
+h1 span {
+    color: #6c63ff;
+}
+
+.description {
+    max-width: 650px;
+    color: #9da5b8;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Main layout */
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 55px;
+    margin-top: 65px;
+    align-items: start;
+}
+
+/* Left information */
+
+.side-info {
+    animation: fadeUp 1s .15s ease both;
+}
+
+.side-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #71798d;
+    margin-bottom: 22px;
+}
+
+.info-card {
+    border-left: 2px solid #6c63ff;
+    padding: 20px 22px;
+    background: rgba(255,255,255,.025);
+    backdrop-filter: blur(12px);
+}
+
+.info-card strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #858da1;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.tip {
+    margin-top: 28px;
+    padding: 18px;
+    border: 1px solid rgba(255,255,255,.07);
+    color: #777f93;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Semester cards */
+
+.form-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    animation: fadeUp 1s .25s ease both;
+}
+
+.semester-card {
+    position: relative;
+    padding: 25px;
+    min-height: 180px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: rgba(255,255,255,.035);
+    border-radius: 18px;
+    transition: .35s ease;
+    overflow: hidden;
+}
+
+.semester-card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #6c63ff;
+    filter: blur(70px);
+    opacity: 0;
+    right: -30px;
+    bottom: -30px;
+    transition: .4s;
+}
+
+.semester-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(108,99,255,.5);
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.semester-card:hover::after {
+    opacity: .18;
+}
+
+.sem-number {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #6c63ff;
+    margin-bottom: 18px;
+}
+
+.semester-card h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+select {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #111725;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: .25s;
+}
+
+select:hover,
+select:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 3px rgba(108,99,255,.1);
+}
+
+/* GPA indicator */
+
+.gpa-display {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.gpa-value {
+    font-size: 13px;
+    color: #aeb6c8;
+}
+
+.gpa-track {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.gpa-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#6c63ff,#38bdf8);
+    transition: width .6s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Bottom */
+
+.bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.status {
+    color: #6f778b;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.continue {
+    border: none;
+    background: #f5f7ff;
+    color: #080b13;
+    padding: 16px 28px;
+    border-radius: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.continue:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255,255,255,.12);
+}
+
+/* Animations */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes progressIn {
+    from { width: 0; }
+    to { width: 25%; }
+}
+
+/* Mobile */
+
+@media(max-width: 800px) {
+
+    .content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .form-area {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        letter-spacing: -3px;
+    }
+
+    .bottom {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+
+    .continue {
+        width: 100%;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-<main class="hero">
+<div class="page">
 
-<div class="hero-content">
+```
+<div class="topbar">
+    <div class="logo">
+        PLACEMIND<span>AI</span>
+    </div>
 
-<div class="brand">
-    PLACEMIND<span>AI</span>
+    <div class="step">
+        STEP 02 / 04
+    </div>
 </div>
-
-<p class="step-text">
-    STEP 02 / ACADEMIC PROFILE
-</p>
-
-<div class="tagline">
-    YOUR<br>
-    ACADEMIC<br>
-    TRAJECTORY.
-</div>
-
-<p class="description">
-    Enter your semester performance. PLACEMIND AI will
-    use your academic history to forecast your next
-    semester and identify decline risk.
-</p>
-
-<div style="margin-top:40px; max-width:500px;">
-
-<input
-    type="number"
-    id="sem1"
-    placeholder="Semester 1 GPA"
-    step="0.01"
-    min="0"
-    max="10"
-    style="width:100%; padding:18px; margin-bottom:15px;"
->
-
-<input
-    type="number"
-    id="sem2"
-    placeholder="Semester 2 GPA"
-    step="0.01"
-    min="0"
-    max="10"
-    style="width:100%; padding:18px; margin-bottom:15px;"
->
-
-<input
-    type="number"
-    id="sem3"
-    placeholder="Semester 3 GPA"
-    step="0.01"
-    min="0"
-    max="10"
-    style="width:100%; padding:18px; margin-bottom:15px;"
->
-
-<input
-    type="number"
-    id="sem4"
-    placeholder="Semester 4 GPA"
-    step="0.01"
-    min="0"
-    max="10"
-    style="width:100%; padding:18px;"
->
-
-</div>
-
-<button
-    class="start-btn"
-    onclick="goToCoding()">
-
-    CONTINUE →
-
-</button>
 
 <div class="progress">
-    <span></span>
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="progress-fill"></div>
 </div>
 
-</div>
+<section class="hero">
 
-</main>
+    <div class="eyebrow">
+        ACADEMIC INTELLIGENCE
+    </div>
+
+    <h1>
+        YOUR<br>
+        ACADEMIC<br>
+        <span>TRAJECTORY.</span>
+    </h1>
+
+    <p class="description">
+        Tell PLACEMIND AI how you have performed across your
+        semesters. Your academic history will be analyzed to
+        forecast your next semester and identify potential
+        academic decline risk.
+    </p>
+
+</section>
+
+<section class="content">
+
+    <div class="side-info">
+
+        <div class="side-title">
+            WHAT WE ANALYZE
+        </div>
+
+        <div class="info-card">
+            <strong>01 → 04</strong>
+            <p>
+                Four semesters of academic performance
+                are used to understand your trajectory,
+                not just your latest score.
+            </p>
+        </div>
+
+        <div class="tip">
+            ✦ SELECT YOUR GPA FROM THE DROPDOWN.<br><br>
+            Your latest semester carries slightly more
+            weight because it represents your current
+            academic trajectory.
+        </div>
+
+    </div>
+
+    <div class="form-area">
+
+        <div class="semester-card">
+
+            <div class="sem-number">SEMESTER 01</div>
+
+            <h3>Foundation</h3>
+
+            <select id="sem1" onchange="updateGPA(1)">
+                <option value="">Select GPA</option>
+                <option value="5">5.0</option>
+                <option value="6">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7.0</option>
+                <option value="7.5">7.5</option>
+                <option value="8">8.0</option>
+                <option value="8.5">8.5</option>
+                <option value="9">9.0</option>
+                <option value="9.5">9.5</option>
+                <option value="10">10.0</option>
+            </select>
+
+            <div class="gpa-display">
+                <span class="gpa-value" id="value1">—</span>
+                <div class="gpa-track">
+                    <div class="gpa-bar" id="bar1"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="semester-card">
+
+            <div class="sem-number">SEMESTER 02</div>
+
+            <h3>Development</h3>
+
+            <select id="sem2" onchange="updateGPA(2)">
+                <option value="">Select GPA</option>
+                <option value="5">5.0</option>
+                <option value="6">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7.0</option>
+                <option value="7.5">7.5</option>
+                <option value="8">8.0</option>
+                <option value="8.5">8.5</option>
+                <option value="9">9.0</option>
+                <option value="9.5">9.5</option>
+                <option value="10">10.0</option>
+            </select>
+
+            <div class="gpa-display">
+                <span class="gpa-value" id="value2">—</span>
+                <div class="gpa-track">
+                    <div class="gpa-bar" id="bar2"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="semester-card">
+
+            <div class="sem-number">SEMESTER 03</div>
+
+            <h3>Specialization</h3>
+
+            <select id="sem3" onchange="updateGPA(3)">
+                <option value="">Select GPA</option>
+                <option value="5">5.0</option>
+                <option value="6">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7.0</option>
+                <option value="7.5">7.5</option>
+                <option value="8">8.0</option>
+                <option value="8.5">8.5</option>
+                <option value="9">9.0</option>
+                <option value="9.5">9.5</option>
+                <option value="10">10.0</option>
+            </select>
+
+            <div class="gpa-display">
+                <span class="gpa-value" id="value3">—</span>
+                <div class="gpa-track">
+                    <div class="gpa-bar" id="bar3"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="semester-card">
+
+            <div class="sem-number">SEMESTER 04</div>
+
+            <h3>Current</h3>
+
+            <select id="sem4" onchange="updateGPA(4)">
+                <option value="">Select GPA</option>
+                <option value="5">5.0</option>
+                <option value="6">6.0</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7.0</option>
+                <option value="7.5">7.5</option>
+                <option value="8">8.0</option>
+                <option value="8.5">8.5</option>
+                <option value="9">9.0</option>
+                <option value="9.5">9.5</option>
+                <option value="10">10.0</option>
+            </select>
+
+            <div class="gpa-display">
+                <span class="gpa-value" id="value4">—</span>
+                <div class="gpa-track">
+                    <div class="gpa-bar" id="bar4"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="bottom">
+
+            <div class="status" id="status">
+                0 / 4 SEMESTERS ENTERED
+            </div>
+
+            <button class="continue" onclick="continueNext()">
+                CONTINUE →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+```
+
+</div>
 
 <script>
 
-function goToCoding() {
+function updateGPA(number) {
 
-    const sem1 =
-        document.getElementById("sem1").value;
+    const select = document.getElementById("sem" + number);
+    const value = document.getElementById("value" + number);
+    const bar = document.getElementById("bar" + number);
 
-    const sem2 =
-        document.getElementById("sem2").value;
+    if (select.value) {
 
-    const sem3 =
-        document.getElementById("sem3").value;
+        value.innerText = select.value;
 
-    const sem4 =
-        document.getElementById("sem4").value;
+        const percentage =
+            (parseFloat(select.value) / 10) * 100;
 
-    if (
-        sem1 === "" ||
-        sem2 === "" ||
-        sem3 === "" ||
-        sem4 === ""
-    ) {
+        bar.style.width = percentage + "%";
 
-        alert(
-            "Please enter all four semester GPAs."
-        );
+    } else {
 
-        return;
+        value.innerText = "—";
+        bar.style.width = "0%";
     }
 
-    const student = {
+    updateStatus();
+}
 
-        sem1: Number(sem1),
-        sem2: Number(sem2),
-        sem3: Number(sem3),
-        sem4: Number(sem4)
 
-    };
+function updateStatus() {
+
+    let completed = 0;
+
+    for (let i = 1; i <= 4; i++) {
+
+        if (document.getElementById("sem" + i).value) {
+            completed++;
+        }
+
+    }
+
+    document.getElementById("status").innerText =
+        completed + " / 4 SEMESTERS ENTERED";
+}
+
+
+function continueNext() {
+
+    const values = [];
+
+    for (let i = 1; i <= 4; i++) {
+
+        const value =
+            document.getElementById("sem" + i).value;
+
+        if (!value) {
+
+            const card =
+                document.querySelectorAll(".semester-card")[i - 1];
+
+            card.animate(
+                [
+                    { transform: "translateX(0)" },
+                    { transform: "translateX(-7px)" },
+                    { transform: "translateX(7px)" },
+                    { transform: "translateX(0)" }
+                ],
+                {
+                    duration: 350
+                }
+            );
+
+            return;
+        }
+
+        values.push(parseFloat(value));
+    }
 
     localStorage.setItem(
-        "studentAcademic",
-        JSON.stringify(student)
+        "academicData",
+        JSON.stringify({
+            sem1: values[0],
+            sem2: values[1],
+            sem3: values[2],
+            sem4: values[3]
+        })
     );
 
-    window.location.href =
-        "coding.html";
+    document.body.style.opacity = "0";
+
+    setTimeout(() => {
+
+        window.location.href = "coding.html";
+
+    }, 350);
 }
 
 </script>

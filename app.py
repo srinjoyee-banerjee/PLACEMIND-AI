@@ -10,11 +10,11 @@ import os
 
 # ============================================================
 
-BASE_DIR = os.path.dirname(os.path.abspath(**file**))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = BASE_DIR
 FRONTEND_DIR = BASE_DIR
 
-app = Flask(**name**)
+app = Flask(__name__)
 CORS(app)
 
 # ============================================================

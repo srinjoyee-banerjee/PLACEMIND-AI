@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -19,105 +19,99 @@
 
 body{
 
-    font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 
     color:#f5f7ff;
 
     min-height:100vh;
 
     background:
-    radial-gradient(
-        circle at 85% 15%,
-        rgba(168,85,247,.22),
-        transparent 28%
-    ),
-    radial-gradient(
-        circle at 10% 85%,
-        rgba(59,130,246,.12),
-        transparent 30%
-    ),
-    #070b14;
+        radial-gradient(
+            circle at 75% 15%,
+            rgba(168,85,247,.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(236,72,153,.10),
+            transparent 30%
+        ),
+        #060a13;
 
     overflow-x:hidden;
 }
 
+/* =========================
+   BACKGROUND
+========================= */
 
-/* GRID */
-
-body::before{
+body:before{
 
     content:"";
 
     position:fixed;
+
     inset:0;
 
     pointer-events:none;
 
     background-image:
-    linear-gradient(
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    ),
-    linear-gradient(
-        90deg,
-        rgba(255,255,255,.025) 1px,
-        transparent 1px
-    );
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
 
     background-size:55px 55px;
 
+    animation:gridMove 20s linear infinite;
 }
 
-
-/* FLOATING GLOW */
-
-body::after{
-
-    content:"";
+.glow{
 
     position:fixed;
 
-    width:450px;
-    height:450px;
-
-    right:-180px;
-    bottom:-180px;
+    width:420px;
+    height:420px;
 
     border-radius:50%;
 
-    background:
-    radial-gradient(
-        circle,
-        rgba(168,85,247,.18),
-        transparent 65%
-    );
+    background:rgba(168,85,247,.08);
 
-    animation:
-    floatGlow 7s ease-in-out infinite;
+    filter:blur(70px);
+
+    right:-120px;
+    top:120px;
 
     pointer-events:none;
 
+    animation:floatGlow 8s ease-in-out infinite;
 }
 
-
-/* PAGE */
+/* =========================
+   PAGE
+========================= */
 
 .page{
+
+    position:relative;
+
+    z-index:2;
 
     width:min(1180px,92%);
 
     margin:auto;
 
-    padding:
-    30px 0 70px;
-
+    padding:30px 0 70px;
 }
 
-
-/* TOP */
+/* =========================
+   TOP
+========================= */
 
 .top{
 
@@ -127,116 +121,136 @@ body::after{
 
     align-items:center;
 
-    margin-bottom:35px;
+    padding-bottom:28px;
 
-    animation:
-    fadeDown .7s ease;
+    border-bottom:1px solid rgba(255,255,255,.07);
 
+    animation:fadeDown .8s ease both;
 }
 
 .logo{
 
-    font-weight:800;
-
-    letter-spacing:4px;
-
     font-size:15px;
 
+    font-weight:900;
+
+    letter-spacing:4px;
 }
 
 .logo span{
 
-    color:#a855f7;
-
+    color:#c084fc;
 }
 
 .status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 
     font-size:10px;
 
     letter-spacing:3px;
 
-    color:#9ca3b5;
-
+    color:#858da2;
 }
 
+.status-dot{
 
-/* HERO */
+    width:7px;
+    height:7px;
 
-.hero{
+    border-radius:50%;
 
-    position:relative;
+    background:#c084fc;
 
-    min-height:370px;
+    box-shadow:
+        0 0 10px #c084fc,
+        0 0 25px #c084fc;
 
-    display:grid;
-
-    grid-template-columns:
-    1.15fr .85fr;
-
-    gap:50px;
-
-    align-items:center;
-
-    animation:
-    fadeUp .9s ease;
-
+    animation:pulse 1.5s infinite;
 }
 
+/* =========================
+   HEADER
+========================= */
 
-/* HERO TEXT */
+.header{
+
+    margin-top:65px;
+
+    animation:heroIn 1s .1s both;
+}
 
 .step{
 
-    font-size:11px;
+    font-size:10px;
 
     letter-spacing:4px;
 
     color:#c084fc;
 
-    margin-bottom:25px;
+    font-weight:bold;
 
+    margin-bottom:25px;
 }
 
 h1{
 
-    font-size:
-    clamp(52px,7vw,88px);
+    font-size:clamp(52px,7vw,90px);
 
-    line-height:.88;
+    line-height:.87;
 
     letter-spacing:-6px;
-
 }
 
 h1 span{
 
     color:#c084fc;
-
 }
 
-.description{
+.subtitle{
 
-    max-width:600px;
+    max-width:650px;
+
+    color:#8d96aa;
+
+    line-height:1.75;
 
     margin-top:28px;
 
-    color:#929aad;
-
-    line-height:1.7;
-
     font-size:14px;
-
 }
 
+/* =========================
+   SCORE AREA
+========================= */
 
-/* VISUAL */
+.score-area{
 
-.visual{
+    margin-top:65px;
+
+    display:grid;
+
+    grid-template-columns:300px 1fr;
+
+    gap:55px;
+
+    align-items:center;
+}
+
+/* =========================
+   SCORE CIRCLE
+========================= */
+
+.score-card{
 
     position:relative;
 
-    height:320px;
+    width:270px;
+    height:270px;
 
     display:flex;
 
@@ -244,198 +258,77 @@ h1 span{
 
     align-items:center;
 
+    animation:scaleIn 1s .35s both;
 }
 
-
-/* ORBIT */
-
-.orbit{
+.ring{
 
     position:absolute;
 
-    width:270px;
-    height:270px;
-
-    border:1px solid
-    rgba(192,132,252,.25);
+    inset:0;
 
     border-radius:50%;
 
-    animation:
-    rotate 18s linear infinite;
+    background:
+        conic-gradient(
+            #c084fc 0deg,
+            #7c3aed 0deg,
+            rgba(255,255,255,.06) 0deg
+        );
 
+    transition:background 2.2s cubic-bezier(.2,.8,.2,1);
+
+    transform:rotate(-90deg);
+
+    box-shadow:
+        0 0 45px rgba(168,85,247,.16);
 }
 
-.orbit::before{
+.ring:after{
 
     content:"";
 
     position:absolute;
 
-    width:8px;
-    height:8px;
-
-    background:#c084fc;
+    inset:8px;
 
     border-radius:50%;
 
-    top:15px;
-    left:50%;
+    background:#080c16;
 
     box-shadow:
-    0 0 20px #c084fc,
-    0 0 45px #c084fc;
-
+        inset 0 0 40px rgba(168,85,247,.08);
 }
 
+.score-content{
 
-/* SECOND ORBIT */
-
-.orbit2{
-
-    position:absolute;
-
-    width:200px;
-    height:200px;
-
-    border:1px solid
-    rgba(96,165,250,.22);
-
-    border-radius:50%;
-
-    animation:
-    rotateReverse 12s linear infinite;
-
-}
-
-
-/* CORE */
-
-.core{
-
-    width:135px;
-    height:135px;
-
-    border-radius:50%;
-
-    background:
-    radial-gradient(
-        circle at 35% 30%,
-        #e9d5ff,
-        #a855f7 35%,
-        #4c1d95 70%,
-        #12051f
-    );
-
-    box-shadow:
-    0 0 35px rgba(168,85,247,.45),
-    0 0 90px rgba(168,85,247,.18);
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    animation:
-    pulse 3s ease-in-out infinite;
+    position:relative;
 
     z-index:2;
 
+    text-align:center;
 }
 
-.core-text{
-
-    text-align:center;
+.score-label{
 
     font-size:9px;
 
     letter-spacing:3px;
 
-    font-weight:bold;
+    color:#7d869a;
 
-}
-
-
-/* SCORE */
-
-.score-card{
-
-    margin-top:30px;
-
-    padding:30px;
-
-    border:
-    1px solid rgba(255,255,255,.08);
-
-    background:
-    rgba(255,255,255,.035);
-
-    border-radius:18px;
-
-    animation:
-    fadeUp .9s .2s both;
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.score-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:2px;
-
-    background:
-    linear-gradient(
-        90deg,
-        #6c63ff,
-        #d946ef,
-        transparent
-    );
-
-}
-
-.label{
-
-    font-size:10px;
-
-    letter-spacing:3px;
-
-    color:#8991a5;
-
-    margin-bottom:12px;
-
-}
-
-.score-line{
-
-    display:flex;
-
-    align-items:end;
-
-    gap:5px;
-
+    margin-bottom:10px;
 }
 
 .score{
 
-    font-size:
-    clamp(60px,8vw,95px);
+    font-size:62px;
 
-    font-weight:800;
+    font-weight:900;
 
-    line-height:.9;
+    letter-spacing:-4px;
 
-    letter-spacing:-6px;
-
+    line-height:1;
 }
 
 .percent{
@@ -444,132 +337,114 @@ h1 span{
 
     color:#c084fc;
 
-    margin-bottom:8px;
-
 }
 
-.score-label{
+.readiness-label{
 
-    margin-top:14px;
-
-    color:#c084fc;
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    font-weight:bold;
-
-}
-
-
-/* RESULTS */
-
-.results{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(3,1fr);
-
-    gap:14px;
-
-    margin-top:25px;
-
-}
-
-.result{
-
-    padding:25px;
-
-    border:
-    1px solid rgba(255,255,255,.08);
-
-    background:
-    rgba(255,255,255,.03);
-
-    border-radius:15px;
-
-    transition:.35s;
-
-    animation:
-    cardIn .7s both;
-
-}
-
-.result:nth-child(1){
-    animation-delay:.15s;
-}
-
-.result:nth-child(2){
-    animation-delay:.25s;
-}
-
-.result:nth-child(3){
-    animation-delay:.35s;
-}
-
-.result:hover{
-
-    transform:
-    translateY(-7px);
-
-    border-color:
-    rgba(192,132,252,.45);
-
-    box-shadow:
-    0 20px 50px
-    rgba(168,85,247,.08);
-
-}
-
-.result-number{
+    margin-top:12px;
 
     font-size:10px;
 
+    letter-spacing:2px;
+
     color:#c084fc;
 
-    letter-spacing:3px;
-
-    margin-bottom:18px;
-
+    font-weight:bold;
 }
 
-.result-name{
+/* =========================
+   DOMAIN RESULTS
+========================= */
 
-    color:#929aad;
+.domains{
 
-    font-size:11px;
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+}
+
+.domain{
+
+    padding:22px 25px;
+
+    border:1px solid rgba(255,255,255,.07);
+
+    background:rgba(255,255,255,.025);
+
+    border-radius:13px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    transform:translateX(35px);
+
+    animation:slideIn .8s ease forwards;
+}
+
+.domain:nth-child(1){animation-delay:.65s}
+.domain:nth-child(2){animation-delay:.8s}
+.domain:nth-child(3){animation-delay:.95s}
+
+.domain:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:2px;
+
+    background:#c084fc;
+
+    box-shadow:0 0 15px #c084fc;
+}
+
+.domain-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:13px;
+}
+
+.domain-name{
+
+    font-size:10px;
 
     letter-spacing:2px;
 
+    color:#858da2;
 }
 
-.result-value{
+.domain-number{
 
-    font-size:32px;
+    font-size:10px;
 
-    font-weight:bold;
+    letter-spacing:2px;
 
-    margin-top:8px;
-
+    color:#c084fc;
 }
-
-
-/* PROGRESS BAR */
 
 .bar{
 
     height:3px;
-
-    margin-top:18px;
 
     background:#171c29;
 
     border-radius:10px;
 
     overflow:hidden;
-
 }
 
 .bar-fill{
@@ -578,300 +453,343 @@ h1 span{
 
     width:0;
 
-    background:
-    linear-gradient(
+    background:linear-gradient(
         90deg,
-        #6c63ff,
-        #d946ef
+        #7c3aed,
+        #c084fc
     );
 
-    transition:
-    width 1.5s ease;
+    box-shadow:0 0 12px rgba(192,132,252,.6);
 
+    transition:
+        width 1.8s
+        cubic-bezier(.2,.8,.2,1);
 }
 
+/* =========================
+   ANALYSIS GRID
+========================= */
 
-/* FORECAST + RECOMMENDATION */
+.analysis-grid{
 
-.bottom-grid{
+    margin-top:70px;
 
     display:grid;
 
-    grid-template-columns:
-    1fr 1fr;
+    grid-template-columns:1fr 1fr;
 
-    gap:15px;
-
-    margin-top:15px;
-
+    gap:16px;
 }
 
-.box{
+.panel{
 
     padding:30px;
 
-    border:
-    1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.07);
 
-    background:
-    rgba(255,255,255,.035);
+    background:rgba(255,255,255,.025);
 
-    border-radius:17px;
+    border-radius:16px;
 
-    animation:
-    fadeUp .8s .45s both;
+    opacity:0;
 
+    transform:translateY(30px);
+
+    animation:panelIn .9s ease forwards;
 }
 
-.box-label{
+.panel:nth-child(1){animation-delay:1.2s}
+.panel:nth-child(2){animation-delay:1.4s}
 
-    font-size:10px;
+.panel-label{
+
+    font-size:9px;
 
     letter-spacing:3px;
 
     color:#c084fc;
 
-    margin-bottom:18px;
+    font-weight:bold;
 
+    margin-bottom:18px;
 }
 
-.box h2{
+.panel h2{
 
-    font-size:27px;
+    font-size:25px;
 
     letter-spacing:-1px;
 
-    margin-bottom:15px;
-
+    margin-bottom:14px;
 }
 
-.box p{
+.panel p{
 
-    color:#969eb1;
-
-    line-height:1.7;
+    color:#8c95a9;
 
     font-size:13px;
 
+    line-height:1.7;
 }
 
-
-/* RECOMMENDATION */
+/* =========================
+   RECOMMENDATION
+========================= */
 
 .recommendation{
+
+    margin-top:16px;
+
+    padding:38px 30px;
+
+    border:1px solid rgba(192,132,252,.18);
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(124,58,237,.08),
+            rgba(255,255,255,.02)
+        );
+
+    border-radius:16px;
 
     position:relative;
 
     overflow:hidden;
 
+    opacity:0;
+
+    transform:translateY(30px);
+
+    animation:panelIn .9s 1.6s ease forwards;
 }
 
-.recommendation::after{
+.recommendation:after{
 
-    content:"AI";
+    content:"";
 
     position:absolute;
 
-    right:25px;
-    bottom:-25px;
+    width:200px;
+    height:200px;
 
-    font-size:100px;
+    border-radius:50%;
 
-    font-weight:900;
+    background:rgba(192,132,252,.08);
 
-    color:
-    rgba(168,85,247,.045);
+    right:-80px;
+    top:-100px;
 
+    filter:blur(10px);
+
+    animation:floatGlow 5s ease-in-out infinite;
 }
 
+.next{
 
-/* BUTTON */
+    font-size:8px;
 
-.start-btn{
+    letter-spacing:4px;
 
-    margin-top:30px;
+    color:#c084fc;
 
-    padding:16px 28px;
+    margin-bottom:15px;
+
+    font-weight:bold;
+}
+
+.recommendation h2{
+
+    font-size:28px;
+
+    margin-bottom:12px;
+}
+
+.recommendation p{
+
+    max-width:800px;
+
+    color:#9aa2b5;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-top:45px;
+
+    opacity:0;
+
+    animation:fadeUp .8s 1.9s ease forwards;
+}
+
+button{
+
+    border:0;
 
     background:#f5f7ff;
 
     color:#080b13;
 
-    border:0;
+    padding:16px 28px;
 
     border-radius:9px;
 
-    font-weight:800;
+    font-weight:900;
 
     cursor:pointer;
 
-    transition:.3s;
-
-    animation:
-    fadeUp .8s .6s both;
-
+    transition:.35s;
 }
 
-.start-btn:hover{
+button:hover{
 
-    transform:
-    translateY(-4px);
+    transform:translateY(-4px);
 
     box-shadow:
-    0 15px 40px
-    rgba(255,255,255,.12);
-
+        0 15px 40px
+        rgba(255,255,255,.12);
 }
 
+/* =========================
+   ANIMATIONS
+========================= */
 
-/* ANIMATIONS */
-
-@keyframes fadeUp{
+@keyframes heroIn{
 
     from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(40px);
     }
 
     to{
         opacity:1;
         transform:none;
     }
-
 }
 
 @keyframes fadeDown{
 
     from{
         opacity:0;
-        transform:translateY(-20px);
+        transform:translateY(-15px);
     }
 
     to{
         opacity:1;
         transform:none;
     }
-
 }
 
-@keyframes cardIn{
+@keyframes fadeUp{
 
     from{
         opacity:0;
-        transform:
-        translateY(25px)
-        scale(.98);
+        transform:translateY(20px);
     }
 
     to{
         opacity:1;
         transform:none;
     }
-
 }
 
-@keyframes rotate{
+@keyframes scaleIn{
 
     from{
-        transform:rotate(0deg);
+        opacity:0;
+        transform:scale(.7);
     }
 
     to{
-        transform:rotate(360deg);
+        opacity:1;
+        transform:scale(1);
     }
-
 }
 
-@keyframes rotateReverse{
-
-    from{
-        transform:rotate(360deg);
-    }
+@keyframes slideIn{
 
     to{
-        transform:rotate(0deg);
+        opacity:1;
+        transform:none;
     }
+}
 
+@keyframes panelIn{
+
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
 @keyframes pulse{
 
     0%,100%{
-        transform:scale(1);
+        opacity:.4;
     }
 
     50%{
-        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+@keyframes gridMove{
+
+    from{
+        background-position:0 0;
     }
 
+    to{
+        background-position:55px 55px;
+    }
 }
 
 @keyframes floatGlow{
 
     0%,100%{
-        transform:translateY(0);
+        transform:translate(0,0);
     }
 
     50%{
-        transform:translateY(-30px);
+        transform:translate(-30px,25px);
     }
-
 }
 
+@media(max-width:850px){
 
-/* MOBILE */
-
-@media(max-width:800px){
-
-    .hero{
+    .score-area{
 
         grid-template-columns:1fr;
 
-        gap:10px;
+        justify-items:center;
 
     }
 
-    .visual{
+    .domains{
 
-        height:250px;
-
-        order:-1;
-
+        width:100%;
     }
 
-    .orbit{
-        width:210px;
-        height:210px;
-    }
-
-    .orbit2{
-        width:155px;
-        height:155px;
-    }
-
-    .core{
-        width:105px;
-        height:105px;
-    }
-
-    .results{
+    .analysis-grid{
 
         grid-template-columns:1fr;
-
-    }
-
-    .bottom-grid{
-
-        grid-template-columns:1fr;
-
     }
 
     h1{
 
         letter-spacing:-4px;
-
     }
-
 }
 
 </style>
@@ -880,29 +798,28 @@ h1 span{
 
 <body>
 
+<div class="glow"></div>
+
 <div class="page">
 
-```
-<!-- TOP -->
+    <div class="top">
 
-<div class="top">
+        <div class="logo">
+            PLACEMIND<span>AI</span>
+        </div>
 
-    <div class="logo">
-        PLACEMIND<span>AI</span>
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            AI ANALYSIS COMPLETE
+
+        </div>
+
     </div>
 
-    <div class="status">
-        AI ANALYSIS COMPLETE
-    </div>
 
-</div>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div>
+    <section class="header">
 
         <div class="step">
             FINAL ANALYSIS / PLACEMENT READINESS
@@ -910,190 +827,196 @@ h1 span{
 
         <h1>
             YOUR<br>
-            PLACEMENT<br>
-            <span>READINESS.</span>
+            <span>PLACEMENT</span><br>
+            READINESS.
         </h1>
 
-        <p class="description">
+        <p class="subtitle">
 
-            PLACEMIND AI has analyzed your academic trajectory,
-            coding ability and technical profile to generate
-            your current placement-readiness profile.
+            PLACEMIND AI has analyzed your academic
+            trajectory, coding ability and technical
+            profile to generate your current
+            placement-readiness profile.
 
         </p>
 
-    </div>
+    </section>
 
 
-    <!-- ANIMATED AI VISUAL -->
+    <section class="score-area">
 
-    <div class="visual">
+        <div class="score-card">
 
-        <div class="orbit"></div>
+            <div
+                class="ring"
+                id="scoreRing"
+            ></div>
 
-        <div class="orbit2"></div>
+            <div class="score-content">
 
-        <div class="core">
+                <div class="score-label">
+                    OVERALL AI ASSESSMENT
+                </div>
 
-            <div class="core-text">
-                PLACEMIND<br>
-                AI
+                <div class="score">
+
+                    <span id="readinessScore">
+                        0
+                    </span>
+
+                    <span class="percent">
+                        %
+                    </span>
+
+                </div>
+
+                <div
+                    class="readiness-label"
+                    id="readinessLabel"
+                >
+                    ANALYZING PROFILE
+                </div>
+
             </div>
 
         </div>
 
-    </div>
 
-</section>
+        <div class="domains">
+
+            <div class="domain">
+
+                <div class="domain-top">
+
+                    <span class="domain-name">
+                        01 / ACADEMIC
+                    </span>
+
+                    <span
+                        class="domain-number"
+                        id="academicResult"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="academicBar"
+                    ></div>
+
+                </div>
+
+            </div>
 
 
-<!-- SCORE -->
+            <div class="domain">
 
-<section class="score-card">
+                <div class="domain-top">
 
-    <div class="label">
-        OVERALL AI ASSESSMENT
-    </div>
+                    <span class="domain-name">
+                        02 / CODING
+                    </span>
 
-    <div class="score-line">
+                    <span
+                        class="domain-number"
+                        id="codingResult"
+                    >
+                        0%
+                    </span>
 
-        <div
-            class="score"
-            id="readinessScore"
-        >
-            --
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="codingBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="domain">
+
+                <div class="domain-top">
+
+                    <span class="domain-name">
+                        03 / TECHNICAL
+                    </span>
+
+                    <span
+                        class="domain-number"
+                        id="technicalResult"
+                    >
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="bar">
+
+                    <div
+                        class="bar-fill"
+                        id="technicalBar"
+                    ></div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="percent">
-            %
+    </section>
+
+
+    <section class="analysis-grid">
+
+        <div class="panel">
+
+            <div class="panel-label">
+                ACADEMIC FORECAST
+            </div>
+
+            <h2 id="forecastTitle">
+                ANALYZING...
+            </h2>
+
+            <p id="forecastText">
+                Connecting to the trained academic model...
+            </p>
+
         </div>
 
-    </div>
 
-    <div
-        class="score-label"
-        id="readinessLabel"
-    >
-        ANALYZING PROFILE
-    </div>
+        <div class="panel">
 
-</section>
+            <div class="panel-label">
+                AI PROFILE
+            </div>
 
+            <h2 id="profileTitle">
+                BUILDING PROFILE...
+            </h2>
 
-<!-- THREE DOMAINS ONLY -->
+            <p id="profileText">
+                Evaluating your strongest and weakest
+                placement domains.
+            </p>
 
-<section class="results">
-
-
-    <div class="result">
-
-        <div class="result-number">
-            01 / ACADEMIC
         </div>
 
-        <div class="result-name">
-            ACADEMIC READINESS
-        </div>
-
-        <div
-            class="result-value"
-            id="academicResult"
-        >
-            --
-        </div>
-
-        <div class="bar">
-            <div
-                class="bar-fill"
-                id="academicBar"
-            ></div>
-        </div>
-
-    </div>
+    </section>
 
 
-    <div class="result">
+    <section class="recommendation">
 
-        <div class="result-number">
-            02 / CODING
-        </div>
-
-        <div class="result-name">
-            DSA & CODING
-        </div>
-
-        <div
-            class="result-value"
-            id="codingResult"
-        >
-            --
-        </div>
-
-        <div class="bar">
-            <div
-                class="bar-fill"
-                id="codingBar"
-            ></div>
-        </div>
-
-    </div>
-
-
-    <div class="result">
-
-        <div class="result-number">
-            03 / TECHNICAL
-        </div>
-
-        <div class="result-name">
-            TECHNICAL PROFILE
-        </div>
-
-        <div
-            class="result-value"
-            id="technicalResult"
-        >
-            --
-        </div>
-
-        <div class="bar">
-            <div
-                class="bar-fill"
-                id="technicalBar"
-            ></div>
-        </div>
-
-    </div>
-
-
-</section>
-
-
-<!-- FORECAST + RECOMMENDATION -->
-
-<section class="bottom-grid">
-
-
-    <div class="box">
-
-        <div class="box-label">
-            ACADEMIC FORECAST
-        </div>
-
-        <h2 id="forecastTitle">
-            ANALYZING...
-        </h2>
-
-        <p id="forecastText">
-            Connecting to the trained academic model...
-        </p>
-
-    </div>
-
-
-    <div class="box recommendation">
-
-        <div class="box-label">
+        <div class="next">
             AI RECOMMENDATION
         </div>
 
@@ -1105,55 +1028,59 @@ h1 span{
             Generating recommendation...
         </p>
 
+    </section>
+
+
+    <div class="actions">
+
+        <button onclick="restartAssessment()">
+            START NEW ASSESSMENT ↻
+        </button>
+
     </div>
-
-
-</section>
-
-
-<button
-    class="start-btn"
-    onclick="restartAssessment()"
->
-    START NEW ASSESSMENT ↻
-</button>
-```
 
 </div>
 
+
 <script>
 
+/* ============================================================
+   ANIMATED NUMBER
+============================================================ */
 
-function animateValue(
+function animateNumber(
     element,
-    start,
-    end,
-    duration
+    target,
+    duration = 1600,
+    decimals = 1
 ){
 
-    const startTime =
-        performance.now();
+    const start = 0;
 
+    const startTime = performance.now();
 
     function update(time){
 
         const progress =
             Math.min(
-                (time - startTime) /
-                duration,
+                (time - startTime) / duration,
                 1
             );
 
+        const eased =
+            1 -
+            Math.pow(
+                1 - progress,
+                3
+            );
 
         const value =
             start +
-            (end - start) *
-            progress;
-
+            (target - start) *
+            eased;
 
         element.textContent =
-            value.toFixed(1);
-
+            value.toFixed(decimals);
 
         if(progress < 1){
 
@@ -1163,50 +1090,28 @@ function animateValue(
 
     }
 
-
     requestAnimationFrame(update);
-
 }
 
 
-function setBar(id,value){
-
-    setTimeout(() => {
-
-        document
-        .getElementById(id)
-        .style.width =
-            Math.min(
-                100,
-                Math.max(0,value)
-            ) + "%";
-
-    },300);
-
-}
-
+/* ============================================================
+   GENERATE RESULT
+============================================================ */
 
 async function generateFinalAnalysis(){
 
     try{
 
-        /*
-        First check whether a result
-        already exists.
-        */
-
-        const storedResult =
+        const stored =
             localStorage.getItem(
                 "placementResult"
             );
 
 
-        if(storedResult){
+        if(stored){
 
             const result =
-                JSON.parse(
-                    storedResult
-                );
+                JSON.parse(stored);
 
             displayResult(result);
 
@@ -1214,11 +1119,6 @@ async function generateFinalAnalysis(){
 
         }
 
-
-        /*
-        Fallback: request analysis
-        directly from the backend.
-        */
 
         const academic =
             JSON.parse(
@@ -1244,14 +1144,6 @@ async function generateFinalAnalysis(){
             );
 
 
-        const aptitude =
-            JSON.parse(
-                localStorage.getItem(
-                    "studentAptitude"
-                ) || "{}"
-            );
-
-
         const response =
             await fetch(
                 "/predict",
@@ -1264,22 +1156,21 @@ async function generateFinalAnalysis(){
                             "application/json"
                     },
 
-                    body:
-                        JSON.stringify({
+                    body:JSON.stringify({
 
-                            academic:
-                                academic,
+                        academic:academic,
 
-                            coding:
-                                coding,
+                        coding:coding,
 
-                            technical:
-                                technical,
+                        technical:technical,
 
-                            aptitude:
-                                aptitude
+                        aptitude:{
+                            aptitudeScore:0,
+                            communicationScore:0,
+                            interviewScore:0
+                        }
 
-                        })
+                    })
 
                 }
             );
@@ -1294,7 +1185,7 @@ async function generateFinalAnalysis(){
             throw new Error(
                 result.details ||
                 result.error ||
-                "Analysis failed"
+                "Prediction failed"
             );
 
         }
@@ -1308,7 +1199,6 @@ async function generateFinalAnalysis(){
 
         displayResult(result);
 
-
     }
 
     catch(error){
@@ -1321,80 +1211,36 @@ async function generateFinalAnalysis(){
             "Analysis failed: " +
             error.message;
 
+        document.getElementById(
+            "profileTitle"
+        ).textContent =
+            "ANALYSIS ERROR";
+
     }
 
 }
 
 
+/* ============================================================
+   DISPLAY RESULT
+============================================================ */
+
 function displayResult(result){
-
-
-    /* OVERALL */
 
     const readiness =
         Number(
             result.readinessScore || 0
         );
 
-
-    animateValue(
-        document.getElementById(
-            "readinessScore"
-        ),
-        0,
-        readiness,
-        1400
-    );
-
-
-    document.getElementById(
-        "readinessLabel"
-    ).textContent =
-        result.readinessLabel ||
-        "ANALYSIS COMPLETE";
-
-
-    /* ACADEMIC */
-
     const academic =
         Number(
             result.academicResult || 0
         );
 
-
-    document.getElementById(
-        "academicResult"
-    ).textContent =
-        academic.toFixed(1) + "%";
-
-
-    setBar(
-        "academicBar",
-        academic
-    );
-
-
-    /* CODING */
-
     const coding =
         Number(
             result.codingResult || 0
         );
-
-
-    document.getElementById(
-        "codingResult"
-    ).textContent =
-        coding.toFixed(1) + "%";
-
-
-    setBar(
-        "codingBar",
-        coding
-    );
-
-
-    /* TECHNICAL */
 
     const technical =
         Number(
@@ -1402,53 +1248,169 @@ function displayResult(result){
         );
 
 
-    document.getElementById(
-        "technicalResult"
-    ).textContent =
-        technical.toFixed(1) + "%";
+    /* OVERALL SCORE */
 
-
-    setBar(
-        "technicalBar",
-        technical
+    animateNumber(
+        document.getElementById(
+            "readinessScore"
+        ),
+        readiness,
+        1800,
+        1
     );
+
+
+    /* SCORE RING */
+
+    setTimeout(function(){
+
+        const degrees =
+            readiness * 3.6;
+
+        document.getElementById(
+            "scoreRing"
+        ).style.background =
+            `conic-gradient(
+                #c084fc 0deg,
+                #7c3aed ${degrees}deg,
+                rgba(255,255,255,.06)
+                ${degrees}deg
+            )`;
+
+    },300);
+
+
+    /* LABEL */
+
+    setTimeout(function(){
+
+        document.getElementById(
+            "readinessLabel"
+        ).textContent =
+            result.readinessLabel ||
+            "PLACEMENT READINESS";
+
+    },1200);
+
+
+    /* DOMAIN SCORES */
+
+    animateNumber(
+        document.getElementById(
+            "academicResult"
+        ),
+        academic,
+        1500,
+        1
+    );
+
+    animateNumber(
+        document.getElementById(
+            "codingResult"
+        ),
+        coding,
+        1500,
+        1
+    );
+
+    animateNumber(
+        document.getElementById(
+            "technicalResult"
+        ),
+        technical,
+        1500,
+        1
+    );
+
+
+    /* BARS */
+
+    setTimeout(function(){
+
+        document.getElementById(
+            "academicBar"
+        ).style.width =
+            academic + "%";
+
+        document.getElementById(
+            "codingBar"
+        ).style.width =
+            coding + "%";
+
+        document.getElementById(
+            "technicalBar"
+        ).style.width =
+            technical + "%";
+
+    },700);
 
 
     /* FORECAST */
 
     const forecast =
         Number(
-            result.academicForecast
+            result.academicForecast || 0
         );
 
 
-    if(
-        Number.isFinite(forecast)
-    ){
-
-        document.getElementById(
-            "forecastTitle"
-        ).textContent =
-            "PREDICTED SEM 5 GPA: " +
-            forecast.toFixed(2);
-
-    }
-
-    else{
-
-        document.getElementById(
-            "forecastTitle"
-        ).textContent =
-            "FORECAST UNAVAILABLE";
-
-    }
+    document.getElementById(
+        "forecastTitle"
+    ).textContent =
+        "PREDICTED SEM 5 GPA: " +
+        forecast.toFixed(2);
 
 
     document.getElementById(
         "forecastText"
     ).textContent =
         result.forecast ||
-        "Academic forecast generated by the trained model.";
+        "Academic trajectory analyzed.";
+
+
+    /* PROFILE */
+
+    let strongest =
+        "Academic";
+
+    let strongestValue =
+        academic;
+
+    if(coding > strongestValue){
+
+        strongest =
+            "Coding";
+
+        strongestValue =
+            coding;
+
+    }
+
+    if(technical > strongestValue){
+
+        strongest =
+            "Technical";
+
+        strongestValue =
+            technical;
+
+    }
+
+
+    document.getElementById(
+        "profileTitle"
+    ).textContent =
+        strongest.toUpperCase() +
+        " LEADS YOUR PROFILE";
+
+
+    document.getElementById(
+        "profileText"
+    ).textContent =
+        "Your strongest current domain is " +
+        strongest +
+        ". " +
+        (result.recommendation ||
+        "Continue strengthening all three placement domains.");
 
 
     /* RECOMMENDATION */
@@ -1457,20 +1419,49 @@ function displayResult(result){
         "recommendation"
     ).textContent =
         result.recommendation ||
-        "Continue improving your weakest preparation area.";
+        "Continue your preparation across all placement domains.";
 
 }
 
+
+/* ============================================================
+   RESTART
+============================================================ */
 
 function restartAssessment(){
 
     localStorage.clear();
 
-    window.location.href =
-        "../index.html";
+    document.body.animate(
+        [
+            {
+                opacity:1,
+                transform:"scale(1)"
+            },
+            {
+                opacity:0,
+                transform:"scale(1.02)"
+            }
+        ],
+        {
+            duration:500,
+            easing:"ease-in-out"
+        }
+    );
+
+    setTimeout(function(){
+
+        window.location.href =
+            "index.html";
+
+    },450);
 
 }
 
+
+/* ============================================================
+   START
+============================================================ */
 
 generateFinalAnalysis();
 
@@ -1479,3 +1470,4 @@ generateFinalAnalysis();
 </body>
 
 </html>
+```

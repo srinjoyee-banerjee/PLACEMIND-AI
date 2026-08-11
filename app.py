@@ -5,9 +5,7 @@ import pandas as pd
 import os
 
 # ============================================================
-
 # PATHS
-
 # ============================================================
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -17,59 +15,57 @@ FRONTEND_DIR = BASE_DIR
 app = Flask(__name__)
 CORS(app)
 
+
 # ============================================================
-
 # FRONTEND
-
 # ============================================================
 
 @app.route("/")
 def home():
-return send_from_directory(FRONTEND_DIR, "index.html")
+    return send_from_directory(FRONTEND_DIR, "index.html")
 
-@app.route("/[path:filename](path:filename)")
+
+@app.route("/<path:filename>")
 def frontend_files(filename):
-return send_from_directory(FRONTEND_DIR, filename)
+    return send_from_directory(FRONTEND_DIR, filename)
+
 
 # ============================================================
-
 # LOAD REAL ML MODELS
-
 # ============================================================
 
 academic_model = joblib.load(
-os.path.join(MODEL_DIR, "academic_forecast_model.pkl")
+    os.path.join(MODEL_DIR, "academic_forecast_model.pkl")
 )
 
 decline_model = joblib.load(
-os.path.join(MODEL_DIR, "academic_decline_model.pkl")
+    os.path.join(MODEL_DIR, "academic_decline_model.pkl")
 )
 
 placement_model = joblib.load(
-os.path.join(MODEL_DIR, "placement_model.pkl")
+    os.path.join(MODEL_DIR, "placement_model.pkl")
 )
 
 print("✅ Academic Forecast model loaded")
 print("✅ Academic Decline model loaded")
 print("✅ Placement model loaded")
 
+
 # ============================================================
-
 # HEALTH
-
 # ============================================================
 
 @app.route("/health")
 def health():
-return jsonify({
-"status": "online",
-"application": "PLACEMIND AI",
-"models": {
-"academic_forecast": "loaded",
-"academic_decline": "loaded",
-"placement": "loaded"
-}
-})
+    return jsonify({
+        "status": "online",
+        "application": "PLACEMIND AI",
+        "models": {
+            "academic_forecast": "loaded",
+            "academic_decline": "loaded",
+            "placement": "loaded"
+        }
+    })
 
 # ============================================================
 
